@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/06 11:16:11 by aurlic           ###   ########.fr       */
+/*   Created: 2024/02/06 11:10:57 by aurlic            #+#    #+#             */
+/*   Updated: 2024/02/06 11:19:37 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#ifndef PARSER_H
+# define PARSER_H
 
-# include <errno.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include "parser.h"
-# include "builtins.h"
-# include "lexer.h"
+# include "../srcs/libft/includes/libft.h"
+# include "../srcs/libft/includes/ft_printf.h"
+# include "../srcs/libft/includes/get_next_line.h"
 
 #endif

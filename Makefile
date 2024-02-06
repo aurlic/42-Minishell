@@ -1,18 +1,46 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/02/06 11:02:46 by aurlic            #+#    #+#              #
+#    Updated: 2024/02/06 11:05:43 by aurlic           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# **************************************************************************** #
+#                                     CONFIG                                   #
+# **************************************************************************** #
+
 NAME		=	minishell
 
 CC			=	cc
 
-FLAG		=	-Wall -Wextra -Werror -g3
+CFLAGS		=	-Wall -Wextra -Werror -g3
 
-LIBFT_PATH	=	libft
+# **************************************************************************** #
+#                                     SOURCES                                  #
+# **************************************************************************** #
+
+LIBFT_PATH	=	./libft
 
 LIBFT_FILE	=	libft.a
 
 LIBFT_LIB	=	$(LIBFT_PATH)/$(LIBFT_FILE)
 
-C_FILE		=	
-			
-OBJS		=	$(C_FILE:.c=.o)
+SRCS		=	
+
+# **************************************************************************** #
+#                                     OBJECTS                                  #
+# **************************************************************************** #
+
+OBJS		=	$(SRCS:.c=.o)
+
+# **************************************************************************** #
+#                                  MAKEFILE RULES                              #
+# **************************************************************************** #
 
 .c.o:
 	@printf "\r\033[K[Jeanmi-Shell] \033[0;32mBuilding : $<\033[0m"
@@ -21,22 +49,27 @@ OBJS		=	$(C_FILE:.c=.o)
 all:	$(NAME)
 
 lib:
+	@printf "\r\033[K[libft] \033[4;32mBuilding libft: $<\033[0m\n"
 	@make -C $(LIBFT_PATH)
+	@printf "\n"
 
 $(NAME): lib $(OBJS)
-	@printf "\r\033[K[Jeanmi-Shell] \033[0;32mLinking...\033[0m"
-	@$(CC) $(OBJS) $(LIBFT_LIB) -o $(NAME) -lm 
+	@printf "\r\033[K[Jeanmi-Shell] \033[4;32mBuilding Jeanmi-Shell: $<\033[0m"
+	@$(CC) $(OBJS) $(LIBFT_LIB) -o $(NAME)
 	@printf "\r\033[K[Jeanmi-Shell] \033[0;32mDone!\033[0m\n"
 
 clean:
-	@make clean -sC $(LIBFT_PATH)
+	@printf "[Jeanmi-Shell] \033[0;31mCleaning $(LIBFT_PATH)\033[0m\n"
+	@make clean -sC $(LIBFT_PATH) > /dev/null 2>&1
+	@printf "[Jeanmi-Shell] \033[0;31mCleaning .o\033[0m\n"
 	@rm -f $(OBJS)
-	@printf "[Jeanmi-Shell] \033[1;31mCleaned .o!\033[0m\n"
+	@printf "[Jeanmi-Shell] \033[0;31mCleaned objects!\033[0m\n"
 
 fclean: clean
+	@printf "[Jeanmi-Shell] \033[0;31mDeleting Jeanmi-Shell executable\033[0m\n"
 	@rm -f $(NAME)
-	@make fclean -C $(LIBFT_PATH)
-	@printf "[Jeanmi-Shell] \033[1;31mCleaned all!\033[0m\n"
+	@make fclean -C $(LIBFT_PATH) > /dev/null 2>&1
+	@printf "[Jeanmi-Shell] \033[1;32mDone\033[0m\n\n"
 
 re: fclean all
 
