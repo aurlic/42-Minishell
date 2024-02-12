@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/12 11:53:03 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:31:59 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "builtins.h"
 # include "lexer.h"
 # include "env.h"
+# include "exec.h"
 
 typedef struct s_shell
 {
