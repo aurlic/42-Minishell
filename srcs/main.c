@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:44:58 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/08 16:14:58 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/12 09:37:11 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ int	main(int ac, char **av, char **envp)
 	(void)envp;
 	if (ac != 1)
 		exit(EXIT_FAILURE);
-	printf("%s\n", ft_substr("salut les amigos", 3, 5));
+	printf("%s\n", ft_substr("Please enter your command", 3, 5));
 	return (0);
 }
