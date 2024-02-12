@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:44:58 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/12 14:52:11 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/12 15:12:02 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	handle_signals(int action)
 	{}
 	else if (action == 3) // ctrl-\ 
 	{}
-
+	return ;
 }
 
 void	exit_shell(char *error_msg)
