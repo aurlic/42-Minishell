@@ -1,14 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 13:56:50 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/12 14:01:58 by traccurt         ###   ########.fr       */
+/*   Created: 2024/02/12 14:46:31 by aurlic            #+#    #+#             */
+/*   Updated: 2024/02/12 14:46:51 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+void	init_shell(t_shell *shell, char **envp)
+{
+	shell->env = NULL;
+	shell->path = ft_calloc(1, sizeof(t_path));
+	if (!shell->path)
+		exit_shell
+	get_env(shell, envp);
+}

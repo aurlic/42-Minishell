@@ -1,14 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 13:56:50 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/12 14:01:58 by traccurt         ###   ########.fr       */
+/*   Created: 2024/02/12 14:41:31 by aurlic            #+#    #+#             */
+/*   Updated: 2024/02/12 14:48:20 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/env.h"
 
+void	get_env(t_shell *shell, char **envp)
+{
+	t_env	*new;
+	int		i;
+
+	new = 
+}

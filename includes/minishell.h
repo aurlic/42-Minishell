@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/12 14:31:59 by traccurt         ###   ########.fr       */
+=======
+/*   Updated: 2024/02/12 14:34:58 by aurlic           ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +30,11 @@
 # include "env.h"
 # include "exec.h"
 
-typedef struct s_shell
+typedef struct	s_shell
 {
-	
 	t_env	*env;
+	t_path	*path;
 	t_cmds	*cmds;
-	struct s_shell *prev;
-	struct s_shell *next;
-}t_shell;
+}				t_shell;
 
 #endif
