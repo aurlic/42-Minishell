@@ -6,7 +6,7 @@
 #    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 11:02:46 by aurlic            #+#    #+#              #
-#    Updated: 2024/02/06 11:05:43 by aurlic           ###   ########.fr        #
+#    Updated: 2024/02/12 09:35:34 by aurlic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,17 +20,21 @@ CC			=	cc
 
 CFLAGS		=	-Wall -Wextra -Werror -g3
 
+LDFLAGS		=	-lreadline
+
 # **************************************************************************** #
 #                                     SOURCES                                  #
 # **************************************************************************** #
 
-LIBFT_PATH	=	./libft
+LIBFT_PATH	=	./srcs/libft
 
 LIBFT_FILE	=	libft.a
 
 LIBFT_LIB	=	$(LIBFT_PATH)/$(LIBFT_FILE)
 
-SRCS		=	
+SRCS		=	srcs/main.c \
+
+INCLUDES	=	includes/ \
 
 # **************************************************************************** #
 #                                     OBJECTS                                  #
@@ -44,7 +48,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 .c.o:
 	@printf "\r\033[K[Jeanmi-Shell] \033[0;32mBuilding : $<\033[0m"
-	@$(CC) $(FLAG) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 all:	$(NAME)
 
@@ -55,7 +59,7 @@ lib:
 
 $(NAME): lib $(OBJS)
 	@printf "\r\033[K[Jeanmi-Shell] \033[4;32mBuilding Jeanmi-Shell: $<\033[0m"
-	@$(CC) $(OBJS) $(LIBFT_LIB) -o $(NAME)
+	@$(CC) $(OBJS) $(LDFLAGS) $(LIBFT_LIB) -o $(NAME)
 	@printf "\r\033[K[Jeanmi-Shell] \033[0;32mDone!\033[0m\n"
 
 clean:
