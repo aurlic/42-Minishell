@@ -6,11 +6,57 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:12:50 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/12 14:52:21 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:39:29 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	check_underscore(t_shell *shell, t_cmds *cmds)
+{
+	t_env 	*env_tmp;
+	char	*last_arg;
+	int		i;
+
+	env_tmp = shell->env;
+	while (cmds->tab[i])
+		i++;
+	if (i == 0)
+		return ;
+	last_arg = cmds->tab[i - 1];
+	while (env_tmp)
+	{
+		if (ft_strictcmp(env_tmp->key, "_") == 0)
+		{
+			free(env_tmp->value);
+			env_tmp->value = ft_strdup(last_arg);
+			return ;
+		}
+		env_tmp = env_tmp->next;
+	}
+}
+
+void	handle_redirections(t_shell *shell, t_cmds *cmds, int *fd)
+{
+	
+}
+
+void	run_others_cmds(t_shell *shell, t_cmds *cmds)
+{
+	t_fd	fds;
+
+	while (cmds)
+	{
+		check_underscore(shell, cmds);
+		ft_init_fds(&fds);
+		if (cmds->next)
+		{
+			if (pipe(fds.pipe) == -1)
+				return (ERROR, EXIT);
+		}
+		
+	}
+}
 
 void	ft_exec(t_shell *shell, t_cmds *cmds)
 {
@@ -43,8 +89,6 @@ void	handle_commands(char *str, t_shell *shell)
 
 	cmds_tmp = shell->cmds;
 	while (cmds_tmp)
-	{
-		check_builtins(shell, cmds_tmp);
-		
-	}
+		(check_builtins(shell, cmds_tmp), cmds_tmp = cmds_tmp->next);
+	run_others_cmds(shell, shell->cmds);
 }
