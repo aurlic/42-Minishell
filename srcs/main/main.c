@@ -6,16 +6,16 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:44:58 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/12 17:12:44 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/13 13:31:14 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	handle_signals(int action)
-{
-	//
-}
+// void	handle_signals(int action)
+// {
+// 	//
+// }
 
 int	main(int ac, char **av, char **envp)
 {

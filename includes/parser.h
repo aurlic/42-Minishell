@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:10:57 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/13 13:31:58 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:34:34 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_cmds
 	char	**tab;
 	int		pid;
 	int		end;
-	t_lex	*redirection;
+	struct s__lex	*redirection;
 	struct s_cmds	*prev;
 	struct s_cmds	*next;
 }t_cmds;
