@@ -6,7 +6,7 @@
 #    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 11:02:46 by aurlic            #+#    #+#              #
-#    Updated: 2024/02/13 13:28:03 by aurlic           ###   ########.fr        #
+#    Updated: 2024/02/13 14:09:04 by aurlic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ LIBFT_LIB	=	$(LIBFT_PATH)/$(LIBFT_FILE)
 SRCS		=	srcs/main/main.c \
 				srcs/main/init.c \
 				srcs/env/get_env.c \
+				srcs/error/exit_shell.c \
 
 # INCLUDES	=	includes/ \ TO MAKE IT WORK GIVE ABSOLUTE PATH IN FILES AND INLUDE WHILE COMPILING
 

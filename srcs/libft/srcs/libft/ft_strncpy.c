@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 14:46:31 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/13 13:40:55 by aurlic           ###   ########.fr       */
+/*   Created: 2024/02/13 15:20:46 by aurlic            #+#    #+#             */
+/*   Updated: 2024/02/13 15:20:59 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/libft.h"
 
-void	init_shell(t_shell *shell, char **envp)
+char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
-	shell->env = NULL;
-	shell->path = ft_calloc(1, sizeof(t_path));
-	if (!shell->path)
-		exit_shell("Minishell");
-	get_env(shell, envp);
-}
+	unsigned int	i;
 
+	i = 0;
+	while (src[i] && i < n)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (dest);
+}

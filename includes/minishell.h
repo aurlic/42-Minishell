@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/13 13:34:00 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/13 13:41:24 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ void	init_shell(t_shell *shell, char **envp);
 /*
 	get_env.c
 */
-
 void	get_env(t_shell *shell, char **envp);
+
+/*
+	error.c
+*/
+void	exit_shell(char *error_msg);
 
 #endif

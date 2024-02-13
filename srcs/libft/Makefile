@@ -6,7 +6,7 @@
 #    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 11:34:17 by aurlic            #+#    #+#              #
-#    Updated: 2024/02/01 11:20:52 by aurlic           ###   ########.fr        #
+#    Updated: 2024/02/13 15:22:38 by aurlic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS_LIB	=	srcs/libft/ft_atoi.c \
 				srcs/libft/ft_strlen.c \
 				srcs/libft/ft_strcmp.c \
 				srcs/libft/ft_strncmp.c \
+				srcs/libft/ft_strncpy.c \
 				srcs/libft/ft_strnstr.c \
 				srcs/libft/ft_strrchr.c \
 				srcs/libft/ft_tolower.c \
