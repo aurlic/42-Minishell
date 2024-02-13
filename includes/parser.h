@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:10:57 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/12 13:37:43 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:31:58 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_cmds
 	char	**tab;
 	int		pid;
 	int		end;
-	t_arg	*redirection;
+	t_lex	*redirection;
 	struct s_cmds	*prev;
 	struct s_cmds	*next;
 }t_cmds;
