@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:26:30 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/12 17:02:49 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:50:18 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,11 @@ typedef struct s_fd
 	int in;
 	int out;
 }t_fd;
+
+/*init_fds.c*/
+void ft_init_fds(t_fd *fds);
+
+/*here_doc*/
+//void	run_here_doc(t_shell *shell, t_lex *lex, t_fd *fds);
 
 #endif
