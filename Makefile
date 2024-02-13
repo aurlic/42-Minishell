@@ -6,7 +6,7 @@
 #    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 11:02:46 by aurlic            #+#    #+#              #
-#    Updated: 2024/02/12 09:35:34 by aurlic           ###   ########.fr        #
+#    Updated: 2024/02/13 13:28:03 by aurlic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,11 @@ LIBFT_FILE	=	libft.a
 
 LIBFT_LIB	=	$(LIBFT_PATH)/$(LIBFT_FILE)
 
-SRCS		=	srcs/main.c \
+SRCS		=	srcs/main/main.c \
+				srcs/main/init.c \
+				srcs/env/get_env.c \
 
-INCLUDES	=	includes/ \
+# INCLUDES	=	includes/ \ TO MAKE IT WORK GIVE ABSOLUTE PATH IN FILES AND INLUDE WHILE COMPILING
 
 # **************************************************************************** #
 #                                     OBJECTS                                  #
