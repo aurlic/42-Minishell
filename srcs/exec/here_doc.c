@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:59:31 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/13 14:35:22 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/02/14 11:29:09 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ char	*ft_oget_next_line(int fd, char **line)
 	return (*line);
 }
 
-void	run_here_doc(t_shell *shell, t_lex *lex, t_fd *fds)
+void	run_here_doc(t_shell *shell, t_lex *lex, int *fd)
 {
-	int		fd;
+	int		fd_tmp;
 	char	*file_name;
 	char	*line;
 
 	file_name = ft_strdup("a");
 	while (access(file_name, F_OK) == 0)
 		file_name = ft_strjoinfree(file_name, "a");
-	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	fds->in = open(file_name, O_RDONLY);
+	fd_tmp = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	fd[IN] = open(file_name, O_RDONLY);
 	unlink(file_name);
 	while (ft_printf("here_doc> ") && ft_oget_next_line(0, &line))
 	{
@@ -38,4 +38,20 @@ void	run_here_doc(t_shell *shell, t_lex *lex, t_fd *fds)
 		free(line);
 	}
 	(free(file_name), free(line));
+}
+
+int	manage_here_doc(t_shell *shell, t_cmds *cmds, int *fd)
+{
+	int flag;
+	t_lex *tmp;
+
+	flag = -2;
+	tmp = cmds->redirection;
+	while (tmp)
+	{
+		if (tmp->is_token == D_LOWER)
+			(run_here_doc(shell, tmp, fd), flag = -3);
+		tmp = tmp->next;
+	}
+	return (flag);
 }

@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:12:50 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/13 18:23:48 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:52:44 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,19 @@ void	open_outfile(t_shell *shell, t_cmds *cmds, t_lex *lex, int fd[2])
 	else
 		fd[OUT] = open(lex->next->word, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd[OUT] == -1)
-			(error....);
+		(fd[OUT] = -2, error..);
 }
 
-void	set_infile(t_shell *shell, t_cmds *cmds, t_lex *lex)
+void	open_infile(t_shell *shell, t_cmds *cmds, t_lex *lex, int *flag_fd)
 {
+	if(*flag_fd != -2 && *flag_fd != -3)
+		close (*flag_fd);
+	if (lex->is_token == D_LOWER)
+		*flag_fd = -3;
 	if(lex->is_token == LOWER)
-		variable = open(lex->next->word, O_WRONLY);
-	if (variable == -1)
-		(exit, blablabla);
-	
+		*flag_fd = open(lex->next->word, O_RDONLY);
+	if (*flag_fd == -1)
+		(*flag_fd = -2, error, blablabla);
 }
 
 void	check_underscore(t_shell *shell, t_cmds *cmds)
@@ -59,14 +62,25 @@ void	check_underscore(t_shell *shell, t_cmds *cmds)
 
 void	handle_redirections(t_shell *shell, t_cmds *cmds, int fd[2])
 {
+	int		flag_fd;
+
+	fd[IN] = manage_here_doc(shell, cmds, fd);
+	fd[OUT] = -2;
+	flag_fd = -2;
 	while (cmds->redirection)
 	{
 		if (cmds->redirection->is_token == GREATER ||
 			cmds->redirection->is_token == D_GREATER)
 			open_outfile(shell, cmds, cmds->redirection, fd);
 		else
-			set_infile();
+			open_infile(shell, cmds, cmds->redirection, &flag_fd);
 		cmds->redirection = cmds->redirection->next;	
+	}
+	if (flag_fd != -3)
+	{
+		if (fd[IN] != -2)
+			close(fd[IN]);
+		fd[IN] = flag_fd;
 	}
 }
 
@@ -74,18 +88,17 @@ void	run_cmds(t_shell *shell, t_cmds *cmds)
 {
 	t_fd	fds;
 
+	fds.in = -2;
 	while (cmds)
 	{
 		check_underscore(shell, cmds);
-		// if(cmds->redirection->is_token == D_LOWER)
-		// 	run_here_doc(shell, cmds, );
-		ft_init_fds(&fds);
+		init_fds(&fds);
 		if (cmds->next)
-		{
 			if (pipe(fds.pipe) == -1)
 				return (ERROR, EXIT);
-		}
 		handle_redirections(shell, cmds, fds.redirection);
+		set_fds(&fds);
+		
 	}
 }
 
