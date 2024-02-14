@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:41:31 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/13 16:59:59 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/14 10:25:09 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	fill_env(t_shell *shell, t_env *new, char **envp, int i)
 
 	curr = shell->env;
 	new->index = i;
-	ft_get_key_value(new, envp, i);
+	get_key_value(new, envp, i);
 	if (!curr)
 	{
 		new->prev = NULL;
@@ -69,7 +69,7 @@ void	get_env(t_shell *shell, char **envp)
 	i = 0;
 	if (!envp || !envp[i])
 	{
-		handle_no_env(shell, envp);
+		handle_no_env(shell);
 		return ;
 	}
 	while (envp && envp[i])

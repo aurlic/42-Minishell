@@ -6,13 +6,13 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:58:02 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/13 18:06:20 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/14 10:27:04 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	set_pwd(t_shell *shell)
+static void	set_pwd(t_shell *shell)
 {
 	char	*pwd;
 	t_env	*new;
@@ -26,9 +26,10 @@ void	set_pwd(t_shell *shell)
 	new->value = ft_strdup(pwd);
 	new->prev = NULL;
 	new->next = NULL;
+	shell->env = new;
 }
 
-void	set_shlvl(t_shell *shell)
+static void	set_shlvl(t_shell *shell)
 {
 	t_env	*new;
 	t_env	*curr;
@@ -47,7 +48,7 @@ void	set_shlvl(t_shell *shell)
 	new->prev = curr;
 }
 
-void	set_underscore(t_shell *shell, char **envp)
+static void	set_underscore(t_shell *shell)
 {
 	t_env	*new;
 	t_env	*curr;
@@ -66,9 +67,9 @@ void	set_underscore(t_shell *shell, char **envp)
 	new->prev = curr;
 }
 
-void	handle_no_env(t_shell *shell, char **envp)
+void	handle_no_env(t_shell *shell)
 {
 	set_pwd(shell);
 	set_shlvl(shell);
-	set_underscore(shell, envp);
+	set_underscore(shell);
 }

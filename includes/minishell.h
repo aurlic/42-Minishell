@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/13 17:00:24 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/14 15:23:39 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,29 @@ typedef struct	s_shell
 }				t_shell;
 
 /*
-	init.c
+======================= main =======================
 */
+/*                     init.c                       */
 void	init_shell(t_shell *shell, char **envp);
+/*                    prompt.c                       */
+char	*read_prompt(void);
+/*                    signals.c                       */
+void	handle_signals(int action);
 
 /*
-	get_env.c
+======================= env =======================
 */
+/*                   get_env.c                      */
 void	get_env(t_shell *shell, char **envp);
 
-/*
-	no_env.c
-*/
-void	handle_no_env(t_shell *shell, char **envp);
+/*                    n_env.c                       */
+void	handle_no_env(t_shell *shell);
 
 /*
-	error.c
+======================= error =======================
 */
+/*                    error.c                       */
 void	exit_shell(char *error_msg);
+
 
 #endif

@@ -6,7 +6,7 @@
 #    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 11:02:46 by aurlic            #+#    #+#              #
-#    Updated: 2024/02/13 14:09:04 by aurlic           ###   ########.fr        #
+#    Updated: 2024/02/14 15:49:38 by aurlic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ NAME		=	minishell
 CC			=	cc
 
 CFLAGS		=	-Wall -Wextra -Werror -g3
+#MAY NEED TO BE USED FOR SIGACTION -D_XOPEN_SOURCE=700
 
 LDFLAGS		=	-lreadline
 
@@ -34,7 +35,10 @@ LIBFT_LIB	=	$(LIBFT_PATH)/$(LIBFT_FILE)
 
 SRCS		=	srcs/main/main.c \
 				srcs/main/init.c \
+				srcs/main/prompt.c \
+				srcs/main/signals.c \
 				srcs/env/get_env.c \
+				srcs/env/no_env.c \
 				srcs/error/exit_shell.c \
 
 # INCLUDES	=	includes/ \ TO MAKE IT WORK GIVE ABSOLUTE PATH IN FILES AND INLUDE WHILE COMPILING
