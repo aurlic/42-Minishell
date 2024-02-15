@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:12:50 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/14 15:52:44 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:16:53 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,14 @@ void	check_underscore(t_shell *shell, t_cmds *cmds)
 	}
 }
 
+void	close_parent(t_fd *fds)
+{
+	if (fds->in != -2)
+		close(fds->in);
+	if (fds->out != -2)
+		close(fds->out);
+}
+
 void	handle_redirections(t_shell *shell, t_cmds *cmds, int fd[2])
 {
 	int		flag_fd;
@@ -98,7 +106,10 @@ void	run_cmds(t_shell *shell, t_cmds *cmds)
 				return (ERROR, EXIT);
 		handle_redirections(shell, cmds, fds.redirection);
 		set_fds(&fds);
-		
+		if (cmds->end == 1)
+			close_parent(&fds);
+		else if
+			check_builtins(shell, cmds, );
 	}
 }
 
@@ -123,8 +134,6 @@ void	check_builtins(t_shell *shell, t_cmds *cmds)
 		ft_env(shell->env);
 	else if (ft_strictcmp(cmds->redirection->word, "exit") == 0)
 		ft_exit(shell);
-	else
-		ft_exec(shell, cmds);
 }
 
 void	handle_commands(char *str, t_shell *shell)
