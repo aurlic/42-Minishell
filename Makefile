@@ -6,7 +6,7 @@
 #    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 11:02:46 by aurlic            #+#    #+#              #
-#    Updated: 2024/02/14 15:49:38 by aurlic           ###   ########.fr        #
+#    Updated: 2024/02/15 16:53:37 by aurlic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRCS		=	srcs/main/main.c \
 				srcs/main/signals.c \
 				srcs/env/get_env.c \
 				srcs/env/no_env.c \
-				srcs/error/exit_shell.c \
+				srcs/exit_free/exit_shell.c \
+				srcs/lexer/lexer.c \
 
 # INCLUDES	=	includes/ \ TO MAKE IT WORK GIVE ABSOLUTE PATH IN FILES AND INLUDE WHILE COMPILING
 

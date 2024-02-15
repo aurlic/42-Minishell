@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:37:24 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/14 10:41:29 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/15 14:30:08 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@
 # include "../srcs/libft/includes/ft_printf.h"
 # include "../srcs/libft/includes/get_next_line.h"
 
-# define PROMPT_MESSAGE "\x1b[38;2;153;204;255m\x1b[1m[Jeanmi-Shell] 🫂  > \x1b[0m"
+#define PASTEL_BLUE "\x1b[38;2;153;204;255m"
+#define BOLD "\x1b[1m"
+#define RESET "\x1b[0m"
+
+#define PROMPT_MESSAGE PASTEL_BLUE BOLD "[Jeanmi-Shell] 🫂  > " RESET
 
 typedef struct	s_env
 {

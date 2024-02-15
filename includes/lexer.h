@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:16:21 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/13 13:30:47 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/15 16:11:23 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include "../srcs/libft/includes/libft.h"
 # include "../srcs/libft/includes/ft_printf.h"
 # include "../srcs/libft/includes/get_next_line.h"
+
+# define TRUE 0
+# define FALSE -1
+# define ERR_QUOTE "Error: unclosed quote\n"
 
 typedef struct s_lex
 {

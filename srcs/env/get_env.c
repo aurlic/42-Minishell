@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:41:31 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/14 10:25:09 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/15 14:45:15 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	get_key_value(t_env *new, char **envp, int i)
 	if (!new->key)
 		exit_shell("env_key");
 	ft_strncpy(new->key, envp[i], delim);
-	new->key[delim] = '\0';
 	new->value = ft_calloc((j - delim) + 1, sizeof(char));
 	if (!new->value)
 		exit_shell("env_value");
