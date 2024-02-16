@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:30:34 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/15 17:29:32 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/16 10:50:37 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,43 +47,121 @@ int		quote_checker(char *str)
 	return (TRUE);
 }
 
-void	lexer(t_shell *shell, char *str)
+int		is_token(char *str, int i)
+{
+	if (str[i] == '|')
+		return (PIPE);
+	if (str[i] == '>')
+	{
+		if (str[i + 1] == '>')
+			return (i++, D_GREATER);
+		else
+			return (GEATER);
+	}
+	if (str[i] == '<')
+	{
+		if (str[i + 1] == '<')
+			return (i++, D_LOWER);
+		else
+			return (LOWER);
+	}
+	return (0);
+}
+
+// int	check_match(char *str, int i, int sep)
+// {
+// 	if (sep == 1)
+
+// }
+
+void	store_new_word(t_lex *lex, char *str, int i, int j)
+{
+	t_lex *new;
+
+	new = ft_calloc(1, sizeof(t_lex));
+	if (!new)
+		exit_shell("lexer malloc");
+	new->word = ft_strndup(str + i - j, j);
+	new->token = 0;
+	if (!lex->next)
+	{
+		lex = new;
+		new->next = NULL;
+	}
+	else
+	{
+		while (lex->next)
+			lex = lex->next;
+		lex->next = new;
+		new->next = NULL;
+	}
+}
+
+void	store_new_token(t_lex *lex, int token)
+{
+	t_lex *new;
+	new = ft_calloc(1, sizeof(t_lex));
+	if (!new)
+		exit_shell("lexer malloc");
+	new->word = NULL;
+	new->token = token;
+	if (!lex->next)
+	{
+		lex = new;
+		new->next = NULL;
+	}
+	else
+	{
+		while (lex->next)
+			lex = lex->next;
+		lex->next = new;
+		new->next = NULL;
+	}
+}
+
+void	lex_str(t_lex *lex, char *str)
 {
 	int	i;
+	int	j;
+	int	opened;
 
-
-(void)shell;
 	i = 0;
-	i++;
+	opened = 0;
+	// >                      echo "coucou" | echo ""
+	while (str[i])
+	{
+		j = 0;
+		while (str[i] == ' ')
+			i++;
+		// if (opened != 0)
+		// 	j = check_match(str, i, opened);
+		while ((str[i] != '\'') &&(str[i] != '\"') && (str[i] != ' ')
+			&& (is_token(str, i) == FALSE) && opened == 0 && str[i])
+		{
+			if (is_token(str, i) == D_LOWER || is_token(str, i) == D_GREATER)
+				i++;
+			i++;
+			j++;
+		}
+		if (j != 0)
+			store_new_word(lex, str, i, j);
+		if (is_token(str, i) != FALSE)
+			store_new_token(lex, is_token(str, i));
+		else
+			i++;
+	}
+}
+
+void	lexer(t_shell *shell, char *str)
+{
+	t_lex	*lex;
+
+	(void)shell;
+	lex = ft_calloc(1, sizeof(t_lex));
+	if (!lex)
+		exit_shell("lexer malloc");
 	if (quote_checker(str) == FALSE)
 		write(STDERR_FILENO, ERR_QUOTE, ft_strlen(ERR_QUOTE));
-	// while (1)
-	// {
-	// 	while(str && str[i] == ' ')
-	// 		i++;
-	// 	while (str && str[i] != ' ')
-	// 	{
-	// 		// check les TOKENS
-	// 		// 
-	// 	}
-	// }
+	lex_str(lex, str);
+	// return (lex);
 }
-
-
-/*
-int	check_quotes(char *str, int i, char quote)
-{
-	while (str && str[++i])
-	{
-		if (str[i] == quote)
-			return (TRUE);
-	}
-	return (FALSE);
-}
-
-
-if (str[i] == '\'' || str[i] == '\"')
-				if (check_quotes(str, i, str[i]) == FALSE)
-				
-
-*/

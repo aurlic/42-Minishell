@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/06 11:16:21 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/16 10:37:59 by aurlic           ###   ########.fr       */
+/*   Created: 2024/02/16 10:34:40 by aurlic            #+#    #+#             */
+/*   Updated: 2024/02/16 10:36:18 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#include "../../includes/libft.h"
 
-# include "../srcs/libft/includes/libft.h"
-# include "../srcs/libft/includes/ft_printf.h"
-# include "../srcs/libft/includes/get_next_line.h"
-
-# define TRUE 0
-# define FALSE -1
-# define ERR_QUOTE "Error: unclosed quote\n"
-
-typedef struct s_lex
+char	*ft_strndup(char *s, int n)
 {
-	char	*word;
-	int		token;
-	struct s_lex	*next;
-}t_lex; 
+	char	*dest;
+	int		i;
 
-#endif
+	i = 0;
+	if (!s)
+		return (NULL);
+	dest = malloc ((n + 1) * sizeof(char));
+	if (!dest)
+		return (NULL);
+	while (s[i] && i < n)
+	{
+		dest[i] = s[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}

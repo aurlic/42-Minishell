@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/15 16:55:23 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/16 09:06:34 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	exit_shell(char *error_msg);
 /*
 ======================= lexer =======================
 */
-/*                    lexerr.c                       */
+/*                    lexer.c                       */
 void	lexer(t_shell *shell, char *str);
 
 #endif
