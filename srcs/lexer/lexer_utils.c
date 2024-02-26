@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:17:12 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/26 14:22:33 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/26 15:31:39 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	is_token(char *str, int i)
 	return (FALSE);
 }
 
-int		quote_is_goat(char quote)
+int	quote_is_goat(char quote)
 {
 	if (quote == '\'')
 		return (1);

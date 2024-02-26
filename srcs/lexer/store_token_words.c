@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:19:54 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/26 14:20:23 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/26 15:31:17 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	store_new_token(t_lex **lex, int token)
 {
-	t_lex *new;
+	t_lex	*new;
 	t_lex	*curr;
 
 	new = ft_calloc(1, sizeof(t_lex));

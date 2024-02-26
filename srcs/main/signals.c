@@ -6,13 +6,13 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:57:41 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/15 14:56:22 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/26 15:35:06 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void handler(int sig)
+static void	handler(int sig)
 {
 	if (sig == SIGINT)
 	{

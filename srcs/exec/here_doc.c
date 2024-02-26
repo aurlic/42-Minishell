@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:59:31 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/14 11:29:09 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:35:57 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ void	run_here_doc(t_shell *shell, t_lex *lex, int *fd)
 
 int	manage_here_doc(t_shell *shell, t_cmds *cmds, int *fd)
 {
-	int flag;
-	t_lex *tmp;
+	int		flag;
+	t_lex	*tmp;
 
 	flag = -2;
 	tmp = cmds->redirection;
 	while (tmp)
 	{
-		if (tmp->is_token == D_LOWER)
+		if (tmp->token == D_LOWER)
 			(run_here_doc(shell, tmp, fd), flag = -3);
 		tmp = tmp->next;
 	}

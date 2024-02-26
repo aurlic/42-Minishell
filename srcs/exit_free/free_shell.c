@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:14:30 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/15 14:26:14 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/26 15:36:59 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_env(t_env *env)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = env;
 	while (env)
@@ -29,12 +29,10 @@ void	free_env(t_env *env)
 
 void	free_path(t_path *path)
 {
-
 }
 
 void	free_cmds(t_cmds *cmds)
 {
-
 }
 
 void	free_shell(t_shell *shell)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:12:50 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/15 14:16:53 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:36:36 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	open_outfile(t_shell *shell, t_cmds *cmds, t_lex *lex, int fd[2])
 {
 	if (fd[OUT] != -2)
 		close (fd[OUT]);
-	if (lex->is_token == GREATER)
+	if (lex->token == GREATER)
 		fd[OUT] = open(lex->next->word, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else
 		fd[OUT] = open(lex->next->word, O_WRONLY | O_CREAT | O_APPEND, 0644);
@@ -28,9 +28,9 @@ void	open_infile(t_shell *shell, t_cmds *cmds, t_lex *lex, int *flag_fd)
 {
 	if(*flag_fd != -2 && *flag_fd != -3)
 		close (*flag_fd);
-	if (lex->is_token == D_LOWER)
+	if (lex->token == D_LOWER)
 		*flag_fd = -3;
-	if(lex->is_token == LOWER)
+	if(lex->token == LOWER)
 		*flag_fd = open(lex->next->word, O_RDONLY);
 	if (*flag_fd == -1)
 		(*flag_fd = -2, error, blablabla);
@@ -77,8 +77,8 @@ void	handle_redirections(t_shell *shell, t_cmds *cmds, int fd[2])
 	flag_fd = -2;
 	while (cmds->redirection)
 	{
-		if (cmds->redirection->is_token == GREATER ||
-			cmds->redirection->is_token == D_GREATER)
+		if (cmds->redirection->token == GREATER ||
+			cmds->redirection->token == D_GREATER)
 			open_outfile(shell, cmds, cmds->redirection, fd);
 		else
 			open_infile(shell, cmds, cmds->redirection, &flag_fd);

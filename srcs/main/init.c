@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:46:31 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/15 14:51:50 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/26 15:33:36 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	fill_shlvl(t_env *curr)
 	else
 		curr->value = ft_itoa(shlvl + 1);
 }
+
 // May need to handle SHLVL with no env
 void	get_shlvl(t_shell *shell)
 {
@@ -69,4 +70,3 @@ void	init_shell(t_shell *shell, char **envp)
 	shell->path->oldpwd = get_paths(shell, "OLDPWD");
 	get_shlvl(shell);
 }
-
