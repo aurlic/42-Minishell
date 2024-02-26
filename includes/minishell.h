@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/16 09:06:34 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/26 14:22:02 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,12 @@ void	exit_shell(char *error_msg);
 */
 /*                    lexer.c                       */
 void	lexer(t_shell *shell, char *str);
+/*                    quotes.c                      */
+int		quote_is_goat(char quote);
+int		quote_checker(char *str);
+int		is_token(char *str, int i);
+/*                    store_token_words.c           */
+void	store_new_token(t_lex **lex, int token);
+void	store_new_word(t_lex **lex, char *str, int i, int j);
 
 #endif
