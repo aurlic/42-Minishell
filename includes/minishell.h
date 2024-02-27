@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/26 15:01:06 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/27 15:08:05 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,17 @@ void	get_env(t_shell *shell, char **envp);
 void	handle_no_env(t_shell *shell);
 
 /*
-======================= error =======================
+======================= exit_free ===================
 */
-/*                    error.c                       */
+/*                    exit_shell.c                  */
 void	exit_shell(char *error_msg);
+void	token_error(int token);
 
 /*
 ======================= lexer =======================
 */
 /*                    lexer.c                       */
-void	lexer(t_shell *shell, char *str);
+t_lex	*lexer(char *str);
 /*                    quotes.c                      */
 int		quote_is_goat(char quote);
 int		quote_checker(char *str);
@@ -72,5 +73,11 @@ int		is_token(char *str, int i);
 /*                    store_token_words.c           */
 void	store_new_token(t_lex **lex, int token);
 void	store_new_word(t_lex **lex, char *str, int i, int j);
+
+/*
+======================= parser ======================
+*/
+/*                    parser.c                      */
+void	parser(t_shell *shell, t_lex *lex);
 
 #endif

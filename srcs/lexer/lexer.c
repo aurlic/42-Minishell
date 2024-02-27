@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:30:34 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/26 15:33:11 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/27 09:15:09 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ static void	lex_str(t_lex **lex, char *str)
 	}
 }
 
-void	lexer(t_shell *shell, char *str)
+t_lex	*lexer(char *str)
 {
 	t_lex	*lex;
 
-	(void)shell;
 	lex = NULL;
 	if (quote_checker(str) == FALSE)
 		write(STDERR_FILENO, ERR_QUOTE, ft_strlen(ERR_QUOTE));
 	lex_str(&lex, str);
+	return (lex);
 }

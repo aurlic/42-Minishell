@@ -6,7 +6,7 @@
 #    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 11:02:46 by aurlic            #+#    #+#              #
-#    Updated: 2024/02/26 14:21:16 by aurlic           ###   ########.fr        #
+#    Updated: 2024/02/27 09:39:19 by aurlic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRCS		=	srcs/main/main.c \
 				srcs/lexer/lexer.c \
 				srcs/lexer/store_token_words.c \
 				srcs/lexer/lexer_utils.c \
+				srcs/parser/parser.c \
 
 # INCLUDES	=	includes/ \ TO MAKE IT WORK GIVE ABSOLUTE PATH IN FILES AND INLUDE WHILE COMPILING
 

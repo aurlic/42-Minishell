@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:37:24 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/26 16:48:55 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/27 15:47:41 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@
 # define PIPE 1001
 # define LOWER 1002
 # define D_LOWER 1003
-# define GEATER 1004
+# define GREATER 1004
 # define D_GREATER 1005
-
 
 typedef struct	s_env
 {

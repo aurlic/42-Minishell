@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:10:57 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/13 13:36:53 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:18:44 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ typedef struct s_cmds
 	struct s_lex	*redirection;
 	struct s_cmds	*prev;
 	struct s_cmds	*next;
-}t_cmds;
+}	t_cmds;
 
 #endif
