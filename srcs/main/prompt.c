@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:19:35 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/26 16:54:43 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/28 16:42:25 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ char	*read_prompt(t_shell *shell)
 
 	(void)shell;
 	if (!prompt)
-		prompt = PROMPT_MESSAGE;
+		prompt = PROMPT;
 	str = readline(prompt);
 	if (ft_strictcmp(str, "xxx"))
-		prompt = PROMPT_MESSAGE_HIDDEN;
+		prompt = PROMPT_X;
 	else if (ft_strictcmp(str, "jeanmi"))
-		prompt = PROMPT_MESSAGE;
+		prompt = PROMPT;
 	if (!str)
 	{
 		// free_shell(shell);

@@ -6,12 +6,12 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/27 15:08:05 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/28 16:47:07 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-#define MINISHELL_H
+# define MINISHELL_H
 
 # include <errno.h>
 # include <sys/stat.h>
@@ -28,12 +28,12 @@
 
 extern int	g_return;
 
-typedef struct	s_shell
+typedef struct s_shell
 {
 	t_env	*env;
 	t_path	*path;
 	t_cmds	*cmds;
-}				t_shell;
+}			t_shell;
 
 /*
 ======================= main =======================
@@ -79,5 +79,13 @@ void	store_new_word(t_lex **lex, char *str, int i, int j);
 */
 /*                    parser.c                      */
 void	parser(t_shell *shell, t_lex *lex);
+/*                    parser.c                      */
+int		count_commands(t_lex *lex);
+int		count_redir(t_lex *cmd_start, t_lex *lex);
+int		check_syntax(t_lex *lex);
+/*                    process_command.c             */
+t_cmds	*process_command(t_lex *lex, t_lex *cmd_start, t_cmds *new_cmd);
+/*                    process_command_utils.c       */
+void	new_redi(t_lex **head, t_lex **tmp, t_lex *cmd_start, t_cmds *new_cmd);
 
 #endif

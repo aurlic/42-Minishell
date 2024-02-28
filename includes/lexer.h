@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:16:21 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/16 10:37:59 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/28 16:47:53 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 
 typedef struct s_lex
 {
-	char	*word;
-	int		token;
+	char			*word;
+	int				token;
 	struct s_lex	*next;
-}t_lex; 
+}					t_lex;
 
 #endif
