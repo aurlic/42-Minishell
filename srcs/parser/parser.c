@@ -6,11 +6,20 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:00:39 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/28 16:31:51 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/28 18:10:09 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	parser_subprocess(t_lex *tmp_lex, t_lex *cmd_start, t_cmds **cmds)
+{
+	*cmds = process_command(tmp_lex, cmd_start, *cmds);
+	(*cmds)->next = malloc(sizeof(t_cmds));
+	if (!(*cmds)->next)
+		exit_shell("parser_malloc");
+	*cmds = (*cmds)->next;
+}
 
 void	parser(t_shell *shell, t_lex *lex)
 {
@@ -31,19 +40,16 @@ void	parser(t_shell *shell, t_lex *lex)
 	while (tmp_lex)
 	{
 		if (tmp_lex->token == PIPE)
-		{
-			cmds = process_command(tmp_lex, cmd_start, cmds);
-			
-			cmds->next = malloc(sizeof(t_cmds));
-			if (!cmds)
-				exit_shell("parser_malloc");
-			cmds = cmds->next;
-			cmd_start = tmp_lex;
-		}
+			(parser_subprocess(tmp_lex, cmd_start, &cmds), cmd_start = tmp_lex);
 		tmp_lex = tmp_lex->next;
 	}
 	cmds = process_command(tmp_lex, cmd_start, cmds);
 	cmds = cmds_head;
+	
+}
+/*
+PRINT
+
 	while (cmds)
 	{
 		int	k = 0;
@@ -62,4 +68,32 @@ void	parser(t_shell *shell, t_lex *lex)
 		}
 		cmds = cmds->next;
 	}
-}
+*/
+// void	parser(t_shell *shell, t_lex *lex)
+// {
+// 	t_cmds	*cmds;
+// 	t_cmds	*cmds_head;
+// 	t_lex	*tmp_lex;
+// 	t_lex	*cmd_start;
+
+// 	(void)shell;
+// 	if (check_syntax(lex) == -1)
+// 		return ;
+// 	cmds = malloc(sizeof(t_cmds));
+// 	if (!cmds)
+// 		exit_shell("parser_malloc");
+// 	tmp_lex = lex;
+// 	cmd_start = lex;
+// 	cmds_head = cmds;
+// 	while (tmp_lex)
+// 	{
+// 		if (tmp_lex->token == PIPE)
+// 		{
+// 			process_and_link_command(&cmds, cmd_start, tmp_lex);
+// 			cmd_start = tmp_lex;
+// 		}
+// 		tmp_lex = tmp_lex->next;
+// 	}
+// 	process_and_link_command(&cmds, cmd_start, tmp_lex);
+// 	cmds = cmds_head;
+// }
