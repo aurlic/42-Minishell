@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:00:39 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/28 18:10:09 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/29 11:53:36 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,51 @@ void	parser_subprocess(t_lex *tmp_lex, t_lex *cmd_start, t_cmds **cmds)
 	*cmds = (*cmds)->next;
 }
 
+void	expand_dollar(t_shell *shell, int i, int j)
+{
+	int	var_len;
+	t_env *tmp;
+
+	var_len = 0;
+	tmp = shell->env;
+	while (shell->cmds->tab[i][++j] == '_' || ft_isalnum(shell->cmds->tab[i][j]))
+		var_len++;
+	if (var_len != 0)
+	{
+		while (tmp)
+		{
+			if (!ft_strncmp(tmp->key, (shell->cmds->tab[i] + j - var_len), var_len))
+				ft_printf("this variable exists\n");
+			tmp = tmp->next;
+		}
+	}
+}
+
+void	parse_cmds_tab(t_shell *shell)
+{
+	int		i;
+	int		j;
+	t_cmds *tmp;
+
+	i = 0;
+	tmp = shell->cmds;
+	while (tmp)
+	{
+		while (tmp->tab[i])
+		{
+			j = 0;
+			while (tmp->tab[i][j])
+			{
+				if (tmp->tab[i][j] == '$')
+					expand_dollar(shell, i, j);
+				j++;
+			}
+			i++;
+		}
+		tmp = tmp->next;
+	}
+}
+
 void	parser(t_shell *shell, t_lex *lex)
 {
 	t_cmds	*cmds;
@@ -28,7 +73,6 @@ void	parser(t_shell *shell, t_lex *lex)
 	t_lex	*tmp_lex;
 	t_lex	*cmd_start;
 
-	(void)shell;
 	if (check_syntax(lex) == -1)
 		return ;
 	cmds = malloc(sizeof(t_cmds));
@@ -44,8 +88,9 @@ void	parser(t_shell *shell, t_lex *lex)
 		tmp_lex = tmp_lex->next;
 	}
 	cmds = process_command(tmp_lex, cmd_start, cmds);
-	cmds = cmds_head;
-	
+	// cmds = cmds_head;
+	shell->cmds = cmds_head;
+	parse_cmds_tab(shell);
 }
 /*
 PRINT
