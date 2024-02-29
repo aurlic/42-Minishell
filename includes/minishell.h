@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/28 16:47:07 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/29 17:20:22 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,7 @@ int		check_syntax(t_lex *lex);
 t_cmds	*process_command(t_lex *lex, t_lex *cmd_start, t_cmds *new_cmd);
 /*                    process_command_utils.c       */
 void	new_redi(t_lex **head, t_lex **tmp, t_lex *cmd_start, t_cmds *new_cmd);
+/*                    dollar_handler.c              */
+void	find_dollar(t_cmds *cmds, t_env *env, int i, int j);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 11:02:46 by aurlic            #+#    #+#              #
-#    Updated: 2024/02/28 16:38:46 by aurlic           ###   ########.fr        #
+#    Updated: 2024/02/29 17:19:49 by aurlic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ SRCS		=	srcs/main/main.c \
 				srcs/parser/parser.c \
 				srcs/parser/parser_syntax.c \
 				srcs/parser/process_command.c \
-				srcs/parser/process_command_utils.c
+				srcs/parser/process_command_utils.c \
+				srcs/parser/dollar_handler.c \
 
 # INCLUDES	=	includes/ \ TO MAKE IT WORK GIVE ABSOLUTE PATH IN FILES AND INLUDE WHILE COMPILING
 
