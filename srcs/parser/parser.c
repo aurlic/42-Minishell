@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:00:39 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/29 11:53:36 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/02/29 14:39:40 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,19 @@ void	parser_subprocess(t_lex *tmp_lex, t_lex *cmd_start, t_cmds **cmds)
 
 void	expand_dollar(t_shell *shell, int i, int j)
 {
-	int	var_len;
-	t_env *tmp;
+	int		var_len;
+	t_env	*tmp;
 
 	var_len = 0;
 	tmp = shell->env;
 	while (shell->cmds->tab[i][++j] == '_' || ft_isalnum(shell->cmds->tab[i][j]))
 		var_len++;
+	ft_printf("j: %d | var_len: %d\n", j, var_len);
 	if (var_len != 0)
 	{
 		while (tmp)
 		{
-			if (!ft_strncmp(tmp->key, (shell->cmds->tab[i] + j - var_len), var_len))
+			if (!ft_strictncmp(tmp->key, (shell->cmds->tab[i] + j - var_len), var_len))
 				ft_printf("this variable exists\n");
 			tmp = tmp->next;
 		}
