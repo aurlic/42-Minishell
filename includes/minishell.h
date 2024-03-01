@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/29 17:20:22 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/01 15:45:43 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,11 @@ t_cmds	*process_command(t_lex *lex, t_lex *cmd_start, t_cmds *new_cmd);
 void	new_redi(t_lex **head, t_lex **tmp, t_lex *cmd_start, t_cmds *new_cmd);
 /*                    dollar_handler.c              */
 void	find_dollar(t_cmds *cmds, t_env *env, int i, int j);
+
+/*
+======================= builtins ======================
+*/
+/*                    builtins.c                      */
+int		is_builtin(char *str);
 
 #endif

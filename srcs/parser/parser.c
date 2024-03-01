@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:00:39 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/01 15:27:36 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/01 15:57:41 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,6 @@ void	parser_subprocess(t_lex *tmp_lex, t_lex *cmd_start, t_cmds **cmds)
 	if (!(*cmds)->next)
 		exit_shell("parser_malloc");
 	*cmds = (*cmds)->next;
-}
-
-int	is_builtin(char *str)
-{
-	if (ft_strictcmp(str, "echo") || ft_strictcmp(str, "\'echo\'")
-		|| ft_strictcmp(str, "\"echo\""))
-		return (1);
-	if (ft_strictcmp(str, "cd") || ft_strictcmp(str, "\'cd\'")
-		|| ft_strictcmp(str, "\"cd\""))
-		return (1);
-	if (ft_strictcmp(str, "pwd") || ft_strictcmp(str, "\'pwd\'")
-		|| ft_strictcmp(str, "\"pwd\""))
-		return (1);
-	if (ft_strictcmp(str, "export") || ft_strictcmp(str, "\'export\'")
-		|| ft_strictcmp(str, "\"export\""))
-		return (1);
-	if (ft_strictcmp(str, "unset") || ft_strictcmp(str, "\'unset\'")
-		|| ft_strictcmp(str, "\"unset\""))
-		return (1);
-	if (ft_strictcmp(str, "env") || ft_strictcmp(str, "\'env\'")
-		|| ft_strictcmp(str, "\"env\""))
-		return (1);
-	if (ft_strictcmp(str, "exit") || ft_strictcmp(str, "\'exit\'")
-		|| ft_strictcmp(str, "\"exit\""))
-		return (1);
-	return (0);
 }
 
 void	parse_cmds_tab(t_shell *shell)
@@ -75,6 +49,21 @@ void	parse_cmds_tab(t_shell *shell)
 		tmp = tmp->next;
 	}
 }
+
+// void	remove_quotes(t_shell *shell)
+// {
+// 	t_cmds	*tmp;
+// 	int		i;
+// 	int		j;
+
+// 	tmp = shell->cmds;
+// 	while (tmp)
+// 	{
+		
+
+// 		tmp = tmp->next;
+// 	}
+// }
 
 void	parser(t_shell *shell, t_lex *lex)
 {
@@ -113,6 +102,7 @@ void	parser(t_shell *shell, t_lex *lex)
 		ft_printf("---\n");
 		shell->cmds = shell->cmds->next;
 	}
+	//remove_quotes(shell);
 }
 
 /*
