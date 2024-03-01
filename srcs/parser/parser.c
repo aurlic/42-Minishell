@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:00:39 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/01 11:06:55 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/01 15:27:36 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	parse_cmds_tab(t_shell *shell)
 			}
 			i++;
 		}
+		if (tmp->next == NULL)
+			tmp->end = 1;
 		tmp = tmp->next;
 	}
 }

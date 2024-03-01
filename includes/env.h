@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:37:24 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/01 10:55:50 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/01 15:26:34 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # define PROMPT_D "\x1b[1;38;5;165m\x1b[1m[Shell-line Dion] 🎤 > \x1b[0m"
 # define PROMPT_J "\x1b[1;30m\x1b[1m[Minishell \x1b[1;97mJackson] 🕺 > \x1b[0m"
 # define PROMPT_R "\x1b[1;38;5;94m\x1b[1m[Romani-Shell] 🦔 > \x1b[0m"
-
 
 # define PIPE 1001
 # define LOWER 1002
