@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:40:50 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/28 16:43:30 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/01 10:26:45 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static t_cmds	*init_new_cmd(t_cmds *cmd)
 {
 	cmd->tab = NULL;
+	cmd->is_builtin = 0;
 	cmd->pid = -2;
 	cmd->end = 0;
 	cmd->redirection = NULL;

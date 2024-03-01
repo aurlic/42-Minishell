@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:10:57 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/28 16:47:20 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/01 10:26:11 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct s_cmds
 {
 	char			**tab;
+	int				is_builtin;
 	int				pid;
 	int				end;
 	struct s_lex	*redirection;

@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:00:39 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/29 17:14:47 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/01 11:06:55 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,32 @@ void	parser_subprocess(t_lex *tmp_lex, t_lex *cmd_start, t_cmds **cmds)
 	*cmds = (*cmds)->next;
 }
 
+int	is_builtin(char *str)
+{
+	if (ft_strictcmp(str, "echo") || ft_strictcmp(str, "\'echo\'")
+		|| ft_strictcmp(str, "\"echo\""))
+		return (1);
+	if (ft_strictcmp(str, "cd") || ft_strictcmp(str, "\'cd\'")
+		|| ft_strictcmp(str, "\"cd\""))
+		return (1);
+	if (ft_strictcmp(str, "pwd") || ft_strictcmp(str, "\'pwd\'")
+		|| ft_strictcmp(str, "\"pwd\""))
+		return (1);
+	if (ft_strictcmp(str, "export") || ft_strictcmp(str, "\'export\'")
+		|| ft_strictcmp(str, "\"export\""))
+		return (1);
+	if (ft_strictcmp(str, "unset") || ft_strictcmp(str, "\'unset\'")
+		|| ft_strictcmp(str, "\"unset\""))
+		return (1);
+	if (ft_strictcmp(str, "env") || ft_strictcmp(str, "\'env\'")
+		|| ft_strictcmp(str, "\"env\""))
+		return (1);
+	if (ft_strictcmp(str, "exit") || ft_strictcmp(str, "\'exit\'")
+		|| ft_strictcmp(str, "\"exit\""))
+		return (1);
+	return (0);
+}
+
 void	parse_cmds_tab(t_shell *shell)
 {
 	int		i;
@@ -31,6 +57,8 @@ void	parse_cmds_tab(t_shell *shell)
 	while (tmp)
 	{
 		i = 0;
+		if (is_builtin(tmp->tab[0]))
+			tmp->is_builtin = 1;
 		while (tmp->tab[i])
 		{
 			j = 0;
@@ -68,15 +96,13 @@ void	parser(t_shell *shell, t_lex *lex)
 		tmp_lex = tmp_lex->next;
 	}
 	cmds = process_command(tmp_lex, cmd_start, cmds);
-	// cmds = cmds_head;
+	cmds = cmds_head;
 	shell->cmds = cmds_head;
 	parse_cmds_tab(shell);
-}
-
-/*
 	while (shell->cmds)
 	{
 		int k = 0;
+		ft_printf("builtin: %d\n", shell->cmds->is_builtin);
 		while (shell->cmds->tab[k])
 		{
 			ft_printf("tab:[%s]\n", shell->cmds->tab[k]);
@@ -85,4 +111,7 @@ void	parser(t_shell *shell, t_lex *lex)
 		ft_printf("---\n");
 		shell->cmds = shell->cmds->next;
 	}
+}
+
+/*
 */
