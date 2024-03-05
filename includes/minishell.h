@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/01 15:45:43 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/05 16:15:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,11 @@ void	store_new_word(t_lex **lex, char *str, int i, int j);
 */
 /*                    parser.c                      */
 void	parser(t_shell *shell, t_lex *lex);
-/*                    parser.c                      */
+/*                    check_syntax.c                */
 int		count_commands(t_lex *lex);
 int		count_redir(t_lex *cmd_start, t_lex *lex);
 int		check_syntax(t_lex *lex);
+void	redesign_words(t_lex *lex);
 /*                    process_command.c             */
 t_cmds	*process_command(t_lex *lex, t_lex *cmd_start, t_cmds *new_cmd);
 /*                    process_command_utils.c       */

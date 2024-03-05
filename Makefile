@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 11:02:46 by aurlic            #+#    #+#              #
-#    Updated: 2024/03/01 15:37:47 by aurlic           ###   ########.fr        #
+#    Updated: 2024/03/05 09:31:45 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAME		=	minishell
 
 CC			=	cc
 
-CFLAGS		=	-Wall -Wextra -Werror -g3
+CFLAGS		=	-g3 -Wall -Wextra -Werror
 #MAY NEED TO BE USED FOR SIGACTION -D_XOPEN_SOURCE=700
 
 LDFLAGS		=	-lreadline

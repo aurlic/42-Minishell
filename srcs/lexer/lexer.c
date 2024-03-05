@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:30:34 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/01 16:22:08 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/05 14:32:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	handle_lex_quote(char *str, int *i, int *j, int *opened)
 	{
 		if (quote_is_goat(str[*i]) == *opened)
 		{
+			while((*opened == quote_is_goat(str[(*i)]) || str[(*i)] != ' ') && str[(*i)])
+				((*i)++, (*j)++);
 			*opened = 0;
-			(*i)++;
-			(*j)++;
 			break ;
 		}
 		(*j)++;
@@ -32,7 +32,7 @@ void	handle_lex_quote(char *str, int *i, int *j, int *opened)
 
 static void	handle_lex_word(char *str, int *i, int *j, int *opened)
 {
-	while ((str[*i] != '\'') && (str[*i] != '\"') && (str[*i] != ' ')
+	while ( (str[*i] != ' ')
 		&& (is_token(str, *i) == FALSE) && *opened == 0 && str[*i])
 	{
 		(*j)++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:00:39 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/01 15:57:41 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/05 16:24:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,6 @@ void	parse_cmds_tab(t_shell *shell)
 	}
 }
 
-// void	remove_quotes(t_shell *shell)
-// {
-// 	t_cmds	*tmp;
-// 	int		i;
-// 	int		j;
-
-// 	tmp = shell->cmds;
-// 	while (tmp)
-// 	{
-		
-
-// 		tmp = tmp->next;
-// 	}
-// }
-
 void	parser(t_shell *shell, t_lex *lex)
 {
 	t_cmds	*cmds;
@@ -77,6 +62,7 @@ void	parser(t_shell *shell, t_lex *lex)
 	cmds = malloc(sizeof(t_cmds));
 	if (!cmds)
 		exit_shell("parser_malloc");
+	redesign_words(lex);
 	tmp_lex = lex;
 	cmd_start = lex;
 	cmds_head = cmds;
@@ -93,17 +79,18 @@ void	parser(t_shell *shell, t_lex *lex)
 	while (shell->cmds)
 	{
 		int k = 0;
-		ft_printf("builtin: %d\n", shell->cmds->is_builtin);
 		while (shell->cmds->tab[k])
 		{
 			ft_printf("tab:[%s]\n", shell->cmds->tab[k]);
 			k++;
 		}
+		while (shell->cmds->redirection)
+		{
+			ft_printf("redir-> token: [%d] | word: [%s]\n", shell->cmds->redirection->token, shell->cmds->redirection->word);
+			shell->cmds->redirection = shell->cmds->redirection->next ;
+		}
 		ft_printf("---\n");
 		shell->cmds = shell->cmds->next;
 	}
-	//remove_quotes(shell);
 }
 
-/*
-*/
