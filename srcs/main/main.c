@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:44:58 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/27 09:37:17 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/06 11:22:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,12 @@ int	main(int ac, char **av, char **envp)
 	{
 		handle_signals(0);
 		str = read_prompt(&shell);
-		lex = lexer(str);
+		lex = lexer(&shell, str);
 		parser(&shell, lex);
+		// free_before_new_loop(shell)
+		if (shell.cmds)
+			free_cmds(shell.cmds);
+		free(str);
 	}
+	exit(EXIT_SUCCESS);
 }

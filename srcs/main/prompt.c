@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:19:35 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/01 10:51:51 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/06 10:49:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ char	*read_prompt(t_shell *shell)
 	else if (ft_strictcmp(str, "jeanmi"))
 		prompt = PROMPT;
 	if (!str)
-	{
-		// free_shell(shell);
-		exit(g_return);
-	}
+		exit_shell(shell, "exit");
 	return (str);
 }

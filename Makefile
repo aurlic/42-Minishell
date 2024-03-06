@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 11:02:46 by aurlic            #+#    #+#              #
-#    Updated: 2024/03/05 09:31:45 by marvin           ###   ########.fr        #
+#    Updated: 2024/03/06 10:13:06 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRCS		=	srcs/main/main.c \
 				srcs/env/get_env.c \
 				srcs/env/no_env.c \
 				srcs/exit_free/exit_shell.c \
+				srcs/exit_free/free_shell.c \
 				srcs/lexer/lexer.c \
 				srcs/lexer/store_token_words.c \
 				srcs/lexer/lexer_utils.c \

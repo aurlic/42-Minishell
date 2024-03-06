@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:20:46 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/26 15:28:18 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/06 16:40:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libft.h"
+
+char	*ft_fstrncpy(char *dest, char *src, unsigned int n)
+{
+	char	*tmp;
+	char	*result;
+
+	tmp = dest;
+	result = ft_strncpy(dest, src, n);
+	return (free(tmp), result);
+}
 
 char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
@@ -22,7 +32,7 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 		dest[i] = src[i];
 		i++;
 	}
-	while (i < n)
+	while (i <= n)
 	{
 		dest[i] = '\0';
 		i++;

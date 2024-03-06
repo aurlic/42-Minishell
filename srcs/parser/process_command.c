@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:40:50 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/05 14:32:19 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/06 15:25:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_cmds	*init_new_cmd(t_cmds *cmd)
 	return (cmd);
 }
 
-static void	process_redir(t_lex *lex, t_lex *cmd_start, t_cmds *new_cmd)
+static void	process_redir(t_shell *shell, t_lex *lex, t_lex *cmd_start, t_cmds *new_cmd)
 {
 	t_lex	*redir_head;
 	t_lex	*redir_tmp;
@@ -38,7 +38,7 @@ static void	process_redir(t_lex *lex, t_lex *cmd_start, t_cmds *new_cmd)
 		if (cmd_start->next && cmd_start->next->token
 			&& cmd_start->next->token != PIPE)
 		{
-			new_redi(&redir_head, &redir_tmp, cmd_start, new_cmd);
+			new_redi(shell, &redir_head, &redir_tmp, cmd_start, new_cmd);
 			if (prev_redir)
 				prev_redir->next = redir_tmp;
 			prev_redir = redir_tmp;
@@ -63,14 +63,14 @@ static int	count_size(t_lex *cmd_start, t_lex *lex)
 	return (i);
 }
 
-static void	fill_cmd_tab(t_cmds *new_cmd, t_lex *cmd_start, int i)
+static void	fill_cmd_tab(t_shell *shell, t_cmds *new_cmd, t_lex *cmd_start, int i)
 {
 	int	j;
 
 	j = 0;
 	new_cmd->tab = malloc((i + 1) * sizeof(char *));
 	if (!new_cmd->tab)
-		exit_shell("parser_malloc");
+		exit_shell(shell, "parser_malloc");
 	if (cmd_start && cmd_start->token == PIPE)
 		cmd_start = cmd_start->next;
 	while (j < i)
@@ -82,15 +82,15 @@ static void	fill_cmd_tab(t_cmds *new_cmd, t_lex *cmd_start, int i)
 	new_cmd->tab[j] = NULL;
 }
 
-t_cmds	*process_command(t_lex *lex, t_lex *cmd_start, t_cmds *new_cmd)
+t_cmds	*process_command(t_shell *shell, t_lex *lex, t_lex *cmd_start, t_cmds *new_cmd)
 {
 	t_lex	*tmp_head;
 	int		i;
 
 	tmp_head = cmd_start;
 	new_cmd = init_new_cmd(new_cmd);
-	process_redir(lex, cmd_start, new_cmd);
+	process_redir(shell, lex, cmd_start, new_cmd);
 	i = count_size(cmd_start, lex);
-	fill_cmd_tab(new_cmd, tmp_head, i);
+	fill_cmd_tab(shell, new_cmd, tmp_head, i);
 	return (new_cmd);
 }

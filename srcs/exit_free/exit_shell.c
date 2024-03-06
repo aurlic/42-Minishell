@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:14:39 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/27 15:16:04 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/06 10:50:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ void	token_error(int token)
 		exit_token("Syntax error near unexpected token `>>'\n");
 }
 
-void	exit_shell(char *error_msg)
+void	exit_shell(t_shell *shell, char *error_msg)
 {
-	perror(error_msg);
+	if (!ft_strictcmp(error_msg, "exit"))
+		perror(error_msg);
+	free_shell(shell);
 	exit(EXIT_FAILURE);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   no_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:58:02 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/26 15:32:08 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/06 10:16:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	set_pwd(t_shell *shell)
 	new = ft_calloc(1, sizeof(t_env));
 	pwd = getcwd(NULL, 0);
 	if (!new || !pwd)
-		exit_shell("env_pwd");
+		exit_shell(shell, "env_pwd");
 	new->index = 1;
 	new->key = ft_strdup("PWD");
 	new->value = ft_strdup(pwd);
@@ -39,7 +39,7 @@ static void	set_shlvl(t_shell *shell)
 		curr = curr->next;
 	new = ft_calloc(1, sizeof(t_env));
 	if (!new)
-		exit_shell("env_shlvl");
+		exit_shell(shell, "env_shlvl");
 	new->index = 2;
 	new->key = ft_strdup("SHLVL");
 	new->value = ft_strdup("0");
@@ -58,7 +58,7 @@ static void	set_underscore(t_shell *shell)
 		curr = curr->next;
 	new = ft_calloc(1, sizeof(t_env));
 	if (!new)
-		exit_shell("env_underscore");
+		exit_shell(shell, "env_underscore");
 	new->index = 3;
 	new->key = ft_strdup("_");
 	new->value = ft_strdup("./minishell");

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/05 16:15:05 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/06 11:21:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,25 @@ void	handle_no_env(t_shell *shell);
 ======================= exit_free ===================
 */
 /*                    exit_shell.c                  */
-void	exit_shell(char *error_msg);
+void	exit_shell(t_shell *shell, char *error_msg);
 void	token_error(int token);
+/*                    free_shell.c                  */
+void	free_shell(t_shell *shell);
+void	free_env(t_env *env);
+void	free_cmds(t_cmds *cmds);
 
 /*
 ======================= lexer =======================
 */
 /*                    lexer.c                       */
-t_lex	*lexer(char *str);
+t_lex	*lexer(t_shell *shell, char *str);
 /*                    quotes.c                      */
 int		quote_is_goat(char quote);
 int		quote_checker(char *str);
 int		is_token(char *str, int i);
 /*                    store_token_words.c           */
-void	store_new_token(t_lex **lex, int token);
-void	store_new_word(t_lex **lex, char *str, int i, int j);
+void	store_new_token(t_shell *shell, t_lex **lex, int token);
+void	store_new_word(t_shell *shell, t_lex **lex, char *str, int i, int j);
 
 /*
 ======================= parser ======================
@@ -85,9 +89,9 @@ int		count_redir(t_lex *cmd_start, t_lex *lex);
 int		check_syntax(t_lex *lex);
 void	redesign_words(t_lex *lex);
 /*                    process_command.c             */
-t_cmds	*process_command(t_lex *lex, t_lex *cmd_start, t_cmds *new_cmd);
+t_cmds	*process_command(t_shell *shell, t_lex *lex, t_lex *cmd_start, t_cmds *new_cmd);
 /*                    process_command_utils.c       */
-void	new_redi(t_lex **head, t_lex **tmp, t_lex *cmd_start, t_cmds *new_cmd);
+void	new_redi(t_shell *shell, t_lex **head, t_lex **tmp, t_lex *cmd_start, t_cmds *new_cmd);
 /*                    dollar_handler.c              */
 void	find_dollar(t_cmds *cmds, t_env *env, int i, int j);
 

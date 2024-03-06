@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:46:31 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/05 09:34:11 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/06 15:55:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,13 @@ char	*get_paths(t_shell *shell, char *key)
 	curr = shell->env;
 	while (curr)
 	{
+		// ft_printf("result : %d\n", ft_strictcmp(curr->key, key));
+		// ft_printf("curr key : %s | key : %s\n", curr->key, key);
 		if (ft_strictcmp(curr->key, key) != 0)
+		{
+			ft_printf("key = %s\n");
 			break ;
+		}
 		curr = curr->next;
 	}
 	if (!curr)
@@ -63,11 +68,14 @@ char	*get_paths(t_shell *shell, char *key)
 void	init_shell(t_shell *shell, char **envp)
 {
 	shell->env = NULL;
+	shell->cmds = NULL;
 	shell->path = ft_calloc(1, sizeof(t_path));
 	if (!shell->path)
-		exit_shell("Minishell");
+		exit_shell(shell, "Minishell");
 	get_env(shell, envp);
 	shell->path->pwd = get_paths(shell, "PWD");
+	// ft_printf("pwd : %s\n", shell->path->pwd);
 	shell->path->oldpwd = get_paths(shell, "OLDPWD");
+	// ft_printf("old : %s\n", shell->path->oldpwd);
 	get_shlvl(shell);
 }
