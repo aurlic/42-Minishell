@@ -6,21 +6,30 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:46:31 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/06 15:55:18 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/07 13:13:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	fill_shlvl(t_env *curr)
+void	fill_shlvl(t_shell *shell, t_env *curr)
 {
 	int	shlvl;
 
 	shlvl = ft_atoi(curr->value);
+
 	if (shlvl == INT_MAX)
+	{
+		free(curr->value);
 		curr->value = ft_strdup("0");
+	}
 	else
+	{
+		free(curr->value);
 		curr->value = ft_itoa(shlvl + 1);
+		if (!curr->value)
+			exit_shell(shell, "shlvl");
+	}
 }
 
 // May need to handle SHLVL with no env
@@ -35,7 +44,7 @@ void	get_shlvl(t_shell *shell)
 	{
 		if (ft_strictcmp(curr->key, "SHLVL") != 0)
 		{
-			fill_shlvl(curr);
+			fill_shlvl(shell, curr);
 			break ;
 		}
 		if (!curr->next && curr)
@@ -51,13 +60,8 @@ char	*get_paths(t_shell *shell, char *key)
 	curr = shell->env;
 	while (curr)
 	{
-		// ft_printf("result : %d\n", ft_strictcmp(curr->key, key));
-		// ft_printf("curr key : %s | key : %s\n", curr->key, key);
 		if (ft_strictcmp(curr->key, key) != 0)
-		{
-			ft_printf("key = %s\n");
 			break ;
-		}
 		curr = curr->next;
 	}
 	if (!curr)
@@ -73,9 +77,11 @@ void	init_shell(t_shell *shell, char **envp)
 	if (!shell->path)
 		exit_shell(shell, "Minishell");
 	get_env(shell, envp);
-	shell->path->pwd = get_paths(shell, "PWD");
-	// ft_printf("pwd : %s\n", shell->path->pwd);
-	shell->path->oldpwd = get_paths(shell, "OLDPWD");
-	// ft_printf("old : %s\n", shell->path->oldpwd);
+	shell->path->pwd = ft_strdup(get_paths(shell, "PWD"));
+	if (!shell->path->pwd)
+		exit_shell(shell, "init malloc");
+	shell->path->oldpwd = ft_strdup(get_paths(shell, "OLDPWD"));
+	if (!shell->path->oldpwd)
+		exit_shell(shell, "init malloc");
 	get_shlvl(shell);
 }

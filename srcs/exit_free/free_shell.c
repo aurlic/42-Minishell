@@ -22,20 +22,12 @@ void	free_env(t_env *env)
 	{
 		next = tmp->next;
 		if (tmp->key)
-		{
-			// ft_printf("%s=", tmp->key);
 			free(tmp->key);
-		}
 		if (tmp->value)
-		{
-			// ft_printf("%s", tmp->value);
 			free(tmp->value);
-		}
-		// ft_printf("\n");
 		free(tmp);
 		tmp = next;
 	}
-	// free(next);
 }
 
 void	free_lex(t_lex *lex)
@@ -48,12 +40,13 @@ void	free_lex(t_lex *lex)
 	{
 		next = tmp->next;
 		if (tmp->word)
+		{
+			ft_printf(" free : %s\n", tmp->word);
 			free(tmp->word);
+		}
 		free(tmp);
 		tmp = next;
 	}
-	free(next);
-	free(tmp);
 }
 
 void	free_cmds(t_cmds *cmds)
@@ -72,8 +65,6 @@ void	free_cmds(t_cmds *cmds)
 		free(tmp);
 		tmp = next;
 	}
-	free(next);
-	free(tmp);
 }
 
 void	free_shell(t_shell *shell)
@@ -82,5 +73,9 @@ void	free_shell(t_shell *shell)
 		(free_env(shell->env));
 	if (shell->cmds)
 		free_cmds(shell->cmds);
-	// free(shell->cmds);
+	if (shell->path)
+	{
+		free(shell->path->pwd);
+		free(shell->path->oldpwd);
+	}
 }

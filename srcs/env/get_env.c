@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:41:31 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/06 16:45:04 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/06 18:17:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@
 // 	}
 // }
 
-static void	get_key_value(t_shell *shell, t_env **new, char **envp, int i)
+static void	get_key_value(t_shell *shell, t_env *new, char **envp, int i)
 {
 	int	j;
 	int	delim;
@@ -124,15 +124,14 @@ static void	get_key_value(t_shell *shell, t_env **new, char **envp, int i)
 			delim = j;
 		j++;
 	}
-	(*new)->key = ft_calloc(delim + 1, sizeof(char));
-	if (!(*new)->key)
+	new->key = ft_calloc(delim + 1, sizeof(char));
+	if (!new->key)
 		exit_shell(shell, "env_key");
-	ft_strncpy((*new)->key, envp[i], delim);
-	(*new)->value = ft_calloc((j - delim), sizeof(char));
-	if (!(*new)->value)
+	ft_strncpy(new->key, envp[i], delim);
+	new->value = ft_calloc((j - delim + 1), sizeof(char));
+	if (!new->value)
 		exit_shell(shell, "env_value");
-	ft_strncpy((*new)->value, envp[i] + delim + 1, j - delim);
-	ft_printf("-> new->key: [%s]\n", (*new)->value);
+	ft_strncpy(new->value, envp[i] + delim + 1, j - delim);
 }
 
 static void	fill_env(t_shell *shell, t_env *new, char **envp, int i)
@@ -141,7 +140,8 @@ static void	fill_env(t_shell *shell, t_env *new, char **envp, int i)
 
 	curr = shell->env;
 	new->index = i;
-	get_key_value(shell, &new, envp, i);
+	get_key_value(shell, new, envp, i);
+	new->next = NULL;
 	if (!curr)
 	{
 		new->prev = NULL;
@@ -174,11 +174,11 @@ void	get_env(t_shell *shell, char **envp)
 	while (envp && envp[i])
 	{
 		// ft_printf(" i = %d\n", i);
-		new = ft_calloc(1, sizeof(t_env));
+		new = malloc(sizeof(t_env));
 		if (!new)
 			exit_shell(shell, "get_env");
 		fill_env(shell, new, envp, i);
-		// ft_printf("[%s] = [%s]\n", new->key, new->value);
 		i++;
 	}
 }
+

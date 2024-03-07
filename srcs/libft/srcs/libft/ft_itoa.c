@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:12:42 by aurlic            #+#    #+#             */
-/*   Updated: 2023/12/08 10:19:22 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/07 11:19:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_itoa(int n)
 	i = 0;
 	nb = n;
 	len = get_len(nb);
-	res = ft_calloc(sizeof(char), (len + 1));
+	res = ft_calloc((len + 1), sizeof(char));
 	if (!res)
 		return (NULL);
 	res[len--] = '\0';

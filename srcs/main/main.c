@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:44:58 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/06 11:22:11 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/07 13:47:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	main(int ac, char **av, char **envp)
 		lex = lexer(&shell, str);
 		parser(&shell, lex);
 		// free_before_new_loop(shell)
-		if (shell.cmds)
-			free_cmds(shell.cmds);
-		free(str);
+		// if (shell.cmds)
+		// 	free_cmds(shell.cmds);
+		// free(str);
 	}
 	exit(EXIT_SUCCESS);
 }

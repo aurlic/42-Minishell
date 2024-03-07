@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:00:39 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/06 10:27:05 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/07 13:40:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,21 @@ void	parser(t_shell *shell, t_lex *lex)
 	cmds = cmds_head;
 	shell->cmds = cmds_head;
 	parse_cmds_tab(shell);
-	while (shell->cmds)
-	{
-		int k = 0;
-		while (shell->cmds->tab[k])
-		{
-			ft_printf("tab:[%s]\n", shell->cmds->tab[k]);
-			k++;
-		}
-		while (shell->cmds->redirection)
-		{
-			ft_printf("redir-> token: [%d] | word: [%s]\n", shell->cmds->redirection->token, shell->cmds->redirection->word);
-			shell->cmds->redirection = shell->cmds->redirection->next ;
-		}
-		ft_printf("---\n");
-		shell->cmds = shell->cmds->next;
-	}
+	// while (shell->cmds)
+	// {
+	// 	int k = 0;
+	// 	while (shell->cmds->tab[k])
+	// 	{
+	// 		ft_printf("tab:[%s]\n", shell->cmds->tab[k]);
+	// 		k++;
+	// 	}
+	// 	while (shell->cmds->redirection)
+	// 	{
+	// 		ft_printf("redir-> token: [%d] | word: [%s]\n", shell->cmds->redirection->token, shell->cmds->redirection->word);
+	// 		shell->cmds->redirection = shell->cmds->redirection->next ;
+	// 	}
+	// 	ft_printf("---\n");
+	// 	shell->cmds = shell->cmds->next;
+	// }
 }
 

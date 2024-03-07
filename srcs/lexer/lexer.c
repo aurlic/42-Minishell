@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:30:34 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/06 10:32:26 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/07 13:38:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,11 @@ t_lex	*lexer(t_shell *shell, char *str)
 	if (quote_checker(str) == FALSE)
 		write(STDERR_FILENO, ERR_QUOTE, ft_strlen(ERR_QUOTE));
 	lex_str(shell, &lex, str);
+	t_lex *tmp = lex;
+	while(tmp)
+	{
+		ft_printf("%s\n", tmp->word);
+		tmp = tmp->next;
+	}
 	return (lex);
 }
