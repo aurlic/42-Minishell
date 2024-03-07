@@ -6,22 +6,36 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:32:15 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/06 10:22:01 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/07 15:53:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	join_nodes(t_lex *cmd_start)
+static void	join_nodes(t_shell *shell, t_lex *cmd_start)
 {
 	t_lex	*tmp;
 
-	tmp = cmd_start->next->next->next;
-	cmd_start->next->next = NULL;
-	free(cmd_start->next->next);
-	cmd_start->next = NULL;
-	free(cmd_start->next);
-	cmd_start->next = tmp;
+	(void)shell;
+	tmp = NULL;
+	if (cmd_start->next->next->next)
+		tmp = cmd_start->next->next->next;
+	if (cmd_start->next->next)
+	{
+		if (cmd_start->next->next->word)
+			free(cmd_start->next->next->word);
+		free(cmd_start->next->next);
+	}
+	// cmd_start->next->next = NULL;
+	// cmd_start->next = NULL;
+	if (cmd_start->next)
+	{
+		if (cmd_start->next->word)
+			free(cmd_start->next->word);
+		free(cmd_start->next);
+	}
+	if (tmp)
+		cmd_start->next = tmp;
 }
 
 void	new_redi(t_shell *shell, t_lex **head, t_lex **tmp, t_lex *cmd_start, t_cmds *new_cmd)
@@ -43,5 +57,5 @@ void	new_redi(t_shell *shell, t_lex **head, t_lex **tmp, t_lex *cmd_start, t_cmd
 	}
 	(*tmp)->word = ft_strdup(cmd_start->next->next->word);
 	(*tmp)->token = cmd_start->next->token;
-	join_nodes(cmd_start);
+	join_nodes(shell, cmd_start);
 }

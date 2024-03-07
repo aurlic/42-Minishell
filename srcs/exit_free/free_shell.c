@@ -40,10 +40,7 @@ void	free_lex(t_lex *lex)
 	{
 		next = tmp->next;
 		if (tmp->word)
-		{
-			ft_printf(" free : %s\n", tmp->word);
 			free(tmp->word);
-		}
 		free(tmp);
 		tmp = next;
 	}

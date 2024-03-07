@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:13:20 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/05 16:43:31 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/07 15:20:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,11 @@ int	check_syntax(t_lex *lex)
 	return (0);
 }
 
-static char	*remove_quotes(char *str, int *i, char quote)
+static char	*remove_quotes(t_shell *shell, char *str, int *i, char quote)
 {
 	char	*tmp;
 	char	*final;
+	char	*final_tmp;
 	int		j;
 
 	tmp = ft_strndup(str, *i);
@@ -75,14 +76,18 @@ static char	*remove_quotes(char *str, int *i, char quote)
 		return str;
 	while (str[j] && str[j] != quote)
 		j++;
-	final = ft_strndup(str + *i + 1, j - *i - 1);
-	final = ft_strjoin_free(tmp, final);
+	final_tmp = ft_strndup(str + *i + 1, j - *i - 1);
+	final = ft_strjoin_free(tmp, final_tmp);
+	free(final_tmp);
 	*i = ft_strlen(final);
 	final = ft_strjoin_free(final, str + j + 1);
+	if (!final)
+		exit_shell(shell, "malloc");
+	free(str);
 	return (final);
 }
 
-void	redesign_words(t_lex *lex)
+void	redesign_words(t_shell *shell, t_lex *lex)
 {
 	t_lex	*tmp;
 	int		i;
@@ -97,7 +102,7 @@ void	redesign_words(t_lex *lex)
 			while (tmp->word[i])
 			{
 				if ((tmp->word[i] == '\'') || (tmp->word[i] == '\"'))
-					tmp->word = remove_quotes(tmp->word, &i, tmp->word[i]);
+					tmp->word = remove_quotes(shell, tmp->word, &i, tmp->word[i]);
 				else
 					i++;
 			}

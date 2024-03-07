@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:00:39 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/07 13:40:01 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/07 15:54:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	parser(t_shell *shell, t_lex *lex)
 	cmds = malloc(sizeof(t_cmds));
 	if (!cmds)
 		exit_shell(shell, "parser_malloc");
-	redesign_words(lex);
+	redesign_words(shell, lex);
 	tmp_lex = lex;
 	cmd_start = lex;
 	cmds_head = cmds;
