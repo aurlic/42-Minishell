@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:40:50 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/12 15:52:02 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:19:56 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	fill_cmd_tab(t_shell *shell, t_cmds *new_cmd, t_lex **cmd_start, int
 		if (tmp->word)
 			new_cmd->tab[j] = ft_strdup(tmp->word);
 		else
-			new_cmd->tab[j] = "ERROR";
+			new_cmd->tab[j] = ft_strdup("ERROR");
 		j++;
 		tmp = tmp->next;
 	}

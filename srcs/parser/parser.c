@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:00:39 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/12 16:03:25 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:32:29 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ void	parser(t_shell *shell, t_lex *lex)
 	while (tmp_lex)
 	{
 		if (tmp_lex->token == PIPE)
-			(parser_subprocess(shell, tmp_lex, &cmd_start, &cmds), cmd_start = tmp_lex);
-		// ft_printf("jsjs word = %s | token = %d\n", tmp_lex->word, tmp_lex->token);
+			(parser_subprocess(shell, tmp_lex, &cmd_start, &cmds));
+		cmd_start = tmp_lex;
 		tmp_lex = tmp_lex->next;
 	}
 	cmds = process_command(shell, tmp_lex, &cmd_start, cmds);
-	lex = cmd_start;
+	// free_lex(&cmd_start);
 	cmds = cmds_head;
 	shell->cmds = cmds_head;
 	free_lex(&lex);
