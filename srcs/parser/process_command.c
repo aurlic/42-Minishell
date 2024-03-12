@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:40:50 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/07 15:27:22 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/12 15:14:52 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,23 @@ static t_cmds	*init_new_cmd(t_cmds *cmd)
 	return (cmd);
 }
 
-static void	process_redir(t_shell *shell, t_lex *lex, t_lex *cmd_start, t_cmds *new_cmd)
+static void	process_redir(t_shell *shell, t_lex *lex, t_lex **cmd_start, t_cmds *new_cmd)
 {
 	t_lex	*redir_head;
 	t_lex	*redir_tmp;
 	t_lex	*prev_redir;
+	t_lex	*tmp2; 
 
 	redir_head = NULL;
 	redir_tmp = NULL;
 	prev_redir = NULL;
-	while (cmd_start != lex)
+	if ((*cmd_start) && (*cmd_start)->token && (*cmd_start)->token != PIPE)
+		(create_pipe_head(shell, cmd_start));
+	tmp2 = (*cmd_start);
+	while ((*cmd_start) && (*cmd_start) != lex)
 	{
-		if (cmd_start->next && cmd_start->next->token
-			&& cmd_start->next->token != PIPE)
+		if (((*cmd_start)->next && (*cmd_start)->next->token
+			&& (*cmd_start)->next->token != PIPE))
 		{
 			new_redi(shell, &redir_head, &redir_tmp, cmd_start, new_cmd);
 			if (prev_redir)
@@ -44,8 +48,9 @@ static void	process_redir(t_shell *shell, t_lex *lex, t_lex *cmd_start, t_cmds *
 			prev_redir = redir_tmp;
 		}
 		else
-			cmd_start = cmd_start->next;
+			(*cmd_start) = (*cmd_start)->next;
 	}
+	(*cmd_start) = tmp2;
 }
 
 static int	count_size(t_lex *cmd_start, t_lex *lex)
@@ -53,12 +58,13 @@ static int	count_size(t_lex *cmd_start, t_lex *lex)
 	int	i;
 
 	i = 0;
-	while (cmd_start != lex)
+	while (cmd_start && cmd_start != lex)
 	{
 		if (cmd_start->token == PIPE)
 			cmd_start = cmd_start->next;
 		i++;
-		cmd_start = cmd_start->next;
+		if(cmd_start)
+			cmd_start = cmd_start->next;
 	}
 	return (i);
 }
@@ -73,9 +79,13 @@ static void	fill_cmd_tab(t_shell *shell, t_cmds *new_cmd, t_lex *cmd_start, int 
 		exit_shell(shell, "parser_malloc");
 	if (cmd_start && cmd_start->token == PIPE)
 		cmd_start = cmd_start->next;
-	while (j < i)
+	
+	while (j < i && cmd_start)
 	{
-		new_cmd->tab[j] = ft_strdup(cmd_start->word);
+		if (cmd_start->word)
+			new_cmd->tab[j] = ft_strdup(cmd_start->word);
+		else
+			new_cmd->tab[j] = "ERROR";
 		j++;
 		cmd_start = cmd_start->next;
 	}
@@ -84,13 +94,11 @@ static void	fill_cmd_tab(t_shell *shell, t_cmds *new_cmd, t_lex *cmd_start, int 
 
 t_cmds	*process_command(t_shell *shell, t_lex *lex, t_lex *cmd_start, t_cmds *new_cmd)
 {
-	t_lex	*tmp_head;
 	int		i;
 
-	tmp_head = cmd_start;
 	new_cmd = init_new_cmd(new_cmd);
-	process_redir(shell, lex, cmd_start, new_cmd);
+	process_redir(shell, lex, &cmd_start, new_cmd);
 	i = count_size(cmd_start, lex);
-	fill_cmd_tab(shell, new_cmd, tmp_head, i);
+	fill_cmd_tab(shell, new_cmd, cmd_start, i);
 	return (new_cmd);
 }

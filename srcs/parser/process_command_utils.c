@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_command_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:32:15 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/07 15:53:47 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/12 15:14:51 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,21 @@ static void	join_nodes(t_shell *shell, t_lex *cmd_start)
 		if (cmd_start->next->next->word)
 			free(cmd_start->next->next->word);
 		free(cmd_start->next->next);
+		cmd_start->next->next = NULL;
 	}
-	// cmd_start->next->next = NULL;
-	// cmd_start->next = NULL;
 	if (cmd_start->next)
 	{
 		if (cmd_start->next->word)
 			free(cmd_start->next->word);
 		free(cmd_start->next);
+		cmd_start->next = NULL;
 	}
 	if (tmp)
 		cmd_start->next = tmp;
+	ft_printf("word = %s | token = %d\n", cmd_start->word, cmd_start->token);
 }
 
-void	new_redi(t_shell *shell, t_lex **head, t_lex **tmp, t_lex *cmd_start, t_cmds *new_cmd)
+void	new_redi(t_shell *shell, t_lex **head, t_lex **tmp, t_lex **cmd_start, t_cmds *new_cmd)
 {
 	if (!*head)
 	{
@@ -55,7 +56,20 @@ void	new_redi(t_shell *shell, t_lex **head, t_lex **tmp, t_lex *cmd_start, t_cmd
 			exit_shell(shell, "command_malloc");
 		*tmp = (*tmp)->next;
 	}
-	(*tmp)->word = ft_strdup(cmd_start->next->next->word);
-	(*tmp)->token = cmd_start->next->token;
-	join_nodes(shell, cmd_start);
+	(*tmp)->word = ft_strdup((*cmd_start)->next->next->word);
+	(*tmp)->token = (*cmd_start)->next->token;
+	join_nodes(shell, (*cmd_start));
+}
+
+void	create_pipe_head(t_shell *shell, t_lex **cmd_start)
+{
+	t_lex *new;
+
+	new = malloc(sizeof(t_lex));
+	if (!new)
+		exit_shell(shell, "malloc");
+	new->token = PIPE;
+    new->word = NULL;
+    new->next = (*cmd_start);
+	(*cmd_start) = new;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:00:39 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/07 15:54:36 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/12 15:00:18 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,25 +72,32 @@ void	parser(t_shell *shell, t_lex *lex)
 			(parser_subprocess(shell, tmp_lex, cmd_start, &cmds), cmd_start = tmp_lex);
 		tmp_lex = tmp_lex->next;
 	}
+	// exit_shell(&shell, "LEAKS\n");
 	cmds = process_command(shell, tmp_lex, cmd_start, cmds);
 	cmds = cmds_head;
 	shell->cmds = cmds_head;
+	if (lex)
+	{
+		free_lex(&lex);
+		ft_printf("apres free\n");
+	}
 	parse_cmds_tab(shell);
-	// while (shell->cmds)
+	// t_cmds	*tmp = shell->cmds;
+	// while (tmp)
 	// {
 	// 	int k = 0;
-	// 	while (shell->cmds->tab[k])
+	// 	while (tmp->tab[k])
 	// 	{
-	// 		ft_printf("tab:[%s]\n", shell->cmds->tab[k]);
+	// 		ft_printf("tab:[%s]\n", tmp->tab[k]);
 	// 		k++;
 	// 	}
-	// 	while (shell->cmds->redirection)
+	// 	while (tmp->redirection)
 	// 	{
-	// 		ft_printf("redir-> token: [%d] | word: [%s]\n", shell->cmds->redirection->token, shell->cmds->redirection->word);
-	// 		shell->cmds->redirection = shell->cmds->redirection->next ;
+	// 		ft_printf("redir-> token: [%d] | word: [%s]\n", tmp->redirection->token, tmp->redirection->word);
+	// 		tmp->redirection = tmp->redirection->next ;
 	// 	}
 	// 	ft_printf("---\n");
-	// 	shell->cmds = shell->cmds->next;
+	// 	tmp = tmp->next;
 	// }
 }
 

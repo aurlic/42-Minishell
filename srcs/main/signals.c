@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:57:41 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/07 16:18:31 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/11 10:21:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,27 @@ static void	handler(int sig)
 		g_return = 130;
 	}
 }
+// void	handle_signals(int action, void (*f)(int))
 
 void	handle_signals(int action)
 {
 	struct sigaction	sig;
 
-	signal(SIGTSTP, SIG_IGN);
+	// signal(SIGTSTP, SIG_IGN);
 	if (action == 0)
 	{
 		sig.sa_flags = SA_RESTART;
 		sig.sa_handler = handler;
+		sigemptyset(&sig.sa_mask);
 		sigaction(SIGINT, &sig, NULL);
-		signal(SIGQUIT, SIG_IGN);
+		// signal(SIGQUIT, SIG_IGN);
 	}
 	if (action == 1)
 	{
+		sig.sa_flags = SA_RESTART;
+		sig.sa_handler = SIG_IGN;
+		sigaction(SIGQUIT, &sig, NULL);
+		// signal(SIGQUIT, SIG_IGN);
 		// IN CASE OF HEREDOC -> HANDLE CTRL D IN HERE DOC
 	}
 }
