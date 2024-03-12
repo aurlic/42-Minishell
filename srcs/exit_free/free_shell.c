@@ -76,7 +76,6 @@ void	free_lex(t_lex **lex)
 		to_free = *lex;
 		*lex = (*lex)->next;
 		to_free->next = NULL;
-		// ft_printf("word = %s | token = %d\n", to_free->word, to_free->token);
 		free(to_free->word);
 		free(to_free);
 	}
@@ -110,7 +109,6 @@ void	free_before_new_loop(t_shell *shell)
 {
 	if (shell->cmds)
 		free_cmds(&(shell->cmds));
-	// ft_printf("-> shell->cnds: %d\n", shell->cmds->is_builtin);
 }
 
 void	free_shell(t_shell *shell)

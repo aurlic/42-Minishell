@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:32:15 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/12 15:14:51 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:31:23 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	join_nodes(t_shell *shell, t_lex *cmd_start)
 	}
 	if (tmp)
 		cmd_start->next = tmp;
-	ft_printf("word = %s | token = %d\n", cmd_start->word, cmd_start->token);
 }
 
 void	new_redi(t_shell *shell, t_lex **head, t_lex **tmp, t_lex **cmd_start, t_cmds *new_cmd)

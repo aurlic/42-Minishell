@@ -6,13 +6,13 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:00:39 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/12 15:00:18 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:03:25 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	parser_subprocess(t_shell *shell, t_lex *tmp_lex, t_lex *cmd_start, t_cmds **cmds)
+void	parser_subprocess(t_shell *shell, t_lex *tmp_lex, t_lex **cmd_start, t_cmds **cmds)
 {
 	*cmds = process_command(shell, tmp_lex, cmd_start, *cmds);
 	(*cmds)->next = malloc(sizeof(t_cmds));
@@ -69,18 +69,15 @@ void	parser(t_shell *shell, t_lex *lex)
 	while (tmp_lex)
 	{
 		if (tmp_lex->token == PIPE)
-			(parser_subprocess(shell, tmp_lex, cmd_start, &cmds), cmd_start = tmp_lex);
+			(parser_subprocess(shell, tmp_lex, &cmd_start, &cmds), cmd_start = tmp_lex);
+		// ft_printf("jsjs word = %s | token = %d\n", tmp_lex->word, tmp_lex->token);
 		tmp_lex = tmp_lex->next;
 	}
-	// exit_shell(&shell, "LEAKS\n");
-	cmds = process_command(shell, tmp_lex, cmd_start, cmds);
+	cmds = process_command(shell, tmp_lex, &cmd_start, cmds);
+	lex = cmd_start;
 	cmds = cmds_head;
 	shell->cmds = cmds_head;
-	if (lex)
-	{
-		free_lex(&lex);
-		ft_printf("apres free\n");
-	}
+	free_lex(&lex);
 	parse_cmds_tab(shell);
 	// t_cmds	*tmp = shell->cmds;
 	// while (tmp)
