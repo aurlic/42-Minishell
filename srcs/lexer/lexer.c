@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:30:34 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/12 12:16:59 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:27:35 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,5 @@ t_lex	*lexer(t_shell *shell, char *str)
 	if (quote_checker(str) == FALSE)
 		write(STDERR_FILENO, ERR_QUOTE, ft_strlen(ERR_QUOTE));
 	lex_str(shell, &lex, str);
-	// exit_shell(shell, "LEAKS111\n");
 	return (lex);
 }

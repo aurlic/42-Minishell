@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_token_words.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:19:54 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/12 12:09:20 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:20:35 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	store_new_token(t_shell *shell, t_lex **lex, int token)
 		exit_shell(shell, "lexer malloc");
 	new->word = NULL;
 	new->token = token;
+	new->skip = 0;
 	if (!*lex)
 	{
 		*lex = new;
@@ -47,6 +48,7 @@ void	store_new_word(t_shell *shell, t_lex **lex, char *str, int i, int j)
 		exit_shell(shell, "lexer malloc");
 	new->word = ft_strndup(str + i - j, j);
 	new->token = 0;
+	new->skip = 0;
 	if (!*lex)
 	{
 		*lex = new;
