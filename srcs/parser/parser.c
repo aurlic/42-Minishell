@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 11:15:25 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/14 11:21:45 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/14 14:31:50 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	parser(t_shell *shell, t_lex *lex)
 	t_cmds	*cmds_head;
 	t_lex	*tmp_lex;
 	t_lex	*curr;
+
 
 	if (check_syntax(lex) == -1)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/14 11:13:37 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/14 18:10:02 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,16 @@ void	find_dollar(t_cmds *cmds, t_env *env, int i, int j);
 int		check_syntax(t_lex *lex);
 void	redesign_words(t_shell *shell, t_lex *lex);
 
+/*
+======================= exec ==========================
+*/
+/*                    exec.c                          */
+void	run_exec(t_shell *shell);
+/*                    manage_redirs.c                 */
+int		handle_input(t_shell *shell, t_lex *redirs, int token, int fd);
+int		handle_output(t_shell *shell, t_lex *redirs, int token, int fd);
+/*                    here_doc.c                      */
+int		run_here_doc(t_shell *shell, t_lex *lex, int fd);
 
 /*
 ======================= builtins ======================

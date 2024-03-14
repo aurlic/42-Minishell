@@ -6,7 +6,7 @@
 #    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 11:02:46 by aurlic            #+#    #+#              #
-#    Updated: 2024/03/14 10:33:52 by aurlic           ###   ########.fr        #
+#    Updated: 2024/03/14 18:04:40 by aurlic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,9 @@ SRCS		=	srcs/main/main.c \
 				srcs/parser/handle_redirections.c \
 				srcs/parser/handle_command.c \
 				srcs/parser/dollar_handler.c \
+				srcs/exec/exec.c \
+				srcs/exec/manage_redirs.c \
+				srcs/exec/here_doc.c \
 				srcs/builtins/builtins.c \
 
 # INCLUDES	=	includes/ \ TO MAKE IT WORK GIVE ABSOLUTE PATH IN FILES AND INLUDE WHILE COMPILING

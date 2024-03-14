@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:44:58 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/14 10:06:44 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/14 11:36:11 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	main(int ac, char **av, char **envp)
 		else
 		{
 			parser(&shell, lex);
-		// if (shell.cmds)
-		// 	run_exec(shell.cmds);
+			if (shell.cmds)
+				run_exec(&shell);
 		}
 		free_before_new_loop(&shell);
 		if (str)

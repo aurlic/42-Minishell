@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:26:30 by traccurt          #+#    #+#             */
-/*   Updated: 2024/02/28 16:47:42 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/14 15:17:52 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define IN 0
 # define OUT 1
+# define UNOPENED_FD -2
 
 # include "../srcs/libft/includes/ft_printf.h"
 # include "../srcs/libft/includes/get_next_line.h"
