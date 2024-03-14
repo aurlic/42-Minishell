@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:17:12 by aurlic            #+#    #+#             */
-/*   Updated: 2024/02/27 10:58:41 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/14 09:54:13 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	open_check(char *str, char type, int *i, int *opened)
 	{
 		if (*opened == 0)
 			*opened = -1;
-		while (str[*i] && str[++(*i)] != type)
+		while (str[*i] && str[*i + 1] && str[++(*i)] != type)
 			continue ;
 		if (str[*i] == type && *opened == -1)
 			*opened = 0;

@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/13 17:10:08 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/14 11:13:37 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,23 +78,28 @@ int		quote_checker(char *str);
 int		is_token(char *str, int i);
 /*                    store_token_words.c           */
 void	store_new_token(t_shell *shell, t_lex **lex, int token);
-void	store_new_word(t_shell *shell, t_lex **lex, char *str, int i, int j);
+// void	store_new_word(t_shell *shell, t_lex **lex, char *str, int i, int j);
+void	store_new_word(t_shell *shell, t_lex **lex, char *str, int ij[2]);
 
 /*
 ======================= parser ======================
 */
 /*                    parser.c                      */
 void	parser(t_shell *shell, t_lex *lex);
-/*                    parser_syntax.c               */
-int		count_commands(t_lex *lex);
-int		count_redir(t_lex *cmd_start, t_lex *lex);
-int		check_syntax(t_lex *lex);
-void	redesign_words(t_shell *shell, t_lex *lex);
+/*                    parser_utils.c                */
+int		count_tab_size(t_lex *tmp_lex, t_lex *curr);
+/*                    handle_commands.c             */
+void	new_cmd(t_shell *shell, t_cmds **cmds, t_lex *tmp_lex, t_lex *curr);
+t_cmds	*create_cmd(t_shell *shell, t_cmds **cmds, t_lex *tmp_lex, t_lex *curr);
+void	parse_cmds_tab(t_shell *shell);
 /*                    handle_redirections.c             */
-void	handle_redir(t_shell *shell, t_cmds **cmds, t_lex *tmp_lex, t_lex *curr);
-
+void	set_redir(t_shell *shell, t_cmds **cmds, t_lex *tmp_lex, t_lex *curr);
 /*                    dollar_handler.c              */
 void	find_dollar(t_cmds *cmds, t_env *env, int i, int j);
+/*                    parser_syntax.c               */
+int		check_syntax(t_lex *lex);
+void	redesign_words(t_shell *shell, t_lex *lex);
+
 
 /*
 ======================= builtins ======================

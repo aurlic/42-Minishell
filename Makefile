@@ -6,7 +6,7 @@
 #    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 11:02:46 by aurlic            #+#    #+#              #
-#    Updated: 2024/03/13 16:09:32 by aurlic           ###   ########.fr        #
+#    Updated: 2024/03/14 10:33:52 by aurlic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,9 @@ SRCS		=	srcs/main/main.c \
 				srcs/lexer/lexer_utils.c \
 				srcs/parser/parser.c \
 				srcs/parser/parser_syntax.c \
+				srcs/parser/parser_utils.c \
 				srcs/parser/handle_redirections.c \
+				srcs/parser/handle_command.c \
 				srcs/parser/dollar_handler.c \
 				srcs/builtins/builtins.c \
 

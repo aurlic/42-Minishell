@@ -3,46 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   parser_syntax.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:13:20 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/07 15:20:24 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/14 10:19:06 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// int	count_commands(t_lex *lex)
-// {
-// 	t_lex	*tmp;
-// 	int		count;
+static char	*rm_quotes(t_shell *shell, char *str, int *i, char quote)
+{
+	char	*tmp;
+	char	*final;
+	char	*final_tmp;
+	int		j;
 
-// 	tmp = lex;
-// 	count = 0;
-// 	while (tmp)
-// 	{
-// 		if (tmp->token == PIPE)
-// 			count++;
-// 		tmp = tmp->next;
-// 	}
-// 	return (count + 1);
-// }
-
-// int	count_redir(t_lex *cmd_start, t_lex *lex)
-// {
-// 	t_lex	*tmp;
-// 	int		count;
-
-// 	tmp = cmd_start;
-// 	count = 0;
-// 	while (tmp != lex)
-// 	{
-// 		if (tmp->token && tmp->token != PIPE)
-// 			count++;
-// 		tmp = tmp->next;
-// 	}
-// 	return (count);
-// }
+	tmp = ft_strndup(str, *i);
+	j = *i + 1;
+	if (ft_strictcmp(str, ""))
+		return (str);
+	while (str[j] && str[j] != quote)
+		j++;
+	final_tmp = ft_strndup(str + *i + 1, j - *i - 1);
+	final = ft_strjoin_free(tmp, final_tmp);
+	free(final_tmp);
+	*i = ft_strlen(final);
+	final = ft_strjoin_free(final, str + j + 1);
+	if (!final)
+		exit_shell(shell, "malloc");
+	free(str);
+	return (final);
+}
 
 int	check_syntax(t_lex *lex)
 {
@@ -63,30 +55,6 @@ int	check_syntax(t_lex *lex)
 	return (0);
 }
 
-static char	*remove_quotes(t_shell *shell, char *str, int *i, char quote)
-{
-	char	*tmp;
-	char	*final;
-	char	*final_tmp;
-	int		j;
-
-	tmp = ft_strndup(str, *i);
-	j = *i + 1;
-	if (ft_strictcmp(str, ""))
-		return str;
-	while (str[j] && str[j] != quote)
-		j++;
-	final_tmp = ft_strndup(str + *i + 1, j - *i - 1);
-	final = ft_strjoin_free(tmp, final_tmp);
-	free(final_tmp);
-	*i = ft_strlen(final);
-	final = ft_strjoin_free(final, str + j + 1);
-	if (!final)
-		exit_shell(shell, "malloc");
-	free(str);
-	return (final);
-}
-
 void	redesign_words(t_shell *shell, t_lex *lex)
 {
 	t_lex	*tmp;
@@ -102,7 +70,7 @@ void	redesign_words(t_shell *shell, t_lex *lex)
 			while (tmp->word[i])
 			{
 				if ((tmp->word[i] == '\'') || (tmp->word[i] == '\"'))
-					tmp->word = remove_quotes(shell, tmp->word, &i, tmp->word[i]);
+					tmp->word = rm_quotes(shell, tmp->word, &i, tmp->word[i]);
 				else
 					i++;
 			}

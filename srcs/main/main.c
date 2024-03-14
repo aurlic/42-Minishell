@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:44:58 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/12 12:25:59 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/14 10:06:44 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ int	main(int ac, char **av, char **envp)
 		handle_signals(0);
 		str = read_prompt(&shell);
 		lex = lexer(&shell, str);
-		parser(&shell, lex);
-		// exit_shell(&shell, "LEAKS\n");
+		if (g_return == 2)
+			free_lex(&lex);
+		else
+		{
+			parser(&shell, lex);
 		// if (shell.cmds)
 		// 	run_exec(shell.cmds);
+		}
 		free_before_new_loop(&shell);
 		if (str)
 			free(str);

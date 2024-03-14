@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:46:31 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/07 13:13:45 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/14 10:09:30 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	fill_shlvl(t_shell *shell, t_env *curr)
 	int	shlvl;
 
 	shlvl = ft_atoi(curr->value);
-
 	if (shlvl == INT_MAX)
 	{
 		free(curr->value);

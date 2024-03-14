@@ -82,7 +82,7 @@ void	free_lex(t_lex **lex)
 	*lex = NULL;
 }
 
-void	free_cmds(t_cmds  **cmds)
+void	free_cmds(t_cmds **cmds)
 {
 	t_cmds	*tmp;
 	int		i;

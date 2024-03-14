@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:05:51 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/13 19:10:24 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/14 10:17:37 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	create_redir(t_shell *shell, t_cmds **cmds, t_lex *curr)
 	}
 }
 
-void	handle_redir(t_shell *shell, t_cmds **cmds, t_lex *tmp_lex, t_lex *curr)
+void	set_redir(t_shell *shell, t_cmds **cmds, t_lex *tmp_lex, t_lex *curr)
 {
 	while (curr && curr != tmp_lex)
 	{
