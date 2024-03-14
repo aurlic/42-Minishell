@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 10:02:26 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/06 10:02:26 by marvin           ###   ########.fr       */
+/*   Created: 2024/03/14 11:26:05 by traccurt          #+#    #+#             */
+/*   Updated: 2024/03/14 11:26:05 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,41 +29,6 @@ void	free_env(t_env *env)
 		tmp = next;
 	}
 }
-
-// void	free_lex(t_lex *lex)
-// {
-// 	t_lex	*tmp;
-// 	t_lex	*next;
-
-// 	tmp = lex;
-// 	while (tmp)
-// 	{
-// 		next = tmp->next;
-// 		if (tmp->word)
-// 			free(tmp->word);
-// 		free(tmp);
-// 		tmp = next;
-// 	}
-// }
-
-// void	free_cmds(t_cmds **cmds)
-// {
-// 	t_cmds	*tmp;
-// 	t_cmds	*next;
-
-// 	tmp = cmds;
-// 	while (tmp)
-// 	{
-// 		next = tmp->next;
-// 		if (tmp->tab)
-// 			free_matrix_safe(tmp->tab);
-// 		if (tmp->redirection)
-// 			free_lex(tmp->redirection);
-// 		free(tmp);
-// 		tmp = next;
-// 	}
-// 	cmds = NULL;
-// }
 
 void	free_lex(t_lex **lex)
 {
