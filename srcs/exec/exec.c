@@ -6,39 +6,38 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:35:19 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/14 18:10:23 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/15 11:17:04 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	open_redirs(t_shell *shell)
+void	run_builtins(t_shell *shell, int fd_in, int fd_out)
 {
-	t_cmds	*tmp;
-	t_lex	*redirs;
-	int		fd[2];
+	t_cmds *tmp;
 
-	fd[0] = UNOPENED_FD;
-	fd[1] = UNOPENED_FD;
 	tmp = shell->cmds;
 	while (tmp)
 	{
-		redirs = tmp->redirection;
-		while (redirs)
-		{
-			if (redirs->token == D_LOWER || redirs->token == LOWER)
-				fd[0] = handle_input(shell, redirs, redirs->token, fd[0]);
-			else if (redirs->token == D_GREATER || redirs->token == GREATER)
-				fd[1] = handle_output(shell, redirs, redirs->token, fd[0]);
-			if (fd[0] == -1 || fd[1] == -1)
-				return ;
-			redirs = redirs->next;
-		}
+		if (shell->cmds->is_builtin == ECHO)
+			echo(shell->cmds, fd_in, fd_out);
 		tmp = tmp->next;
 	}
 }
 
 void	run_exec(t_shell *shell)
 {
-	open_redirs(shell);
+	t_cmds	*tmp_cmd;
+	int		fd[2];
+
+	tmp_cmd = shell->cmds;
+	fd[0] = UNOPENED_FD;
+	fd[1] = UNOPENED_FD;
+	while (tmp_cmd)
+	{
+		open_redirs(tmp_cmd, &fd[0], &fd[1]);
+		run_builtins(tmp_cmd, fd[0], fd[1]);
+		//run exec
+		tmp_cmd = tmp_cmd->next;
+	}
 }
