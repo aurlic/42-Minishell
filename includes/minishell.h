@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/15 10:23:33 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/15 16:38:52 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,21 @@ void	redesign_words(t_shell *shell, t_lex *lex);
 /*                    exec.c                          */
 void	run_exec(t_shell *shell);
 /*                    manage_redirs.c                 */
-void	open_redirs(t_shell *shell, int *fd_in, int *fd_out);
+void	open_redirs(t_cmds *cmds, int *fd_in, int *fd_out);
 /*                    here_doc.c                      */
-int		run_here_doc(t_shell *shell, t_lex *lex, int fd);
+int		run_here_doc(t_lex *lex, int fd);
+/*                    manage_fds.c                      */
+void	init_fds(t_fd *fds);
+void	set_fds(t_fd *fds);
 
 /*
 ======================= builtins ======================
 */
 /*                    builtins.c                      */
 int		is_builtin(char *str);
+void	run_builtins(t_shell *shell, t_cmds *cmds, int fd_in, int fd_out);
+
+void 	pwd(t_shell *shell);
+void	env(t_shell *shell);
 
 #endif

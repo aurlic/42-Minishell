@@ -3,38 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   manage_fds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:58:33 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/14 11:25:47 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:12:31 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_init_fds(t_fd *fds)
+void	init_fds(t_fd *fds)
 {
-	fds->pipe[0] = -2;
-	fds->pipe[1] = -2;
-	fds->redirection[0] = -2;
-	fds->redirection[1] = -2;
-	fds->out = -2;
+	fds->pipe[IN] = UNOPENED_FD;
+	fds->pipe[OUT] = UNOPENED_FD;
+	fds->redir[IN] = UNOPENED_FD;
+	fds->redir[OUT] = UNOPENED_FD;
+	fds->out = UNOPENED_FD;
 }
 
 void	set_fds(t_fd *fds)
 {
-	if (fds->pipe[1] != -2)
-		fds->out = fds->pipe[1];
-	if (fds->redirection[IN] != -2)
+	if (fds->pipe[OUT] != UNOPENED_FD)
+		fds->out = fds->pipe[OUT];
+	if (fds->redir[IN] != UNOPENED_FD)
 	{
-		if (fds->in != -2)
+		if (fds->in != UNOPENED_FD)
 			close(fds->in);
-		fds->in = fds->redirection[IN];
+		fds->in = fds->redir[IN];
 	}
-	if (fds->redirection[OUT] != -2)
+	if (fds->redir[OUT] != UNOPENED_FD)
 	{
-		if (fds->pipe[1] != -2)
-			close(fds->pipe[1]);
-		fds->out = fds->redirection[OUT];
+		if (fds->pipe[OUT] != UNOPENED_FD)
+			close(fds->pipe[OUT]);
+		fds->out = fds->redir[OUT];
 	}
 }

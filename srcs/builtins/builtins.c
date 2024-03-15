@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:24:46 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/14 11:24:52 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:39:10 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	run_builtins(t_shell *shell, t_cmds *cmds, int fd_in, int fd_out)
+{
+	(void)fd_in;
+	(void)fd_out;
+	// if (cmds->is_builtin == ECHO)
+	// 	echo(cmds, fd_in, fd_out);
+	if (cmds->is_builtin == PWD)
+		pwd(shell);
+	if (cmds->is_builtin == ENV)
+		env(shell);
+}
 
 int	is_builtin(char *str)
 {

@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 13:56:50 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/15 16:40:42 by aurlic           ###   ########.fr       */
+/*   Created: 2024/03/15 14:46:40 by aurlic            #+#    #+#             */
+/*   Updated: 2024/03/15 16:39:27 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	env(t_shell *shell)
+void	pwd(t_shell *shell)
 {
-	t_env	*env;
+	char	*path;
 
-	env = shell->env;
-	while (env)
+	(void)shell;
+	path = getcwd(NULL, 0);
+	if (!path)
 	{
-		ft_printf("%s=%s\n", env->key, env->value);
-		env = env->next;
+		perror("pwd: error retrieving current directory: \
+// getcwd: cannot access parent directories");
+	}
+	else
+	{
+		ft_printf("%s\n", path);
+		g_return = 0;
+		free(path);
 	}
 }

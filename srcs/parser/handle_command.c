@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:12:40 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/14 10:20:08 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/15 14:59:22 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	parse_cmds_tab(t_shell *shell)
 	{
 		i = 0;
 		if (is_builtin(tmp->tab[0]))
-			tmp->is_builtin = 1;
+			tmp->is_builtin = is_builtin(tmp->tab[0]);
 		while (tmp->tab[i])
 		{
 			j = 0;

@@ -6,7 +6,7 @@
 #    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 11:02:46 by aurlic            #+#    #+#              #
-#    Updated: 2024/03/14 18:04:40 by aurlic           ###   ########.fr        #
+#    Updated: 2024/03/15 16:39:37 by aurlic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,10 @@ SRCS		=	srcs/main/main.c \
 				srcs/exec/exec.c \
 				srcs/exec/manage_redirs.c \
 				srcs/exec/here_doc.c \
+				srcs/exec/manage_fds.c \
 				srcs/builtins/builtins.c \
+				srcs/builtins/pwd.c \
+				srcs/builtins/env.c \
 
 # INCLUDES	=	includes/ \ TO MAKE IT WORK GIVE ABSOLUTE PATH IN FILES AND INLUDE WHILE COMPILING
 

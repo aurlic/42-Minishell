@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:26:30 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/14 15:17:52 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/15 14:00:58 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 typedef struct s_fd
 {
 	int	pipe[2];
-	int	redirection[2];
+	int	redir[2];
 	int	in;
 	int	out;
 }		t_fd;

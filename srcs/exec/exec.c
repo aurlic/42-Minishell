@@ -6,38 +6,61 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:35:19 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/15 11:17:04 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/15 16:38:59 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	run_builtins(t_shell *shell, int fd_in, int fd_out)
+void	set_last_cmd(t_shell *shell, t_cmds *cmds)
 {
-	t_cmds *tmp;
+	t_env 	*env_tmp;
+	char	*prev_cmd;
 
-	tmp = shell->cmds;
-	while (tmp)
+	env_tmp = shell->env;
+	if (!cmds->tab)
+		return ;
+	prev_cmd = cmds->tab[0];
+	while (env_tmp)
 	{
-		if (shell->cmds->is_builtin == ECHO)
-			echo(shell->cmds, fd_in, fd_out);
-		tmp = tmp->next;
+		if (ft_strictcmp(env_tmp->key, "_") == 0)
+		{
+			free(env_tmp->value);
+			env_tmp->value = ft_strdup(prev_cmd);
+			return ;
+		}
+		env_tmp = env_tmp->next;
 	}
+}
+
+void	close_parent(t_fd *fds)
+{
+	if (fds->in != UNOPENED_FD)
+		close(fds->in);
+	if (fds->out != UNOPENED_FD)
+		close(fds->out);
 }
 
 void	run_exec(t_shell *shell)
 {
 	t_cmds	*tmp_cmd;
-	int		fd[2];
+	t_fd	fds;
 
+	fds.in = UNOPENED_FD;
 	tmp_cmd = shell->cmds;
-	fd[0] = UNOPENED_FD;
-	fd[1] = UNOPENED_FD;
 	while (tmp_cmd)
 	{
-		open_redirs(tmp_cmd, &fd[0], &fd[1]);
-		run_builtins(tmp_cmd, fd[0], fd[1]);
+		set_last_cmd(shell, tmp_cmd);
+		init_fds(&fds);
+		if (tmp_cmd->next)
+			if (pipe(fds.pipe) == -1)
+				exit_shell(shell, "pipe_creation");
+		open_redirs(tmp_cmd, &fds.redir[IN], &fds.redir[OUT]);
+		set_fds(&fds);
+		run_builtins(shell, tmp_cmd, fds.in, fds.out);
 		//run exec
+		if (tmp_cmd->end == 1)
+			close_parent(&fds);
 		tmp_cmd = tmp_cmd->next;
 	}
 }
