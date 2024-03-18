@@ -12,7 +12,33 @@
 
 #include "../../includes/minishell.h"
 
-void	echo(t_cmds *cmds, int fd_in, int fd_out)
+int	check_option(char **tab, int *option)
 {
-	
+	int	i;
+
+	i = 1;
+	while (tab[i] && ft_strictcmp(tab[i], "-n") == 1)
+	{
+		*option = 1;
+		i++;
+	}
+	return (i);
+}
+
+void	echo(t_cmds *cmds, int fd_out)
+{
+	int		i;
+	int		option;
+
+	option = 0;
+	i =	check_option(cmds->tab, &option);
+	while (cmds->tab[i])
+	{
+		ft_putstr_fd(cmds->tab[i], fd_out);
+		if (cmds->tab[i + 1])
+			ft_putstr_fd(" ", fd_out);
+		i++;
+	}
+	if (!option)
+		ft_putstr_fd("\n", fd_out);
 }

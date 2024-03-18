@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:41:31 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/14 11:25:36 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:14:35 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	get_env(t_shell *shell, char **envp)
 	}
 	while (envp && envp[i])
 	{
-		// ft_printf(" i = %d\n", i);
 		new = malloc(sizeof(t_env));
 		if (!new)
 			exit_shell(shell, "get_env");

@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:35:19 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/15 16:38:59 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/18 15:10:59 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@ void	set_last_cmd(t_shell *shell, t_cmds *cmds)
 	env_tmp = shell->env;
 	if (!cmds->tab)
 		return ;
+	if (!cmds->tab[0])
+		return ;
 	prev_cmd = cmds->tab[0];
 	while (env_tmp)
 	{
 		if (ft_strictcmp(env_tmp->key, "_") == 0)
 		{
 			free(env_tmp->value);
+
 			env_tmp->value = ft_strdup(prev_cmd);
 			return ;
 		}
@@ -57,10 +60,13 @@ void	run_exec(t_shell *shell)
 				exit_shell(shell, "pipe_creation");
 		open_redirs(tmp_cmd, &fds.redir[IN], &fds.redir[OUT]);
 		set_fds(&fds);
-		run_builtins(shell, tmp_cmd, fds.in, fds.out);
-		//run exec
+		if (tmp_cmd->is_builtin)
+			run_builtins(shell, tmp_cmd, &fds);
 		if (tmp_cmd->end == 1)
 			close_parent(&fds);
+		//exec_fds
+		//run exec
 		tmp_cmd = tmp_cmd->next;
 	}
+	close_before_exit(&fds);
 }
