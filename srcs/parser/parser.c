@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 11:15:25 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/15 14:59:59 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/18 15:57:21 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,5 @@ void	parser(t_shell *shell, t_lex *lex)
 	cmds = cmds_head;
 	shell->cmds = cmds_head;
 	parse_cmds_tab(shell);
-	// t_cmds *tmp = shell->cmds;
-	// while (tmp)
-	// {
-	// 	ft_printf("end: [%d]\n", tmp->end);
-	// 	tmp = tmp->next;
-	// }
 	free_lex(&lex);
 }

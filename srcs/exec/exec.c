@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:35:19 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/18 15:10:59 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/18 15:51:17 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	run_exec(t_shell *shell)
 			close_parent(&fds);
 		//exec_fds
 		//run exec
+		if (tmp_cmd->next)
+			tmp_cmd->next->prev = tmp_cmd;
 		tmp_cmd = tmp_cmd->next;
 	}
 	close_before_exit(&fds);
