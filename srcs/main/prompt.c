@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:19:35 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/14 11:26:34 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:52:35 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ char	*read_prompt(t_shell *shell)
 		prompt = PROMPT;
 	if (!str)
 		exit_shell(shell, "exit");
+	add_history(str);
 	return (str);
 }

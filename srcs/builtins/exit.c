@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:46:34 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/19 10:30:36 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/19 14:16:10 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ static void	exit_arg(t_shell *shell, t_cmds *cmds, t_fd *fds)
 
 void	exit_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds)
 {
-	if (cmds->prev || cmds->next)
-		return ;
 	if (cmds->tab[1] && cmds->tab[2])
 		return (ft_putstr_fd("cd: too many arguments\n", STDERR_FILENO));
 	if (cmds->tab[1])

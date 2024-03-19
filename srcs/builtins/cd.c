@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 13:38:47 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/19 09:42:22 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/19 18:03:23 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	update_env(t_shell *shell, char *oldpwd, char *currpwd)
 	}
 }
 
-void	cd(t_shell *shell, t_cmds *cmds)
+void	cd_builtin(t_shell *shell, t_cmds *cmds)
 {
 	char	*oldpwd;
 	char	*currpwd;
@@ -79,11 +79,6 @@ void	cd(t_shell *shell, t_cmds *cmds)
 	if (cmds->tab[1] && cmds->tab[2])
 		return (ft_putstr_fd("cd: too many arguments\n", STDERR_FILENO));
 	oldpwd = getcwd(NULL, 0);
-	if (cmds->prev || cmds->next)
-	{
-		free(oldpwd);
-		return ;
-	}
 	if (!cmds->tab[1])
 	{
 		if (!back_to_home(shell, oldpwd))

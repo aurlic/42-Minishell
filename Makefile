@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
+#    By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 11:02:46 by aurlic            #+#    #+#              #
-#    Updated: 2024/03/19 10:27:24 by aurlic           ###   ########.fr        #
+#    Updated: 2024/03/19 14:26:31 by traccurt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRCS		=	srcs/main/main.c \
 				srcs/exec/manage_redirs.c \
 				srcs/exec/here_doc.c \
 				srcs/exec/manage_fds.c \
+				srcs/exec/exec_cmds.c \
 				srcs/builtins/builtins.c \
 				srcs/builtins/pwd.c \
 				srcs/builtins/env.c \

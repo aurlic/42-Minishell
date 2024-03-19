@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/19 10:29:53 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/19 18:21:53 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,19 +112,22 @@ int		run_here_doc(t_lex *lex, int fd);
 /*                    manage_fds.c                      */
 void	init_fds(t_fd *fds);
 void	set_fds(t_fd *fds);
+char	*run_cmds(t_shell *shell, t_cmds *cmds);
+void	close_parent(t_fd *fds);
+void	execute_cmd(t_shell *shell, t_cmds *cmds, t_fd *fds);
 
 /*
 ======================= builtins ======================
 */
 /*                    builtins.c                      */
 int		is_builtin(char *str);
-void	run_builtins(t_shell *shell, t_cmds *cmds, t_fd *fsd);
+void	run_builtins(t_shell *shell, t_cmds *cmds, t_fd *fds, int flag);
 void	close_before_exit(t_fd *fds);
 
-void 	pwd(t_shell *shell, int fd_out);
-void	env(t_shell *shell, int fd_out);
-void	echo(t_cmds *cmds, int fd_out);
-void	cd(t_shell *shell, t_cmds *cmds);
+void 	pwd_builtin(t_shell *shell, int fd_out);
+void	env_builtin(t_shell *shell, int fd_out);
+void	echo_builtin(t_cmds *cmds, int fd_out);
+void	cd_builtin(t_shell *shell, t_cmds *cmds);
 void	exit_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds);
 
 #endif

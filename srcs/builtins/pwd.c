@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:46:40 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/18 13:13:01 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/19 18:03:43 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	pwd(t_shell *shell, int fd_out)
+void	pwd_builtin(t_shell *shell, int fd_out)
 {
 	char	*path;
 
@@ -27,7 +27,6 @@ void	pwd(t_shell *shell, int fd_out)
 	{
 		ft_putstr_fd(path, fd_out);
 		ft_putstr_fd("\n", fd_out);
-		// ft_printf("%s\n", path);
 		g_return = 0;
 		free(path);
 	}

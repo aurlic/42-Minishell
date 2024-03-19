@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:56:50 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/18 13:11:36 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/19 18:03:34 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	env(t_shell *shell, int fd_out)
+void	env_builtin(t_shell *shell, int fd_out)
 {
 	t_env	*env;
 

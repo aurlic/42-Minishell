@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:24:46 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/19 10:29:46 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/19 18:21:24 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,18 @@ void	builtins_fds(t_shell *shell, t_fd *fds)
 		(close_before_exit(fds), exit_shell(shell, "dup2"));
 }
 
-void	run_builtins(t_shell *shell, t_cmds *cmds, t_fd *fds)
+void	run_builtins(t_shell *shell, t_cmds *cmds, t_fd *fds, int flag)
 {
-	builtins_fds(shell, fds);
+	if (flag == 1)
+		builtins_fds(shell, fds);
 	if (cmds->is_builtin == ECHO)
-		echo(cmds, fds->out);
+		echo_builtin(cmds, fds->out);
 	if (cmds->is_builtin == CD)
-		cd(shell, cmds);
+		cd_builtin(shell, cmds);
 	if (cmds->is_builtin == PWD)
-		pwd(shell, fds->out);
+		pwd_builtin(shell, fds->out);
 	if (cmds->is_builtin == ENV)
-		env(shell, fds->out);
+		env_builtin(shell, fds->out);
 	if (cmds->is_builtin == EXIT)
 		exit_builtin(shell, cmds, fds);
 }

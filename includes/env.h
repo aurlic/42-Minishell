@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:37:24 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/01 15:26:34 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/19 16:55:46 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,18 @@
 # include "../srcs/libft/includes/get_next_line.h"
 # include "../srcs/libft/includes/libft.h"
 
-# define PROMPT "\x1b[38;2;153;204;255m\x1b[1m[Jeanmi-Shell] 🫂  > \x1b[0m"
-# define PROMPT_X "\x1b[1;38;5;205m\x1b[1m[Jacquie&Minishell] 🍆 > \x1b[0m"
-# define PROMPT_K "\x1b[1;38;5;82m\x1b[1m[Kiwi-Shell] 🥝 > \x1b[0m"
-# define PROMPT_D "\x1b[1;38;5;165m\x1b[1m[Shell-line Dion] 🎤 > \x1b[0m"
-# define PROMPT_J "\x1b[1;30m\x1b[1m[Minishell \x1b[1;97mJackson] 🕺 > \x1b[0m"
-# define PROMPT_R "\x1b[1;38;5;94m\x1b[1m[Romani-Shell] 🦔 > \x1b[0m"
+# define PROMPT "\001\x1b[38;2;153;204;255m\x1b[1m\002[Jeanmi-Shell] 🫂 > \
+\001\x1b[0m\002"
+# define PROMPT_X "\001\x1b[1;38;5;205m\x1b[1m\002[Jacquie&Minishell] 🍆 > \
+\001\x1b[0m\002"
+# define PROMPT_K "\001\x1b[1;38;5;82m\x1b[1m\002[Kiwi-Shell] 🥝 > \
+\001\x1b[0m\002"
+# define PROMPT_D "\001\x1b[1;38;5;165m\x1b[1m\002[Shell-line Dion] 🎤 > \
+\001\x1b[0m\002"
+# define PROMPT_J "\001\e[0;107m\002\001\x1b[1;30m\x1b[1m\002[Minishell \
+\001\e[0m\002Jackson] 🕺 > "
+# define PROMPT_R "\001\x1b[1;38;5;94m\x1b[1m\002[Romani-Shell] 🦔 > \
+\001\x1b[0m\002"
 
 # define PIPE 1001
 # define LOWER 1002

@@ -25,7 +25,7 @@ int	check_option(char **tab, int *option)
 	return (i);
 }
 
-void	echo(t_cmds *cmds, int fd_out)
+void	echo_builtin(t_cmds *cmds, int fd_out)
 {
 	int		i;
 	int		option;
