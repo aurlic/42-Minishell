@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:09:40 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/19 18:35:53 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:04:02 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	execute_child(t_shell *shell, t_cmds *cmds, t_fd *fds)
 	char	*f_path;
 	f_path = run_cmds(shell, cmds);
 	if (!f_path)
-		return ;
+		(close_before_exit(fds), exit(1)) ;
 	if (fds->pipe[IN] != UNOPENED_FD)
 		close(fds->pipe[IN]);
 	if (fds->in != UNOPENED_FD)
@@ -41,21 +41,14 @@ void	execute_cmd(t_shell *shell, t_cmds *cmds, t_fd *fds)
 	{
 		if (cmds->is_builtin)
 		{
-			run_builtins(shell, cmds, fds, 0);
+			run_builtins(shell, cmds, fds, 1);
 			(close_before_exit(fds), exit(1));
 		}
 		else
-		{
-			ft_printf("cmds = %s\n", cmds->tab[0]);
 			execute_child(shell, cmds, fds);
-		}
 	}
-	else
-	{
-		close_parent(fds);
-		fds->in = fds->pipe[0];
-
-	}
+	close_parent(fds);
+	fds->in = fds->pipe[0];
 }
 
 char	*ft_pathfinding(t_env *env)
@@ -115,7 +108,7 @@ char	*run_cmds(t_shell *shell, t_cmds *cmds)
 		if (path)
 			free_matrix_safe(path);
 		ft_putstr_fd(cmds->tab[0], STDERR_FILENO);
-		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+		ft_putstr_fd(": Command not found\n", STDERR_FILENO);
 		return (NULL);
 	}
 	else

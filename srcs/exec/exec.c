@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:35:19 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/19 18:32:19 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:00:07 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,12 @@ void	run_exec(t_shell *shell)
 				exit_shell(shell, "pipe_creation");
 		open_redirs(tmp_cmd, &fds.redir[IN], &fds.redir[OUT]);
 		set_fds(&fds);
-		if (tmp_cmd->end == 1)
-			close_parent(&fds);
 		if (tmp_cmd->is_builtin && !tmp_cmd->next && !tmp_cmd->prev)
 			run_builtins(shell, tmp_cmd, &fds, 1);
 		else
 			execute_cmd(shell, tmp_cmd, &fds);
+		if (tmp_cmd->end == 1)
+			close_parent(&fds);
 		if (tmp_cmd->next)
 			tmp_cmd->next->prev = tmp_cmd;
 		tmp_cmd = tmp_cmd->next;
