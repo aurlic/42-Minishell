@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 13:38:47 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/18 16:38:49 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:42:22 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	classic_cd(t_shell *shell, t_cmds *cmds, char *oldpwd)
 {
+	(void)shell;
 	if (chdir(cmds->tab[1]) == -1)
 	{
 		ft_putstr_fd("cd: ", STDERR_FILENO);

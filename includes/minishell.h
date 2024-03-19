@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/18 15:15:30 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/19 10:29:53 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ void 	pwd(t_shell *shell, int fd_out);
 void	env(t_shell *shell, int fd_out);
 void	echo(t_cmds *cmds, int fd_out);
 void	cd(t_shell *shell, t_cmds *cmds);
+void	exit_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds);
 
 #endif

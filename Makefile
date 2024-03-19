@@ -6,7 +6,7 @@
 #    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 11:02:46 by aurlic            #+#    #+#              #
-#    Updated: 2024/03/18 14:46:06 by aurlic           ###   ########.fr        #
+#    Updated: 2024/03/19 10:27:24 by aurlic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS		=	srcs/main/main.c \
 				srcs/builtins/env.c \
 				srcs/builtins/echo.c \
 				srcs/builtins/cd.c \
+				srcs/builtins/exit.c \
 
 # INCLUDES	=	includes/ \ TO MAKE IT WORK GIVE ABSOLUTE PATH IN FILES AND INLUDE WHILE COMPILING
 
