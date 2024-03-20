@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:09:40 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/19 19:04:02 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:09:10 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	execute_child(t_shell *shell, t_cmds *cmds, t_fd *fds)
 	f_path = run_cmds(shell, cmds);
 	if (!f_path)
 		(close_before_exit(fds), exit(1)) ;
+	ft_printf("pipe[in] = %d, in = %d, redir in = %d\n", fds->pipe[IN], fds->in, fds->redir[IN]);
 	if (fds->pipe[IN] != UNOPENED_FD)
 		close(fds->pipe[IN]);
 	if (fds->in != UNOPENED_FD)

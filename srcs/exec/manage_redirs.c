@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_redirs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:42:36 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/15 14:33:35 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/20 09:53:18 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int	handle_input(t_lex *redirs, int token, int fd)
 	}
 	else if (token == D_LOWER)
 		fd = run_here_doc(redirs, fd);
+	ft_printf("fd_here_doc : %d\n", fd);
 	return (fd);
 }
 

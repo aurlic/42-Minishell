@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/19 18:21:53 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 13:32:07 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void 	pwd_builtin(t_shell *shell, int fd_out);
 void	env_builtin(t_shell *shell, int fd_out);
 void	echo_builtin(t_cmds *cmds, int fd_out);
 void	cd_builtin(t_shell *shell, t_cmds *cmds);
+void	unset_builtin(t_shell *shell, t_cmds *cmds);
 void	exit_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:24:46 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/19 18:21:24 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 13:33:51 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 void	close_before_exit(t_fd *fds)
 {
@@ -52,6 +52,8 @@ void	run_builtins(t_shell *shell, t_cmds *cmds, t_fd *fds, int flag)
 		env_builtin(shell, fds->out);
 	if (cmds->is_builtin == EXIT)
 		exit_builtin(shell, cmds, fds);
+	if (cmds->is_builtin == UNSET)
+		unset_builtin(shell, cmds);
 }
 
 int	is_builtin(char *str)

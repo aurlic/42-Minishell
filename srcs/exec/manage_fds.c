@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:58:33 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/19 15:07:35 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 09:53:21 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	set_fds(t_fd *fds)
 		if (fds->in != UNOPENED_FD)
 			close(fds->in);
 		fds->in = fds->redir[IN];
+		ft_printf("fd->in : %d\n", fds->in);
 	}
 	if (fds->redir[OUT] != UNOPENED_FD)
 	{

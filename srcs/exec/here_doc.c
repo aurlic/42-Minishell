@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:59:31 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/15 14:33:12 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/20 10:10:22 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	run_here_doc(t_lex *redirs, int fd)
 	char	*file_name;
 	char	*line;
 
-	file_name = ft_strdup("/tmp/.a");
+	file_name = ft_strdup("/tmp/.here_doc_a");
 	while (access(file_name, F_OK) == 0)
 		file_name = ft_strjoin_free(file_name, "a");
 	fd_tmp = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
@@ -34,9 +34,9 @@ int	run_here_doc(t_lex *redirs, int fd)
 	{
 		if (!ft_strncmp(redirs->word, line, ft_strlen(redirs->word)))
 			break ;
-		write(fd, line, ft_strlen(line));
+		write(fd_tmp, line, ft_strlen(line));
 		free(line);
 	}
-	(free(file_name), free(line));
+	(free(file_name), free(line), close(fd_tmp));
 	return (fd);
 }

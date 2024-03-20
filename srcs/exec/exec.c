@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:35:19 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/19 19:00:07 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:13:43 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ void	run_exec(t_shell *shell)
 	tmp_cmd->prev = NULL;
 	while (tmp_cmd)
 	{
-		set_last_cmd(shell, tmp_cmd);
-		init_fds(&fds);
+		(set_last_cmd(shell, tmp_cmd), init_fds(&fds));
 		if (tmp_cmd->next)
 			if (pipe(fds.pipe) == -1)
 				exit_shell(shell, "pipe_creation");
@@ -104,6 +103,5 @@ void	run_exec(t_shell *shell)
 			tmp_cmd->next->prev = tmp_cmd;
 		tmp_cmd = tmp_cmd->next;
 	}
-	wait_child(shell);
-	close_before_exit(&fds);
+	(wait_child(shell), close_before_exit(&fds));
 }
