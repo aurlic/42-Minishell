@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:49:45 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/20 13:32:18 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 13:45:58 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,39 @@ static void	unset_env(t_shell *shell, char *var)
 	free(tmp);
 }
 
-void	unset_builtin(t_shell *shell, t_cmds *cmds)
+static void	unset_sub(t_shell *shell, t_cmds *cmds)
 {
 	int		i;
 	t_env	*tmp;
+	t_env	*next;
 
 	i = 1;
-	if (!cmds->tab[1])
-	{
-		g_return = 1;
-		return ;
-	}
 	while (cmds->tab[i])
 	{
 		tmp = shell->env;
 		while (tmp)
 		{
 			if (ft_strictcmp(tmp->key, cmds->tab[i]) == 1)
+			{
+				next = tmp->next;
 				unset_env(shell, cmds->tab[i]);
+				tmp = next;
+			}
+			else
 			tmp = tmp->next;
 		}
 		i++;
 	}
+}
+
+void	unset_builtin(t_shell *shell, t_cmds *cmds)
+{
+	if (!cmds->tab[1])
+	{
+		g_return = 1;
+		return ;
+	}
+	else
+		unset_sub(shell, cmds);
 	g_return = 0;
 }

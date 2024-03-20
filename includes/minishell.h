@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/20 13:32:07 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:09:28 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	handle_no_env(t_shell *shell);
 ======================= exit_free ===================
 */
 /*                    exit_shell.c                  */
-void	exit_shell(t_shell *shell, char *error_msg);
+void	exit_shell(t_shell *shell, char *error_msg, int flag);
 void	token_error(int token);
 /*                    free_shell.c                  */
 void	free_shell(t_shell *shell);
@@ -106,9 +106,9 @@ void	redesign_words(t_shell *shell, t_lex *lex);
 /*                    exec.c                          */
 void	run_exec(t_shell *shell);
 /*                    manage_redirs.c                 */
-void	open_redirs(t_cmds *cmds, int *fd_in, int *fd_out);
+void	open_redirs(t_shell *shell, t_cmds *cmds, int *fd_in, int *fd_out);
 /*                    here_doc.c                      */
-int		run_here_doc(t_lex *lex, int fd);
+int		run_here_doc(t_shell *shell, t_lex *lex, int fd);
 /*                    manage_fds.c                      */
 void	init_fds(t_fd *fds);
 void	set_fds(t_fd *fds);
@@ -122,9 +122,9 @@ void	execute_cmd(t_shell *shell, t_cmds *cmds, t_fd *fds);
 /*                    builtins.c                      */
 int		is_builtin(char *str);
 void	run_builtins(t_shell *shell, t_cmds *cmds, t_fd *fds, int flag);
-void	close_before_exit(t_fd *fds);
+void	close_all_fds(t_fd *fds);
 
-void 	pwd_builtin(t_shell *shell, int fd_out);
+void 	pwd_builtin(t_shell *shell, t_cmds *cmds, int fd_out);
 void	env_builtin(t_shell *shell, int fd_out);
 void	echo_builtin(t_cmds *cmds, int fd_out);
 void	cd_builtin(t_shell *shell, t_cmds *cmds);

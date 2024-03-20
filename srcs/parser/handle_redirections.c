@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:05:51 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/14 10:17:37 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/20 15:11:10 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static void	create_redir(t_shell *shell, t_cmds **cmds, t_lex *curr)
 
 	new = ft_calloc(1, sizeof(t_lex));
 	if (!new)
-		exit_shell(shell, "redir_malloc");
+		exit_shell(shell, "redir_malloc", 1);
 	new->token = curr->token;
 	new->skip = 0;
 	new->word = ft_strdup(curr->next->word);
 	if (!new->word)
-		exit_shell(shell, "redir_malloc");
+		exit_shell(shell, "redir_malloc", 1);
 	if (!(*cmds)->redirection)
 		(*cmds)->redirection = new;
 	else

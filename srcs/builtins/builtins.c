@@ -6,13 +6,13 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:24:46 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/20 13:33:51 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:12:25 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	close_before_exit(t_fd *fds)
+void	close_all_fds(t_fd *fds)
 {
 	if (!(fds->pipe[IN] == UNOPENED_FD))
 		close(fds->pipe[IN]);
@@ -35,7 +35,7 @@ void	builtins_fds(t_shell *shell, t_fd *fds)
 	if (fds->out == UNOPENED_FD)
 		fds->out = dup(STDOUT_FILENO);
 	if (fds->out == -1)
-		(close_before_exit(fds), exit_shell(shell, "dup2"));
+		(close_all_fds(fds), exit_shell(shell, "dup2", 1));
 }
 
 void	run_builtins(t_shell *shell, t_cmds *cmds, t_fd *fds, int flag)
@@ -47,7 +47,7 @@ void	run_builtins(t_shell *shell, t_cmds *cmds, t_fd *fds, int flag)
 	if (cmds->is_builtin == CD)
 		cd_builtin(shell, cmds);
 	if (cmds->is_builtin == PWD)
-		pwd_builtin(shell, fds->out);
+		pwd_builtin(shell, cmds, fds->out);
 	if (cmds->is_builtin == ENV)
 		env_builtin(shell, fds->out);
 	if (cmds->is_builtin == EXIT)

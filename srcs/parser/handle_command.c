@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:12:40 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/18 15:53:42 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:51:36 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	fill_cmd_tab(t_shell *shell, t_cmds **cmds, t_lex *curr, int i)
 
 	(*cmds)->tab = ft_calloc(i + 1, sizeof(char *));
 	if (!(*cmds)->tab)
-		exit_shell(shell, "cmd_malloc");
+		exit_shell(shell, "cmd_malloc", 1);
 	j = 0;
 	while (curr && curr->token != PIPE)
 	{
@@ -38,7 +38,7 @@ static void	fill_cmd_tab(t_shell *shell, t_cmds **cmds, t_lex *curr, int i)
 		{
 			(*cmds)->tab[j] = ft_strdup(curr->word);
 			if (!(*cmds)->tab)
-				exit_shell(shell, "fill_tab_malloc");
+				exit_shell(shell, "fill_tab_malloc", 1);
 			j++;
 		}
 		curr = curr->next;
@@ -91,6 +91,6 @@ void	new_cmd(t_shell *shell, t_cmds **cmds, t_lex *tmp_lex, t_lex *curr)
 	*cmds = create_cmd(shell, cmds, tmp_lex, curr);
 	(*cmds)->next = malloc(sizeof(t_cmds));
 	if (!(*cmds)->next)
-		exit_shell(shell, "parser_malloc");
+		exit_shell(shell, "parser_malloc", 1);
 	*cmds = (*cmds)->next;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:41:31 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/18 14:14:35 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/20 14:37:18 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static void	get_key_value(t_shell *shell, t_env *new, char **envp, int i)
 	}
 	new->key = ft_calloc(delim + 1, sizeof(char));
 	if (!new->key)
-		exit_shell(shell, "env_key");
+		exit_shell(shell, "env_key", 1);
 	ft_strncpy(new->key, envp[i], delim);
 	new->value = ft_calloc((j - delim + 1), sizeof(char));
 	if (!new->value)
-		exit_shell(shell, "env_value");
+		exit_shell(shell, "env_value", 1);
 	ft_strncpy(new->value, envp[i] + delim + 1, j - delim);
 }
 
@@ -76,7 +76,7 @@ void	get_env(t_shell *shell, char **envp)
 	{
 		new = malloc(sizeof(t_env));
 		if (!new)
-			exit_shell(shell, "get_env");
+			exit_shell(shell, "get_env", 1);
 		fill_env(shell, new, envp, i);
 		i++;
 	}

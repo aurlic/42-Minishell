@@ -6,13 +6,13 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:42:36 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/20 09:53:18 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:13:30 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	handle_input(t_lex *redirs, int token, int fd)
+static int	handle_input(t_shell *shell, t_lex *redirs, int token, int fd)
 {
 	if (fd != UNOPENED_FD)
 		close (fd);
@@ -23,8 +23,7 @@ static int	handle_input(t_lex *redirs, int token, int fd)
 			return (perror(redirs->word), g_return = 1, fd);
 	}
 	else if (token == D_LOWER)
-		fd = run_here_doc(redirs, fd);
-	ft_printf("fd_here_doc : %d\n", fd);
+		fd = run_here_doc(shell, redirs, fd);;
 	return (fd);
 }
 
@@ -47,7 +46,7 @@ static int	handle_output(t_lex *redirs, int token, int fd)
 	return (fd);
 }
 
-void	open_redirs(t_cmds *cmds, int *fd_in, int *fd_out)
+void	open_redirs(t_shell *shell, t_cmds *cmds, int *fd_in, int *fd_out)
 {
 	t_lex	*redirs;
 
@@ -55,7 +54,7 @@ void	open_redirs(t_cmds *cmds, int *fd_in, int *fd_out)
 	while (redirs)
 	{
 		if (redirs->token == D_LOWER || redirs->token == LOWER)
-			*fd_in = handle_input(redirs, redirs->token, *fd_in);
+			*fd_in = handle_input(shell, redirs, redirs->token, *fd_in);
 		else if (redirs->token == D_GREATER || redirs->token == GREATER)
 			*fd_out = handle_output(redirs, redirs->token, *fd_out);
 		if (*fd_in == -1 || *fd_out == -1)

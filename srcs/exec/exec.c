@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:35:19 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/20 10:13:43 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:14:14 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	set_last_cmd(t_shell *shell, t_cmds *cmds)
 			free(env_tmp->value);
 
 			env_tmp->value = ft_strdup(prev_cmd);
+			if (!env_tmp->value)
+				(exit_shell(shell, "malloc failed", 1));
 			return ;
 		}
 		env_tmp = env_tmp->next;
@@ -90,8 +92,8 @@ void	run_exec(t_shell *shell)
 		(set_last_cmd(shell, tmp_cmd), init_fds(&fds));
 		if (tmp_cmd->next)
 			if (pipe(fds.pipe) == -1)
-				exit_shell(shell, "pipe_creation");
-		open_redirs(tmp_cmd, &fds.redir[IN], &fds.redir[OUT]);
+				exit_shell(shell, "pipe_creation", 1);
+		open_redirs(shell, tmp_cmd, &fds.redir[IN], &fds.redir[OUT]);
 		set_fds(&fds);
 		if (tmp_cmd->is_builtin && !tmp_cmd->next && !tmp_cmd->prev)
 			run_builtins(shell, tmp_cmd, &fds, 1);
@@ -103,5 +105,5 @@ void	run_exec(t_shell *shell)
 			tmp_cmd->next->prev = tmp_cmd;
 		tmp_cmd = tmp_cmd->next;
 	}
-	(wait_child(shell), close_before_exit(&fds));
+	(wait_child(shell), close_all_fds(&fds));
 }

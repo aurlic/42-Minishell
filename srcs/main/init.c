@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:46:31 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/14 10:09:30 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/20 15:10:25 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ void	fill_shlvl(t_shell *shell, t_env *curr)
 	{
 		free(curr->value);
 		curr->value = ft_strdup("0");
+		if (!curr->value)
+			(exit_shell(shell, "malloc failed", 1));
 	}
 	else
 	{
 		free(curr->value);
 		curr->value = ft_itoa(shlvl + 1);
 		if (!curr->value)
-			exit_shell(shell, "shlvl");
+			exit_shell(shell, "shlvl", 1);
 	}
 }
 
@@ -74,13 +76,13 @@ void	init_shell(t_shell *shell, char **envp)
 	shell->cmds = NULL;
 	shell->path = ft_calloc(1, sizeof(t_path));
 	if (!shell->path)
-		exit_shell(shell, "Minishell");
+		exit_shell(shell, "Minishell", 1);
 	get_env(shell, envp);
 	shell->path->pwd = ft_strdup(get_paths(shell, "PWD"));
 	if (!shell->path->pwd)
-		exit_shell(shell, "init malloc");
+		exit_shell(shell, "init malloc", 1);
 	shell->path->oldpwd = ft_strdup(get_paths(shell, "OLDPWD"));
 	if (!shell->path->oldpwd)
-		exit_shell(shell, "init malloc");
+		exit_shell(shell, "init malloc", 1);
 	get_shlvl(shell);
 }

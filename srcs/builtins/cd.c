@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 13:38:47 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/19 18:03:23 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:02:58 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	classic_cd(t_shell *shell, t_cmds *cmds, char *oldpwd)
 		ft_putstr_fd(cmds->tab[1], STDERR_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 		free(oldpwd);
+		g_return = 1;
 		return (0);
 	}
 	return (1);
@@ -35,7 +36,11 @@ static int	back_to_home(t_shell *shell, char *oldpwd)
 	while (env_tmp)
 	{
 		if (ft_strictcmp(env_tmp->key, "HOME"))
+		{
 			homepwd = ft_strdup(env_tmp->value);
+			if (!homepwd)
+				(exit_shell(shell, "malloc failed", 1));	
+		}	
 		env_tmp = env_tmp->next;
 	}
 	if (chdir(homepwd) == -1)
@@ -43,7 +48,7 @@ static int	back_to_home(t_shell *shell, char *oldpwd)
 		ft_putstr_fd("cd: ", STDERR_FILENO);
 		ft_putstr_fd(homepwd, STDERR_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-		(free(homepwd), free(oldpwd));
+		(free(homepwd), free(oldpwd), g_return = 1);
 		return (0);
 	}
 	free(homepwd);
@@ -61,11 +66,15 @@ void	update_env(t_shell *shell, char *oldpwd, char *currpwd)
 		{
 			free(tmp->value);
 			tmp->value = ft_strdup(oldpwd);
+			if (!tmp->value)
+				(exit_shell(shell, "malloc failed", 1));
 		}
 		if (ft_strictcmp(tmp->key, "PWD"))
 		{
 			free(tmp->value);
 			tmp->value = ft_strdup(currpwd);
+			if (!tmp->value)
+				(exit_shell(shell, "malloc failed", 1));
 		}
 		tmp = tmp->next;
 	}
@@ -77,7 +86,10 @@ void	cd_builtin(t_shell *shell, t_cmds *cmds)
 	char	*currpwd;
 
 	if (cmds->tab[1] && cmds->tab[2])
+	{
+		g_return = 1;
 		return (ft_putstr_fd("cd: too many arguments\n", STDERR_FILENO));
+	}
 	oldpwd = getcwd(NULL, 0);
 	if (!cmds->tab[1])
 	{
@@ -88,5 +100,6 @@ void	cd_builtin(t_shell *shell, t_cmds *cmds)
 		return ;
 	currpwd = getcwd(NULL, 0);
 	update_env(shell, oldpwd, currpwd);
+	g_return = 0;
 	(free(oldpwd), free(currpwd));
 }

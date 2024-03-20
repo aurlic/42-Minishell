@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_syntax.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:13:20 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/14 10:19:06 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/20 14:51:58 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*rm_quotes(t_shell *shell, char *str, int *i, char quote)
 	*i = ft_strlen(final);
 	final = ft_strjoin_free(final, str + j + 1);
 	if (!final)
-		exit_shell(shell, "malloc");
+		exit_shell(shell, "malloc", 1);
 	free(str);
 	return (final);
 }

@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:46:34 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/19 14:16:10 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:12:13 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ static void	exit_arg(t_shell *shell, t_cmds *cmds, t_fd *fds)
 		ft_putstr_fd(cmds->tab[1], STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
 		g_return = 2;
-		close_before_exit(fds);
-		exit_shell(shell, "exit");
+		close_all_fds(fds);
+		exit_shell(shell, "exit", 1);
 	}
 	g_return = (ft_atoi(cmds->tab[1]) % 256);
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
-	close_before_exit(fds);
-	exit_shell(shell, "exit");
+	close_all_fds(fds);
+	exit_shell(shell, "exit", 0);
 }
 
 void	exit_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds)
@@ -46,6 +46,6 @@ void	exit_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds)
 		exit_arg(shell, cmds, fds);
 	g_return = 0;
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
-	close_before_exit(fds);
-	exit_shell(shell, "exit");
+	close_all_fds(fds);
+	exit_shell(shell, "exit", 0);
 }

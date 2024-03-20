@@ -41,4 +41,5 @@ void	echo_builtin(t_cmds *cmds, int fd_out)
 	}
 	if (!option)
 		ft_putstr_fd("\n", fd_out);
+	g_return = 0;
 }

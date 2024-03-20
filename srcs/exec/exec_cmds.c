@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:09:40 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/20 10:09:10 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:47:12 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,18 @@ void	execute_child(t_shell *shell, t_cmds *cmds, t_fd *fds)
 	char	*f_path;
 	f_path = run_cmds(shell, cmds);
 	if (!f_path)
-		(close_before_exit(fds), exit(1)) ;
-	ft_printf("pipe[in] = %d, in = %d, redir in = %d\n", fds->pipe[IN], fds->in, fds->redir[IN]);
+		(close_all_fds(fds), g_return = 127, exit(1)) ;
 	if (fds->pipe[IN] != UNOPENED_FD)
 		close(fds->pipe[IN]);
 	if (fds->in != UNOPENED_FD)
 		if (dup2(fds->in, STDIN_FILENO) == -1)
-			(free(f_path), close_before_exit(fds), exit_shell(shell, "dup2 -> in"));
+			(free(f_path), close_all_fds(fds), exit_shell(shell, "dup2", 1));
 	if (fds->out != UNOPENED_FD)
 		if (dup2(fds->out, STDOUT_FILENO) == -1)
-			(free(f_path), close_before_exit(fds), exit_shell(shell, "dup2 -> out"));
-	close_before_exit(fds);
+			(free(f_path), close_all_fds(fds), exit_shell(shell, "dup2", 1));
+	close_all_fds(fds);
 	if (execve(f_path, cmds->tab, NULL) == -1)
-		(free(f_path), exit_shell(shell, "execve"));
+		(free(f_path), exit_shell(shell, "execve", 1));
 	free(f_path);
 }
 
@@ -37,13 +36,13 @@ void	execute_cmd(t_shell *shell, t_cmds *cmds, t_fd *fds)
 {
 	cmds->pid = fork();
 	if (cmds->pid == -1)
-		(close_before_exit(fds), exit_shell(shell, "fork"));
+		(close_all_fds(fds), exit_shell(shell, "fork", 1));
 	if (cmds->pid == 0)
 	{
 		if (cmds->is_builtin)
 		{
 			run_builtins(shell, cmds, fds, 1);
-			(close_before_exit(fds), exit(1));
+			(close_all_fds(fds), exit(1));
 		}
 		else
 			execute_child(shell, cmds, fds);
