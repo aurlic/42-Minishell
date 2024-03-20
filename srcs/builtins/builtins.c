@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:24:46 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/20 15:12:25 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:04:22 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ void	builtins_fds(t_shell *shell, t_fd *fds)
 		(close_all_fds(fds), exit_shell(shell, "dup2", 1));
 }
 
-void	run_builtins(t_shell *shell, t_cmds *cmds, t_fd *fds, int flag)
+void	run_builtins(t_shell *shell, t_cmds *cmds, t_fd *fds)
 {
-	if (flag == 1)
-		builtins_fds(shell, fds);
+	builtins_fds(shell, fds);
 	if (cmds->is_builtin == ECHO)
 		echo_builtin(cmds, fds->out);
 	if (cmds->is_builtin == CD)
@@ -54,6 +53,8 @@ void	run_builtins(t_shell *shell, t_cmds *cmds, t_fd *fds, int flag)
 		exit_builtin(shell, cmds, fds);
 	if (cmds->is_builtin == UNSET)
 		unset_builtin(shell, cmds);
+	if (cmds->is_builtin == EXPORT)
+		export_builtin(shell, cmds, fds);
 }
 
 int	is_builtin(char *str)

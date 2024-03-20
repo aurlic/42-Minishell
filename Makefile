@@ -81,6 +81,8 @@ define	SRC	:=
 					exit.c \
 					pwd.c \
 					unset.c \
+					export.c \
+					export_utils.c \
 				)
 				$(addprefix $(ENV_DIR)/, \
 					get_env.c \
@@ -141,7 +143,7 @@ $(NAME): lib $(OBJS)
 
 -include $(DEPS)
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-	@printf "$(NEW)$(PURPLE)[$(JP)] $(U_GREEN)Building:$(DEFAULT) $<"
+	@printf "$(NEW)$(GREEN)[🫂] $(U_GREEN)Building:$(DEFAULT) $<"
 	@mkdir -p $(OBJS_DIR)
 	@mkdir -p $(OBJS_DIR)/$(BUILTIN_DIR)
 	@mkdir -p $(OBJS_DIR)/$(ENV_DIR)

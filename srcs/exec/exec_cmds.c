@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:09:40 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/20 14:47:12 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:04:44 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	execute_cmd(t_shell *shell, t_cmds *cmds, t_fd *fds)
 	{
 		if (cmds->is_builtin)
 		{
-			run_builtins(shell, cmds, fds, 1);
+			run_builtins(shell, cmds, fds);
 			(close_all_fds(fds), exit(1));
 		}
 		else

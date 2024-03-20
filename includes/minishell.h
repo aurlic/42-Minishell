@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/20 15:09:28 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:38:03 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int		quote_checker(char *str);
 int		is_token(char *str, int i);
 /*                    store_token_words.c           */
 void	store_new_token(t_shell *shell, t_lex **lex, int token);
-// void	store_new_word(t_shell *shell, t_lex **lex, char *str, int i, int j);
 void	store_new_word(t_shell *shell, t_lex **lex, char *str, int ij[2]);
 
 /*
@@ -121,7 +120,7 @@ void	execute_cmd(t_shell *shell, t_cmds *cmds, t_fd *fds);
 */
 /*                    builtins.c                      */
 int		is_builtin(char *str);
-void	run_builtins(t_shell *shell, t_cmds *cmds, t_fd *fds, int flag);
+void	run_builtins(t_shell *shell, t_cmds *cmds, t_fd *fds);
 void	close_all_fds(t_fd *fds);
 
 void 	pwd_builtin(t_shell *shell, t_cmds *cmds, int fd_out);
@@ -130,5 +129,8 @@ void	echo_builtin(t_cmds *cmds, int fd_out);
 void	cd_builtin(t_shell *shell, t_cmds *cmds);
 void	unset_builtin(t_shell *shell, t_cmds *cmds);
 void	exit_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds);
+void	export_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds);
+void	no_arg(t_shell *shell, t_fd *fds);
+
 
 #endif
