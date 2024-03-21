@@ -6,11 +6,11 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:46:34 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/20 15:12:13 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static void	exit_arg(t_shell *shell, t_cmds *cmds, t_fd *fds)
 {

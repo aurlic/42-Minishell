@@ -6,11 +6,11 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:14:39 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/20 14:56:05 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 void	exit_token(char *error_msg)
 {

@@ -6,11 +6,11 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:41:31 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 11:00:29 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static void	get_key_value(t_shell *shell, t_env *new, char **envp, int i)
 {

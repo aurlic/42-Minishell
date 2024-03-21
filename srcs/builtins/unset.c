@@ -6,11 +6,11 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:49:45 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 11:00:19 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static void	unset_env(t_shell *shell, char *var)
 {

@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/21 10:56:33 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:31:54 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	parse_cmds_tab(t_shell *shell, int i);
 /*                    handle_redirections.c             */
 void	set_redir(t_shell *shell, t_cmds **cmds, t_lex *tmp_lex, t_lex *curr);
 /*                    dollar_handler.c              */
-void	find_dollar(t_cmds *cmds, t_env *env, int i, int j);
+void	find_dollar(t_shell *shell, t_cmds *cmds, int i, int j);
 /*                    parser_syntax.c               */
 int		check_syntax(t_lex *lex);
 void	redesign_words(t_shell *shell, t_lex *lex);
@@ -114,6 +114,7 @@ void	set_fds(t_fd *fds);
 char	*run_cmds(t_shell *shell, t_cmds *cmds);
 void	close_parent(t_fd *fds);
 void	execute_cmd(t_shell *shell, t_cmds *cmds, t_fd *fds);
+int		verif_access(t_env *env, char *str);
 
 /*
 ======================= builtins ======================

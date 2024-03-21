@@ -6,11 +6,11 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 11:15:25 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 10:55:36 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 t_lex	*parser_sub(t_shell *shell, t_cmds **cmds, t_lex **tmp_lex, t_lex *curr)
 {

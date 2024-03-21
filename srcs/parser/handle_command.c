@@ -6,11 +6,11 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:12:40 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 11:02:35 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:30:54 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static t_cmds	*init_new_cmd(t_cmds *cmd)
 {
@@ -64,7 +64,7 @@ void	parse_cmds_tab(t_shell *shell, int i)
 			{
 				if (tmp->tab[i][j] == '$')
 				{
-					find_dollar(tmp, shell->env, i, j);
+					find_dollar(shell, tmp, i, j);
 					break ;
 				}
 			}

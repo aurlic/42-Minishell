@@ -6,11 +6,11 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:09:40 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/21 11:01:27 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:33:43 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 void	execute_child(t_shell *shell, t_cmds *cmds, t_fd *fds)
 {	
@@ -77,7 +77,10 @@ char	*chr_cmd(t_shell *shell, t_cmds *cmds, char **path)
 	full_path = NULL;
 	if (ft_strchr(cmds->tab[0], '/') != NULL && access(cmds->tab[0],
 			F_OK | X_OK) == 0)
-		return (full_path = cmds->tab[0]);
+	{
+		if (!verif_access(shell->env, cmds->tab[0]))
+			return (full_path = cmds->tab[0]);
+	}
 	while (path && path[i])
 	{
 		add_path = ft_strjoin(path[i], "/");

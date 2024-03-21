@@ -90,6 +90,7 @@ define	SRC	:=
 				)
 				$(addprefix $(EXEC_DIR)/, \
 					exec_cmds.c \
+					exec_cmds_utils.c \
 					exec.c \
 					here_doc.c \
 					manage_fds.c \

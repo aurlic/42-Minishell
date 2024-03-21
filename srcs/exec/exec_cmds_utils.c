@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   exec_cmds_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 13:56:50 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
+/*   Created: 2024/03/21 12:24:11 by traccurt          #+#    #+#             */
+/*   Updated: 2024/03/21 12:29:34 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	env_builtin(t_shell *shell, int fd_out)
+int	verif_access(t_env *env, char *str)
 {
-	t_env	*env;
+	t_env	*tmp;
 
-	env = shell->env;
-	while (env)
+	tmp = env;
+	while (tmp)
 	{
-		if (env->value)
+		if (ft_strictcmp(tmp->key, "PWD"))
 		{
-			ft_putstr_fd(env->key, fd_out);
-			ft_putstr_fd("=", fd_out);
-			ft_putstr_fd(env->value, fd_out);
-			ft_putstr_fd("\n", fd_out);
+			if (ft_strictcmp(tmp->value, str))
+				return (1);
 		}
-		env = env->next;
+		if (ft_strictcmp(tmp->key, "OLDPWD"))
+		{
+			if (ft_strictcmp(tmp->value, str))
+				return (1);
+		}
+		tmp = tmp->next;
 	}
-	g_return = 0;
+	return (0);
 }
