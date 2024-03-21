@@ -6,13 +6,13 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:46:34 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 17:22:50 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	exit_arg(t_shell *shell, t_cmds *cmds, t_fd *fds)
+static void	exit_arg(t_shell *shell, t_cmds *cmds, t_fd *fds, int flag)
 {
 	int	i;
 
@@ -28,24 +28,29 @@ static void	exit_arg(t_shell *shell, t_cmds *cmds, t_fd *fds)
 		ft_putstr_fd("exit: ", STDERR_FILENO);
 		ft_putstr_fd(cmds->tab[1], STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-		g_return = 2;
-		close_all_fds(fds);
-		exit_shell(shell, "exit", 1);
+		if (flag == 0)
+			(g_return = 2, close_all_fds(fds), exit_shell(shell, "exit", 0));
+		else
+			(g_return = 2, close_all_fds(fds), exit_shell(shell, "void", 0));
 	}
 	g_return = (ft_atoi(cmds->tab[1]) % 256);
-	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	close_all_fds(fds);
-	exit_shell(shell, "exit", 0);
+	if (flag == 0)
+		exit_shell(shell, "exit", 0);
+	else
+		exit_shell(shell, "void", 0);
 }
 
-void	exit_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds)
+void	exit_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds, int flag)
 {
 	if (cmds->tab[1] && cmds->tab[2])
 		return (ft_putstr_fd("cd: too many arguments\n", STDERR_FILENO));
 	if (cmds->tab[1])
-		exit_arg(shell, cmds, fds);
+		exit_arg(shell, cmds, fds, flag);
 	g_return = 0;
-	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	close_all_fds(fds);
-	exit_shell(shell, "exit", 0);
+	if (flag == 0)
+		exit_shell(shell, "exit", 0);
+	else
+		exit_shell(shell, "void", 0);
 }

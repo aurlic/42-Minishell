@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:46:31 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 14:22:31 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 17:11:06 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,14 @@ void	init_shell(t_shell *shell, char **envp)
 	if (!shell->path)
 		exit_shell(shell, "Minishell", 1);
 	get_env(shell, envp);
-	shell->path->pwd = ft_strdup(get_paths(shell, "PWD"));
-	if (!shell->path->pwd)
-		exit_shell(shell, "init malloc", 1);
+	str = get_paths(shell, "PWD");
+	if (str)
+	{
+		shell->path->pwd = ft_strdup(str);
+		if (!shell->path->pwd)
+			exit_shell(shell, "init malloc", 1);
+
+	}
 	str = get_paths(shell, "OLDPWD");
 	if (str)
 	{

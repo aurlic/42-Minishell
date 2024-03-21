@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:09:40 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/21 15:39:12 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 17:28:39 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	execute_child(t_shell *shell, t_cmds *cmds, t_fd *fds)
 
 	f_path = run_cmds(shell, cmds, fds);
 	if (!f_path)
-		(close_all_fds(fds), g_return = 127, exit(1));
+		(close_all_fds(fds), close_all_fds(fds), exit_shell(shell, "void", 1));
 	if (fds->pipe[IN] != UNOPENED_FD)
 		close(fds->pipe[IN]);
 	if (fds->in != UNOPENED_FD)
@@ -29,7 +29,7 @@ void	execute_child(t_shell *shell, t_cmds *cmds, t_fd *fds)
 			(free(f_path), close_all_fds(fds), exit_shell(shell, "dup2", 1));
 	close_all_fds(fds);
 	if (execve(f_path, cmds->tab, NULL) == -1)
-		(free(f_path), exit_shell(shell, "execve", 1), g_return = 126);
+		(free(f_path), g_return = 126, exit_shell(shell, "execve", 0));
 	free(f_path);
 }
 
@@ -42,7 +42,7 @@ void	execute_cmd(t_shell *shell, t_cmds *cmds, t_fd *fds)
 	{
 		if (cmds->is_builtin)
 		{
-			run_builtins(shell, cmds, fds);
+			run_builtins(shell, cmds, fds, 1);
 			(close_all_fds(fds), exit(1));
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 13:38:47 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 17:13:17 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static int	back_to_home(t_shell *shell, char *oldpwd)
 	t_env	*env_tmp;
 
 	env_tmp = shell->env;
+	homepwd = NULL;
 	while (env_tmp)
 	{
 		if (ft_strictcmp(env_tmp->key, "HOME"))
@@ -43,16 +44,16 @@ static int	back_to_home(t_shell *shell, char *oldpwd)
 		}	
 		env_tmp = env_tmp->next;
 	}
+	if (!homepwd)
+		return (ft_putstr_fd("cd: HOME not set", STDERR_FILENO), 0);
 	if (chdir(homepwd) == -1)
 	{
 		ft_putstr_fd("cd: ", STDERR_FILENO);
 		ft_putstr_fd(homepwd, STDERR_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-		(free(homepwd), free(oldpwd), g_return = 1);
-		return (0);
+		return (free(homepwd), free(oldpwd), g_return = 1 , 0);
 	}
-	free(homepwd);
-	return (1);
+	return (free(homepwd), 1);
 }
 
 void	update_env(t_shell *shell, char *oldpwd, char *currpwd)

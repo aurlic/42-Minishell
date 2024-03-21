@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:14:39 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 17:22:28 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ void	token_error(int token)
 
 void	exit_shell(t_shell *shell, char *error_msg, int flag)
 {
-	if (!ft_strictcmp(error_msg, "exit"))
+	if (ft_strictcmp(error_msg, "exit"))
+		ft_printf("exit\n");
+	else if (ft_strictcmp(error_msg, "void"))
+		;
+	else
 		perror(error_msg);
 	if (flag == 1)
 		g_return = 127;

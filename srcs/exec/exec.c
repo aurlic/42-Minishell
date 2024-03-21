@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:35:19 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 13:56:50 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 17:30:04 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	set_last_cmd(t_shell *shell, t_cmds *cmds)
 
 void	close_parent(t_fd *fds)
 {
-	if (fds->in != UNOPENED_FD)
+	if (fds->in != UNOPENED_FD && fds->in >= 0)
 		close(fds->in);
-	if (fds->out != UNOPENED_FD)
+	if (fds->out != UNOPENED_FD && fds->out >= 0)
 		close(fds->out);
 }
 
@@ -96,7 +96,7 @@ void	run_exec(t_shell *shell)
 		open_redirs(shell, tmp_cmd, &fds.redir[IN], &fds.redir[OUT]);
 		set_fds(&fds);
 		if (tmp_cmd->is_builtin && !tmp_cmd->next && !tmp_cmd->prev)
-			run_builtins(shell, tmp_cmd, &fds);
+			run_builtins(shell, tmp_cmd, &fds, 0);
 		else if (tmp_cmd->tab[0])
 			execute_cmd(shell, tmp_cmd, &fds);
 		if (tmp_cmd->end == 1)
