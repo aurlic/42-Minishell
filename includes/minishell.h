@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/21 12:31:54 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:35:13 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,10 @@ int		run_here_doc(t_shell *shell, t_lex *lex, int fd);
 /*                    manage_fds.c                      */
 void	init_fds(t_fd *fds);
 void	set_fds(t_fd *fds);
-char	*run_cmds(t_shell *shell, t_cmds *cmds);
+char	*run_cmds(t_shell *shell, t_cmds *cmds, t_fd *fds);
 void	close_parent(t_fd *fds);
 void	execute_cmd(t_shell *shell, t_cmds *cmds, t_fd *fds);
-int		verif_access(t_env *env, char *str);
+void	is_directory(t_shell *shell, t_cmds *cmds, t_fd *fds);
 
 /*
 ======================= builtins ======================

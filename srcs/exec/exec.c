@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:35:19 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 13:56:50 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	run_exec(t_shell *shell)
 		set_fds(&fds);
 		if (tmp_cmd->is_builtin && !tmp_cmd->next && !tmp_cmd->prev)
 			run_builtins(shell, tmp_cmd, &fds);
-		else
+		else if (tmp_cmd->tab[0])
 			execute_cmd(shell, tmp_cmd, &fds);
 		if (tmp_cmd->end == 1)
 			close_parent(&fds);

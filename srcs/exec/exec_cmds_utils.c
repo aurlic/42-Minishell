@@ -6,30 +6,16 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 12:24:11 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/21 12:29:34 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:31:09 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	verif_access(t_env *env, char *str)
+void	is_directory(t_shell *shell, t_cmds *cmds, t_fd *fds)
 {
-	t_env	*tmp;
-
-	tmp = env;
-	while (tmp)
-	{
-		if (ft_strictcmp(tmp->key, "PWD"))
-		{
-			if (ft_strictcmp(tmp->value, str))
-				return (1);
-		}
-		if (ft_strictcmp(tmp->key, "OLDPWD"))
-		{
-			if (ft_strictcmp(tmp->value, str))
-				return (1);
-		}
-		tmp = tmp->next;
-	}
-	return (0);
+	ft_putstr_fd(cmds->tab[0], STDERR_FILENO);
+	ft_putstr_fd(": Is a directory\n", STDERR_FILENO);
+	close_all_fds(fds);
+	exit_shell(shell, "void", 1);
 }

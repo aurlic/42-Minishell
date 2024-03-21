@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:57:41 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:12:28 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,32 @@ static void	handler(int sig)
 		g_return = 130;
 	}
 }
-// void	handle_signals(int action, void (*f)(int))
+
+static void	sig_heredoc(int sig)
+{
+	write(1, "\n", 1);
+	g_return = 130;
+	(void) sig;
+}
 
 void	handle_signals(int action)
 {
 	struct sigaction	sig;
 
-	// signal(SIGTSTP, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
 	if (action == 0)
 	{
 		sig.sa_flags = SA_RESTART;
 		sig.sa_handler = handler;
 		sigemptyset(&sig.sa_mask);
 		sigaction(SIGINT, &sig, NULL);
-		// signal(SIGQUIT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 	}
 	if (action == 1)
 	{
-		sig.sa_flags = SA_RESTART;
-		sig.sa_handler = SIG_IGN;
-		sigaction(SIGQUIT, &sig, NULL);
-		// signal(SIGQUIT, SIG_IGN);
-		// IN CASE OF HEREDOC -> HANDLE CTRL D IN HERE DOC
+		sig.sa_flags = 0;
+		sig.sa_handler = &sig_heredoc;
+		sigemptyset(&sig.sa_mask);
+		sigaction(SIGINT, &sig, NULL); 
 	}
 }

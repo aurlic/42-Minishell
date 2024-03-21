@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:46:31 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:22:31 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ char	*get_paths(t_shell *shell, char *key)
 
 void	init_shell(t_shell *shell, char **envp)
 {
+	char	*str;
+
 	shell->env = NULL;
 	shell->cmds = NULL;
 	shell->path = ft_calloc(1, sizeof(t_path));
@@ -81,8 +83,12 @@ void	init_shell(t_shell *shell, char **envp)
 	shell->path->pwd = ft_strdup(get_paths(shell, "PWD"));
 	if (!shell->path->pwd)
 		exit_shell(shell, "init malloc", 1);
-	shell->path->oldpwd = ft_strdup(get_paths(shell, "OLDPWD"));
-	if (!shell->path->oldpwd)
-		exit_shell(shell, "init malloc", 1);
+	str = get_paths(shell, "OLDPWD");
+	if (str)
+	{
+		shell->path->oldpwd = ft_strdup(str);
+		if (!shell->path->oldpwd)
+			exit_shell(shell, "init malloc", 1);
+	}
 	get_shlvl(shell);
 }

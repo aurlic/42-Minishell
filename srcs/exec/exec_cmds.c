@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:09:40 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/21 12:33:43 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:39:12 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	execute_child(t_shell *shell, t_cmds *cmds, t_fd *fds)
 {	
 	char	*f_path;
 
-	f_path = run_cmds(shell, cmds);
+	f_path = run_cmds(shell, cmds, fds);
 	if (!f_path)
 		(close_all_fds(fds), g_return = 127, exit(1));
 	if (fds->pipe[IN] != UNOPENED_FD)
@@ -29,7 +29,7 @@ void	execute_child(t_shell *shell, t_cmds *cmds, t_fd *fds)
 			(free(f_path), close_all_fds(fds), exit_shell(shell, "dup2", 1));
 	close_all_fds(fds);
 	if (execve(f_path, cmds->tab, NULL) == -1)
-		(free(f_path), exit_shell(shell, "execve", 1));
+		(free(f_path), exit_shell(shell, "execve", 1), g_return = 126);
 	free(f_path);
 }
 
@@ -66,11 +66,12 @@ char	*ft_pathfinding(t_env *env)
 	return (NULL);
 }
 
-char	*chr_cmd(t_shell *shell, t_cmds *cmds, char **path)
+char	*chr_cmd(t_shell *shell, t_cmds *cmds, char **path, t_fd *fds)
 {
 	char	*full_path;
 	char	*add_path;
 	int		i;
+	struct stat file_info;
 
 	(void)shell;
 	i = 0;
@@ -78,8 +79,8 @@ char	*chr_cmd(t_shell *shell, t_cmds *cmds, char **path)
 	if (ft_strchr(cmds->tab[0], '/') != NULL && access(cmds->tab[0],
 			F_OK | X_OK) == 0)
 	{
-		if (!verif_access(shell->env, cmds->tab[0]))
-			return (full_path = cmds->tab[0]);
+		if (stat(cmds->tab[0], &file_info) == 0)
+			is_directory(shell, cmds, fds);
 	}
 	while (path && path[i])
 	{
@@ -94,7 +95,7 @@ char	*chr_cmd(t_shell *shell, t_cmds *cmds, char **path)
 	return (full_path);
 }
 
-char	*run_cmds(t_shell *shell, t_cmds *cmds)
+char	*run_cmds(t_shell *shell, t_cmds *cmds, t_fd *fds)
 {
 	char	*full_path;
 	char	**path;
@@ -106,7 +107,7 @@ char	*run_cmds(t_shell *shell, t_cmds *cmds)
 		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 		return (NULL);
 	}
-	full_path = chr_cmd(shell, cmds, path);
+	full_path = chr_cmd(shell, cmds, path, fds);
 	if (!full_path)
 	{
 		if (path)
