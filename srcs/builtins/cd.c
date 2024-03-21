@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 13:38:47 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 17:13:17 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 17:57:14 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	back_to_home(t_shell *shell, char *oldpwd)
 		env_tmp = env_tmp->next;
 	}
 	if (!homepwd)
-		return (ft_putstr_fd("cd: HOME not set", STDERR_FILENO), 0);
+		return (ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO), 0);
 	if (chdir(homepwd) == -1)
 	{
 		ft_putstr_fd("cd: ", STDERR_FILENO);
@@ -102,5 +102,8 @@ void	cd_builtin(t_shell *shell, t_cmds *cmds)
 	currpwd = getcwd(NULL, 0);
 	update_env(shell, oldpwd, currpwd);
 	g_return = 0;
-	(free(oldpwd), free(currpwd));
+	if (oldpwd)
+		free(oldpwd);
+	if (currpwd)
+		free(currpwd);
 }
