@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/20 17:38:03 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/21 10:56:33 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		count_tab_size(t_lex *tmp_lex, t_lex *curr);
 /*                    handle_commands.c             */
 void	new_cmd(t_shell *shell, t_cmds **cmds, t_lex *tmp_lex, t_lex *curr);
 t_cmds	*create_cmd(t_shell *shell, t_cmds **cmds, t_lex *tmp_lex, t_lex *curr);
-void	parse_cmds_tab(t_shell *shell);
+void	parse_cmds_tab(t_shell *shell, int i);
 /*                    handle_redirections.c             */
 void	set_redir(t_shell *shell, t_cmds **cmds, t_lex *tmp_lex, t_lex *curr);
 /*                    dollar_handler.c              */

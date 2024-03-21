@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:37:15 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 09:36:43 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 10:13:31 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,14 @@ static char	**copy_env(t_shell *shell, int len, int i)
 		env[++i] = ft_strdup(tmp->key);
 		if (!env[i])
 			(free_matrix(env), exit_shell(shell, "env_malloc", 1));
-		env[i] = ft_strjoin_free(env[i], "=\"");
-		if (!env[i])
-			(free_matrix(env), exit_shell(shell, "env_malloc", 1));
-		env[i] = ft_strjoin_free(env[i], tmp->value);
-		if (!env[i])
-			(free_matrix(env), exit_shell(shell, "env_malloc", 1));
-		env[i] = ft_strjoin_free(env[i], "\"");
-		if (!env[i])
-			(free_matrix(env), exit_shell(shell, "env_malloc", 1));
+		if (tmp->value)
+		{
+			env[i] = ft_strjoin_free(env[i], "=\"");
+			env[i] = ft_strjoin_free(env[i], tmp->value);
+			env[i] = ft_strjoin_free(env[i], "\"");
+			if (!env[i])
+				(free_matrix(env), exit_shell(shell, "env_malloc", 1));
+		}
 		tmp = tmp->next;
 	}
 	return (env);

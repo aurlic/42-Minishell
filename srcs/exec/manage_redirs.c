@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:42:36 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/20 15:13:30 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:01:50 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	handle_input(t_shell *shell, t_lex *redirs, int token, int fd)
 			return (perror(redirs->word), g_return = 1, fd);
 	}
 	else if (token == D_LOWER)
-		fd = run_here_doc(shell, redirs, fd);;
+		fd = run_here_doc(shell, redirs, fd);
 	return (fd);
 }
 
@@ -61,5 +61,4 @@ void	open_redirs(t_shell *shell, t_cmds *cmds, int *fd_in, int *fd_out)
 			break ;
 		redirs = redirs->next;
 	}
-
 }

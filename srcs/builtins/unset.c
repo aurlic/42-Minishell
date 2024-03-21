@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:49:45 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/20 13:45:58 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:00:19 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	unset_env(t_shell *shell, char *var)
 {
-	t_env 	*tmp;
+	t_env	*tmp;
 
 	tmp = shell->env;
 	while (ft_strictcmp(tmp->key, var) == 0)

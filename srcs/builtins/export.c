@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:53:19 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/20 19:15:08 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 10:59:53 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,45 +43,54 @@ static int	check_export_syntax(t_cmds *cmds)
 	return (0);
 }
 
+static t_env	*export_sub(t_shell *shell, char *str, int i, int delim)
+{
+	t_env	*new;
+
+	new = malloc(sizeof(t_env));
+	if (!new)
+		exit_shell(shell, "export_new_env", 1);
+	new->key = ft_calloc(delim + 1, sizeof(char));
+	if (!new->key)
+		exit_shell(shell, "export_new_key", 1);
+	ft_strncpy(new->key, str, delim);
+	new->value = ft_calloc((i - delim + 1), sizeof(char));
+	if (!new->value)
+		exit_shell(shell, "export_new_value", 1);
+	if (i > delim)
+		ft_strncpy(new->value, str + delim + 1, i - delim);
+	else
+	{
+		new->value = ft_strdup("");
+		if (!new->value)
+			exit_shell(shell, "export_new_value", 1);
+	}
+	return (new);
+}
+
 static void	set_export(t_shell *shell, char *str)
 {
 	int		i;
 	int		delim;
 	t_env	*new;
 
-	i = 0;
+	i = -1;
 	delim = 0;
-	new = malloc(sizeof(t_env));
-	if (!new)
-		exit_shell(shell, "export_new_env", 1);
-	while (str[i])
-	{
+	while (str[++i])
 		if (str[i] == '=')
 			delim = i;
-		i++;
-	}
-	new->key = ft_calloc(delim + 1, sizeof(char));
-	if (!new->key)
-		exit_shell(shell, "export_new_key", 1);
 	if (delim != 0)
-	{
-		ft_strncpy(new->key, str, delim);
-		new->value = ft_calloc((i - delim + 1), sizeof(char));
-		if (!new->value)
-			exit_shell(shell, "export_new_value", 1);
-		if (i > delim)		
-			ft_strncpy(new->value, str + delim + 1, i - delim);
-		else
-		{
-			new->value = ft_strdup("");
-			if (!new->value)
-				exit_shell(shell, "export_new_value", 1);
-		}
-	}
+		new = export_sub(shell, str, i, delim);
 	else
 	{
-		ft_strncpy(new->key, str, delim);
-		new->value = ft_strdup("");
+		new = malloc(sizeof(t_env));
+		if (!new)
+			exit_shell(shell, "export_new_env", 1);
+		new->key = ft_calloc(i + 1, sizeof(char));
+		if (!new->key)
+			exit_shell(shell, "export_new_key", 1);
+		ft_strncpy(new->key, str, i);
+		new->value = NULL;
 	}
 	new->next = shell->env;
 	shell->env->prev = new;
@@ -108,16 +117,6 @@ void	export_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds)
 			set_export(shell, cmds->tab[i]);
 			i++;
 		}
-		// t_env *tmp;
-		// tmp = shell->env;
-		// while(tmp)
-		// {
-		// 	ft_putstr_fd(tmp->key, fds->out);
-		// 	ft_putstr_fd("=", fds->out);
-		// 	ft_putstr_fd(tmp->value, fds->out);
-		// 	ft_putstr_fd("\n", fds->out);
-		// 	tmp = tmp->next;
-		// }
 	}
 	g_return = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:12:40 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/20 14:51:36 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:02:35 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,28 +46,28 @@ static void	fill_cmd_tab(t_shell *shell, t_cmds **cmds, t_lex *curr, int i)
 	(*cmds)->tab[j] = NULL;
 }
 
-void	parse_cmds_tab(t_shell *shell)
+void	parse_cmds_tab(t_shell *shell, int i)
 {
-	int		i;
 	int		j;
 	t_cmds	*tmp;
 
 	tmp = shell->cmds;
 	while (tmp)
 	{
-		i = 0;
+		i = -1;
 		if (is_builtin(tmp->tab[0]))
 			tmp->is_builtin = is_builtin(tmp->tab[0]);
-		while (tmp->tab[i])
+		while (tmp->tab[++i])
 		{
-			j = 0;
-			while (tmp->tab[i][j])
+			j = -1;
+			while (tmp->tab[i][++j])
 			{
 				if (tmp->tab[i][j] == '$')
+				{
 					find_dollar(tmp, shell->env, i, j);
-				j++;
+					break ;
+				}
 			}
-			i++;
 		}
 		if (tmp->next == NULL)
 			tmp->end = 1;

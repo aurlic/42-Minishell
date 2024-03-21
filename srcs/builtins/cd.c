@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 13:38:47 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/20 15:02:58 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 10:58:49 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	back_to_home(t_shell *shell, char *oldpwd)
 		{
 			homepwd = ft_strdup(env_tmp->value);
 			if (!homepwd)
-				(exit_shell(shell, "malloc failed", 1));	
+				(exit_shell(shell, "malloc failed", 1));
 		}	
 		env_tmp = env_tmp->next;
 	}
@@ -94,7 +94,7 @@ void	cd_builtin(t_shell *shell, t_cmds *cmds)
 	if (!cmds->tab[1])
 	{
 		if (!back_to_home(shell, oldpwd))
-			return;
+			return ;
 	}
 	else if (!classic_cd(shell, cmds, oldpwd))
 		return ;

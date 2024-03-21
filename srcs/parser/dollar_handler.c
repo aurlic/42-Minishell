@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 17:14:58 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/01 15:25:32 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/21 11:02:27 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static char	*ex_dol(char *value, char *str, int var_len, int j)
 	if (value)
 		result = ft_strjoin_free(result, value);
 	result = ft_strjoin_free(result, str + j);
+	free(str);
 	return (result);
 }
 

@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 11:15:25 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/20 15:16:47 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 10:55:36 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ void	parser(t_shell *shell, t_lex *lex)
 	t_cmds	*cmds_head;
 	t_lex	*tmp_lex;
 	t_lex	*curr;
+	int		i;
 
+	i = 0;
 	if (check_syntax(lex) == -1)
 		return ;
 	cmds = malloc(sizeof(t_cmds));
@@ -49,6 +51,6 @@ void	parser(t_shell *shell, t_lex *lex)
 	cmds->end = 1;
 	cmds = cmds_head;
 	shell->cmds = cmds_head;
-	parse_cmds_tab(shell);
+	parse_cmds_tab(shell, i);
 	free_lex(&lex);
 }

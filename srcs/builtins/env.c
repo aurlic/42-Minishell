@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:56:50 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/21 09:38:24 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/21 10:08:51 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ void	env_builtin(t_shell *shell, int fd_out)
 	env = shell->env;
 	while (env)
 	{
-		ft_putstr_fd(env->key, fd_out);
-		ft_putstr_fd("=", fd_out);
-		ft_putstr_fd(env->value, fd_out);
-		ft_putstr_fd("\n", fd_out);
+		if (env->value)
+		{
+			ft_putstr_fd(env->key, fd_out);
+			ft_putstr_fd("=", fd_out);
+			ft_putstr_fd(env->value, fd_out);
+			ft_putstr_fd("\n", fd_out);
+		}
 		env = env->next;
 	}
 	g_return = 0;

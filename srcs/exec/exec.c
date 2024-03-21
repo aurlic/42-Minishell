@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:35:19 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/20 17:29:05 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/21 11:00:54 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	set_last_cmd(t_shell *shell, t_cmds *cmds)
 {
-	t_env 	*env_tmp;
+	t_env	*env_tmp;
 	char	*prev_cmd;
 
 	env_tmp = shell->env;
@@ -25,10 +25,9 @@ void	set_last_cmd(t_shell *shell, t_cmds *cmds)
 	prev_cmd = cmds->tab[0];
 	while (env_tmp)
 	{
-		if (ft_strictcmp(env_tmp->key, "_") == 0)
+		if (ft_strictcmp(env_tmp->key, "_") == 1)
 		{
 			free(env_tmp->value);
-
 			env_tmp->value = ft_strdup(prev_cmd);
 			if (!env_tmp->value)
 				(exit_shell(shell, "malloc failed", 1));
@@ -45,6 +44,7 @@ void	close_parent(t_fd *fds)
 	if (fds->out != UNOPENED_FD)
 		close(fds->out);
 }
+
 static void	child_wtermsig(int sig)
 {
 	if (sig == 2)
@@ -61,7 +61,7 @@ static void	child_wtermsig(int sig)
 
 void	wait_child(t_shell *shell)
 {
-	int				stat;
+	int		stat;
 	t_cmds	*snake;
 
 	snake = shell->cmds;

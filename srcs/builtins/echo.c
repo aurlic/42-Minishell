@@ -31,7 +31,7 @@ void	echo_builtin(t_cmds *cmds, int fd_out)
 	int		option;
 
 	option = 0;
-	i =	check_option(cmds->tab, &option);
+	i = check_option(cmds->tab, &option);
 	while (cmds->tab[i])
 	{
 		ft_putstr_fd(cmds->tab[i], fd_out);

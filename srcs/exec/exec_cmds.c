@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:09:40 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/20 17:04:44 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/21 11:01:27 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 void	execute_child(t_shell *shell, t_cmds *cmds, t_fd *fds)
 {	
 	char	*f_path;
+
 	f_path = run_cmds(shell, cmds);
 	if (!f_path)
-		(close_all_fds(fds), g_return = 127, exit(1)) ;
+		(close_all_fds(fds), g_return = 127, exit(1));
 	if (fds->pipe[IN] != UNOPENED_FD)
 		close(fds->pipe[IN]);
 	if (fds->in != UNOPENED_FD)
@@ -53,7 +54,7 @@ void	execute_cmd(t_shell *shell, t_cmds *cmds, t_fd *fds)
 
 char	*ft_pathfinding(t_env *env)
 {
-	t_env *env_tmp;
+	t_env	*env_tmp;
 
 	env_tmp = env;
 	while (env_tmp)
