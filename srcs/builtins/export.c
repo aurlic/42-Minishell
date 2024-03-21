@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:53:19 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/20 18:35:17 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/20 19:15:08 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,13 @@ static void	set_export(t_shell *shell, char *str)
 		}
 	}
 	else
-		new->value = NULL;
-	shell->env->prev = new;
+	{
+		ft_strncpy(new->key, str, delim);
+		new->value = ft_strdup("");
+	}
 	new->next = shell->env;
-	
+	shell->env->prev = new;
+	shell->env = new;
 }
 
 void	export_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds)
@@ -95,13 +98,26 @@ void	export_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds)
 		g_return = 0;
 		return ;
 	}
-	if (check_export_syntax(cmds) == -1)
+	else if (check_export_syntax(cmds) == -1)
 		return ;
-	i = 0;
-	while (cmds->tab[i])
+	else
 	{
-		set_export(shell, cmds->tab[i]);
-		i++;
-	}	
+		i = 1;
+		while (cmds->tab[i] && cmds->tab[i][0])
+		{
+			set_export(shell, cmds->tab[i]);
+			i++;
+		}
+		// t_env *tmp;
+		// tmp = shell->env;
+		// while(tmp)
+		// {
+		// 	ft_putstr_fd(tmp->key, fds->out);
+		// 	ft_putstr_fd("=", fds->out);
+		// 	ft_putstr_fd(tmp->value, fds->out);
+		// 	ft_putstr_fd("\n", fds->out);
+		// 	tmp = tmp->next;
+		// }
+	}
 	g_return = 0;
 }
