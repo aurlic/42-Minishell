@@ -132,19 +132,19 @@ DEPS		:= $(patsubst %.c,$(OBJS_DIR)/%.d,$(SRC))
 
 all:	$(NAME)
 
-lib:
-	@printf "$(NEW)[libft] $(U_GREEN)Building libft: $<$(DEFAULT)\n"
+$(LIBFT):
+	@printf "$(NEW)[libft 📖] $(U_GREEN)Building libft: $<$(DEFAULT)\n"
 	@make -C $(LIBFT_PATH)
 	@printf "\n"
 
-$(NAME): lib $(OBJS)
-	@printf "\r\033[K[Jeanmi-Shell] \033[4;32mBuilding Jeanmi-Shell: $<\033[0m"
+$(NAME): $(LIBFT) $(OBJS)
+	@printf "\r\033[K[Jeanmi-Shell 🫂] \033[4;32mBuilding Jeanmi-Shell: $<\033[0m"
 	@$(CC) $(OBJS) $(LDFLAGS) $(LIBFT) -o $(NAME)
-	@printf "\r\033[K[Jeanmi-Shell] \033[0;32mDone!\033[0m\n"
+	@printf "\r\033[K[Jeanmi-Shell 🫂] \033[0;32mDone!\033[0m\n"
 
 -include $(DEPS)
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-	@printf "$(NEW)$(GREEN)[🫂] $(U_GREEN)Building:$(DEFAULT) $<"
+	@printf "$(NEW)[Jeanmi-Shell 🫂] $(U_GREEN)Building:$(DEFAULT) $<"
 	@mkdir -p $(OBJS_DIR)
 	@mkdir -p $(OBJS_DIR)/$(BUILTIN_DIR)
 	@mkdir -p $(OBJS_DIR)/$(ENV_DIR)
@@ -156,17 +156,17 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@$(CC) $(DEP_FLAGS) $(CFLAGS) $(INCLD_FLAG) -c $< -o $@
 
 clean:
-	@printf "[Jeanmi-Shell] $(RED)Cleaning $(LIBFT_PATH)$(DEFAULT)\n"
+	@printf "[Jeanmi-Shell 🫂] $(RED)Cleaning $(LIBFT_PATH)$(DEFAULT)\n"
 	@make clean -sC $(LIBFT_PATH) > /dev/null 2>&1
-	@printf "[Jeanmi-Shell] $(RED)Cleaning .o$(DEFAULT)\n"
+	@printf "[Jeanmi-Shell 🫂] $(RED)Cleaning .o$(DEFAULT)\n"
 	@$(RM) $(OBJS_DIR)
-	@printf "[Jeanmi-Shell] $(RED)Cleaned objects!$(DEFAULT)\n"
+	@printf "[Jeanmi-Shell 🫂] $(RED)Cleaned objects!$(DEFAULT)\n"
 
 fclean: clean
-	@printf "[Jeanmi-Shell] \033[0;31mDeleting Jeanmi-Shell executable\033[0m\n"
+	@printf "[Jeanmi-Shell 🫂] \033[0;31mDeleting Jeanmi-Shell executable\033[0m\n"
 	@$(RM) $(NAME)
 	@make fclean -C $(LIBFT_PATH) > /dev/null 2>&1
-	@printf "[Jeanmi-Shell] \033[1;32mDone\033[0m\n\n"
+	@printf "[Jeanmi-Shell 🫂] \033[1;32mDone\033[0m\n\n"
 
 re: fclean all
 

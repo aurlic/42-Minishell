@@ -6,7 +6,7 @@
 #    By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 11:34:17 by aurlic            #+#    #+#              #
-#    Updated: 2024/02/29 13:55:48 by aurlic           ###   ########.fr        #
+#    Updated: 2024/03/22 11:42:29 by aurlic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,23 +81,23 @@ OBJS_PRINTF	=	$(SRCS_PRINTF:.c=.o)
 OBJS_GNL	=	$(SRCS_GNL:.c=.o)
 
 $(NAME):	$(OBJS_LIB) $(OBJS_PRINTF) $(OBJS_GNL)
-	@printf "\r\033[K[libft] \033[0;32mLinking...\033[0m"
+	@printf "\r\033[K[libft 📖] \033[0;32mLinking...\033[0m"
 	@ar rc $(NAME) $(OBJS_LIB) $(OBJS_PRINTF) $(OBJS_GNL)
-	@printf "\r\033[K[libft] \033[0;32mDone!\033[0m\n"
+	@printf "\r\033[K[libft 📖] \033[0;32mDone!\033[0m\n"
 
 all:		$(NAME)
 
 %.o: %.c
-	@printf "\r\033[K[libft] \033[0;32mBuilding : $<\033[0m"
+	@printf "\r\033[K[libft 📖] \033[0;32mBuilding : $<\033[0m"
 	@$(CC) $(CFLAGS) -c $< -o $@
 	
 clean:
 	@$(RM) $(OBJS_LIB) $(OBJS_PRINTF) $(OBJS_GNL)
-	@printf "[libft] \033[0;31mCleaned .o\033[0m\n"
+	@printf "[libft 📖] \033[0;31mCleaned .o\033[0m\n"
 
 fclean:		clean
 	@$(RM) $(NAME)
-	@printf "[libft] \033[1;31mCleaned lib\033[0m\n"
+	@printf "[libft 📖] \033[1;31mCleaned lib\033[0m\n"
 
 re:			fclean all
 

@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:37:24 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/22 10:31:55 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/22 11:30:21 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@
 # define PROMPT_R "\001\x1b[1;38;5;94m\x1b[1m\002[Romani-Shell] 🦔 > \
 \001\x1b[0m\002"
 
+# define PIPE 1001
+# define LOWER 1002
+# define D_LOWER 1003
+# define GREATER 1004
+# define D_GREATER 1005
+
 typedef struct s_env
 {
 	int				index;
@@ -44,10 +50,5 @@ typedef struct s_path
 	char			*pwd;
 	char			*oldpwd;
 }					t_path;
-
-/* get_env.c */
-void	get_env(t_shell *shell, char **envp);
-/* no_env.c */
-void	handle_no_env(t_shell *shell);
 
 #endif
