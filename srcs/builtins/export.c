@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:53:19 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 10:59:53 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/22 09:55:40 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ static int	check_export_syntax(t_cmds *cmds)
 	int	i;
 	int	j;
 
-	i = 0;
+	i = 1;
 	while (cmds->tab[i])
 	{
 		j = 0;
-		while (cmds->tab[i][j])
-		{
-			if (cmds->tab[i][0] == '=')
+		if (cmds->tab[i][0] == '=' || (!ft_isalpha(cmds->tab[i][0])
+				&& cmds->tab[i][0] != '_'))
 				return (export_error(cmds->tab[i][0]), -1);
-			if (!ft_isalnum(cmds->tab[i][j]) && cmds->tab[i][j] != '='
-					&& cmds->tab[i][j] != '@' && cmds->tab[i][j] != '_')
+		while (cmds->tab[i][j] && cmds->tab[i][j] != '=')
+		{
+			if (!ft_isalnum(cmds->tab[i][j]) && cmds->tab[i][j] != '_')
 				return (export_error(cmds->tab[i][j]), -1);
 			j++;
 		}
@@ -77,7 +77,7 @@ static void	set_export(t_shell *shell, char *str)
 	i = -1;
 	delim = 0;
 	while (str[++i])
-		if (str[i] == '=')
+		if (str[i] == '=' && delim == 0)
 			delim = i;
 	if (delim != 0)
 		new = export_sub(shell, str, i, delim);
