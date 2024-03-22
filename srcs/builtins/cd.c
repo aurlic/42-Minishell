@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 13:38:47 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 17:57:14 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:15:32 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	back_to_home(t_shell *shell, char *oldpwd)
 		ft_putstr_fd("cd: ", STDERR_FILENO);
 		ft_putstr_fd(homepwd, STDERR_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-		return (free(homepwd), free(oldpwd), g_return = 1 , 0);
+		return (free(homepwd), free(oldpwd), g_return = 1, 0);
 	}
 	return (free(homepwd), 1);
 }
@@ -65,6 +65,8 @@ void	update_env(t_shell *shell, char *oldpwd, char *currpwd)
 	{
 		if (ft_strictcmp(tmp->key, "OLDPWD"))
 		{
+			if (!oldpwd)
+				return ;
 			free(tmp->value);
 			tmp->value = ft_strdup(oldpwd);
 			if (!tmp->value)

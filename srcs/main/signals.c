@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:57:41 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 14:12:28 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:16:59 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ void	handle_signals(int action)
 		sig.sa_flags = 0;
 		sig.sa_handler = &sig_heredoc;
 		sigemptyset(&sig.sa_mask);
-		sigaction(SIGINT, &sig, NULL); 
+		sigaction(SIGINT, &sig, NULL);
 	}
 }

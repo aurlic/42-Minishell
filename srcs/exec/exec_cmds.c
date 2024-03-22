@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:09:40 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/21 17:28:39 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:15:53 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ char	*ft_pathfinding(t_env *env)
 
 char	*chr_cmd(t_shell *shell, t_cmds *cmds, char **path, t_fd *fds)
 {
-	char	*full_path;
-	char	*add_path;
-	int		i;
-	struct stat file_info;
+	char		*full_path;
+	char		*add_path;
+	int			i;
+	struct stat	file_info;
 
 	(void)shell;
 	i = 0;

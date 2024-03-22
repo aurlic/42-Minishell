@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:46:31 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 17:11:06 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:16:06 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	init_shell(t_shell *shell, char **envp)
 		shell->path->pwd = ft_strdup(str);
 		if (!shell->path->pwd)
 			exit_shell(shell, "init malloc", 1);
-
 	}
 	str = get_paths(shell, "OLDPWD");
 	if (str)

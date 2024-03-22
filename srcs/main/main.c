@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:44:58 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 13:45:42 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:16:42 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int	main(int ac, char **av, char **envp)
 	t_lex	*lex;
 	char	*str;
 
-	(void)av;
-	if (ac != 1)
+	if (ac != 1 && !av[0])
 		exit(EXIT_FAILURE);
 	init_shell(&shell, envp);
 	while (1)

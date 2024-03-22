@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:46:34 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 17:22:50 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:15:00 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static void	exit_arg(t_shell *shell, t_cmds *cmds, t_fd *fds, int flag)
 		ft_putstr_fd("exit: ", STDERR_FILENO);
 		ft_putstr_fd(cmds->tab[1], STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+		(close_all_fds(fds), g_return = 2);
 		if (flag == 0)
-			(g_return = 2, close_all_fds(fds), exit_shell(shell, "exit", 0));
+			exit_shell(shell, "exit", 0);
 		else
-			(g_return = 2, close_all_fds(fds), exit_shell(shell, "void", 0));
+			exit_shell(shell, "void", 0);
 	}
-	g_return = (ft_atoi(cmds->tab[1]) % 256);
-	close_all_fds(fds);
+	(close_all_fds(fds), g_return = (ft_atoi(cmds->tab[1]) % 256));
 	if (flag == 0)
 		exit_shell(shell, "exit", 0);
 	else
