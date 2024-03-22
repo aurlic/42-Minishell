@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:30:34 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:11:39 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	handle_lex_quote(char *str, int *i, int *j, int *opened)
 	{
 		if (quote_is_goat(str[*i]) == *opened)
 		{
-			while ((*opened == quote_is_goat(str[(*i)])
-					|| str[(*i)] != ' ') && str[(*i)])
+			while ((*opened == quote_is_goat(str[(*i)])) && str[(*i)])
 			{
 				(*i)++;
 				(*j)++;
@@ -34,10 +33,10 @@ void	handle_lex_quote(char *str, int *i, int *j, int *opened)
 	}
 }
 
-static void	handle_lex_word(char *str, int *i, int *j, int *opened)
+static void	handle_lex_word(char *str, int *i, int *j)
 {
 	while ((str[*i] != ' ')
-		&& (is_token(str, *i) == FALSE) && *opened == 0 && str[*i])
+		&& (is_token(str, *i) == FALSE) && (quote_is_goat(str[*i]) == 0) && str[*i])
 	{
 		(*j)++;
 		(*i)++;
@@ -54,13 +53,13 @@ static void	lex_str(t_shell *shell, t_lex **lex, char *str)
 	opened = 0;
 	while (str[i])
 	{
-		while (str[i] && str[i] == ' ')
+		while (str[i] && (str[i] == ' ' || (str[i] >= 7 && str[i] <= 13)))
 			i++;
 		j = 0;
 		if ((str[i] == '\'') || (str[i] == '\"'))
 			handle_lex_quote(str, &i, &j, &opened);
 		else
-			handle_lex_word(str, &i, &j, &opened);
+			handle_lex_word(str, &i, &j);
 		if (j > 0)
 			store_new_word(shell, lex, str, (int [2]){i, j});
 		if (is_token(str, i) != FALSE)

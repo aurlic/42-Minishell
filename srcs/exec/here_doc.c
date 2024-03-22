@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:59:31 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:39:29 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ int	run_here_doc(t_shell *shell, t_lex *redirs, int fd)
 	fd_tmp = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	fd = open(file_name, O_RDONLY);
 	unlink(file_name);
+	redirs->word = ft_strjoin_free(redirs->word, "\n");
 	while (ft_printf("here_doc> ") && read_next_line(0, &line))
 	{
-		if (!ft_strncmp(redirs->word, line, ft_strlen(redirs->word)))
+		if (ft_strictcmp(redirs->word, line))
 			break ;
 		write(fd_tmp, line, ft_strlen(line));
 		free(line);

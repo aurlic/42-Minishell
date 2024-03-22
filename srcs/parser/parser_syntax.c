@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:13:20 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:06:46 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static char	*rm_quotes(t_shell *shell, char *str, int *i, char quote)
 	final = ft_strjoin_free(final, str + j + 1);
 	if (!final)
 		exit_shell(shell, "malloc", 1);
+	// ft_printf("[%s]\n", final);
 	free(str);
 	return (final);
 }
@@ -70,7 +71,10 @@ void	redesign_words(t_shell *shell, t_lex *lex)
 			while (tmp->word[i])
 			{
 				if ((tmp->word[i] == '\'') || (tmp->word[i] == '\"'))
+				{
+					// ft_printf("in loop: [%s]\n", tmp->word);
 					tmp->word = rm_quotes(shell, tmp->word, &i, tmp->word[i]);
+				}
 				else
 					i++;
 			}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:09:40 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/22 10:15:53 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/22 15:13:03 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,24 +73,23 @@ char	*chr_cmd(t_shell *shell, t_cmds *cmds, char **path, t_fd *fds)
 	int			i;
 	struct stat	file_info;
 
-	(void)shell;
-	i = 0;
+	i = -1;
 	full_path = NULL;
 	if (ft_strchr(cmds->tab[0], '/') != NULL && access(cmds->tab[0],
 			F_OK | X_OK) == 0)
 	{
-		if (stat(cmds->tab[0], &file_info) == 0)
+		if (stat(cmds->tab[0], &file_info) == 0 && S_ISDIR(file_info.st_mode))
 			is_directory(shell, cmds, fds);
+		else
+			return (full_path = cmds->tab[0], full_path);
 	}
-	while (path && path[i])
+	while (path && path[++i])
 	{
 		add_path = ft_strjoin(path[i], "/");
 		full_path = ft_strjoin_free(add_path, cmds->tab[0]);
 		if (access(full_path, F_OK | X_OK) == 0)
 			return (full_path);
-		free(full_path);
-		full_path = NULL;
-		i++;
+		(free(full_path), full_path = NULL);
 	}
 	return (full_path);
 }
@@ -101,12 +100,6 @@ char	*run_cmds(t_shell *shell, t_cmds *cmds, t_fd *fds)
 	char	**path;
 
 	path = ft_split(ft_pathfinding(shell->env), ':');
-	if (!path)
-	{
-		ft_putstr_fd(cmds->tab[0], STDERR_FILENO);
-		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-		return (NULL);
-	}
 	full_path = chr_cmd(shell, cmds, path, fds);
 	if (!full_path)
 	{
