@@ -6,27 +6,11 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:24:46 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/21 17:31:02 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:44:42 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	close_all_fds(t_fd *fds)
-{
-	if (!(fds->pipe[IN] == UNOPENED_FD) && fds->pipe[IN] >= 0)
-		close(fds->pipe[IN]);
-	if (!(fds->pipe[OUT] == UNOPENED_FD) && fds->pipe[OUT] >= 0)
-		close(fds->pipe[OUT]);
-	if (!(fds->redir[IN] == UNOPENED_FD) && fds->redir[IN] >= 0)
-		close(fds->redir[IN]);
-	if (!(fds->redir[OUT] == UNOPENED_FD) && fds->redir[OUT] >= 0)
-		close(fds->redir[OUT]);
-	if (!(fds->out == UNOPENED_FD) && fds->out >= 0)
-		close(fds->out);
-	if (!(fds->in == UNOPENED_FD) && fds->in >= 0)
-		close(fds->in);
-}
 
 void	builtins_fds(t_shell *shell, t_fd *fds)
 {
@@ -57,21 +41,71 @@ void	run_builtins(t_shell *shell, t_cmds *cmds, t_fd *fds, int flag)
 		export_builtin(shell, cmds, fds);
 }
 
-int	is_builtin(char *str)
+char	**cut_builtin(t_shell *shell, char **tab, int i, int j)
 {
-	if (ft_strictcmp(str, "echo"))
-		return (ECHO);
-	if (ft_strictcmp(str, "cd"))
-		return (CD);
-	if (ft_strictcmp(str, "pwd"))
-		return (PWD);
-	if (ft_strictcmp(str, "export"))
-		return (EXPORT);
-	if (ft_strictcmp(str, "unset"))
-		return (UNSET);
-	if (ft_strictcmp(str, "env"))
-		return (ENV);
-	if (ft_strictcmp(str, "exit"))
-		return (EXIT);
+	char	**expand_tab;
+	char	**new_tab;
+	int		size;
+
+	size = 0;
+	expand_tab = ft_split(tab[0], ' ');
+	size = split_count(tab);
+	new_tab = ft_calloc(size + 2, sizeof(char *));
+	new_tab[0] = ft_strdup(expand_tab[0]);
+	if (expand_tab[1])
+		new_tab[i++] = ft_strdup(expand_tab[1]);
+	else if (tab[j])
+		new_tab[i] = ft_strdup(tab[j++]);
+	if (!new_tab)
+		exit_shell(shell, "builtin malloc", 1);
+	while (expand_tab[i])
+		new_tab[1] = ft_strjoin_free(new_tab[1], expand_tab[i++]);
+	while (tab[j])
+	{
+		new_tab[j] = ft_strdup(tab[j]);
+		j++;
+	}
+	new_tab[j + 1] = NULL;
+	(free_matrix_safe(expand_tab), free_matrix_safe(tab));
+	return (new_tab);
+}
+
+static int	find_builtin(char *str)
+{
+	if (!str)
+		return (0);
+	if (!ft_strncmp(str, "echo", 4) && (str[4] <= 32))
+		return (1);
+	if (!ft_strncmp(str, "cd", 2) && (str[2] <= 32))
+		return (1);
+	if (!ft_strncmp(str, "pwd", 3) && (str[3] <= 32))
+		return (1);
+	if (!ft_strncmp(str, "export", 6) && (str[6] <= 32))
+		return (1);
+	if (!ft_strncmp(str, "unset", 5) && (str[5] <= 32))
+		return (1);
+	if (!ft_strncmp(str, "env", 3) && (str[3] <= 32))
+		return (1);
+	if (!ft_strncmp(str, "exit", 4) && (str[4] <= 32))
+		return (1);
 	return (0);
+}
+
+void	parse_builtins(t_shell *shell)
+{
+	t_cmds	*tmp;
+	int		i;
+	int		j;
+
+	i = 1;
+	j = 1;
+	tmp = shell->cmds;
+	while (tmp)
+	{
+		if (tmp && find_builtin(tmp->tab[0]))
+			tmp->tab = cut_builtin(shell, tmp->tab, i, j);
+		if (is_builtin(tmp->tab[0]))
+			tmp->is_builtin = is_builtin(tmp->tab[0]);
+		tmp = tmp->next;
+	}
 }

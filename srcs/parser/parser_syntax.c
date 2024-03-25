@@ -6,13 +6,16 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:13:20 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/22 16:06:46 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:42:11 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*rm_quotes(t_shell *shell, char *str, int *i, char quote)
+/*
+	Old name: remove_quotes
+*/
+static char	*rmq(t_shell *shell, char *str, int *i, char quote)
 {
 	char	*tmp;
 	char	*final;
@@ -32,7 +35,6 @@ static char	*rm_quotes(t_shell *shell, char *str, int *i, char quote)
 	final = ft_strjoin_free(final, str + j + 1);
 	if (!final)
 		exit_shell(shell, "malloc", 1);
-	// ft_printf("[%s]\n", final);
 	free(str);
 	return (final);
 }
@@ -56,28 +58,27 @@ int	check_syntax(t_lex *lex)
 	return (0);
 }
 
-void	redesign_words(t_shell *shell, t_lex *lex)
+void	redesign_words(t_shell *shell, t_cmds *cmds)
 {
-	t_lex	*tmp;
+	t_cmds	*tmp;
 	int		i;
+	int		j;
 
-	tmp = lex;
-	i = 0;
+	tmp = cmds;
 	while (tmp)
 	{
 		i = 0;
-		if (tmp->word)
+		while (tmp->tab[i])
 		{
-			while (tmp->word[i])
+			j = 0;
+			while (tmp->tab[i][j])
 			{
-				if ((tmp->word[i] == '\'') || (tmp->word[i] == '\"'))
-				{
-					// ft_printf("in loop: [%s]\n", tmp->word);
-					tmp->word = rm_quotes(shell, tmp->word, &i, tmp->word[i]);
-				}
+				if ((tmp->tab[i][j] == '\'') || (tmp->tab[i][j] == '\"'))
+					tmp->tab[i] = rmq(shell, tmp->tab[i], &j, tmp->tab[i][j]);
 				else
-					i++;
+					j++;
 			}
+			i++;
 		}
 		tmp = tmp->next;
 	}

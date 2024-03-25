@@ -75,6 +75,7 @@ LIB			:=	$(strip $(LIB))
 define	SRC	:=	
 				$(addprefix $(BUILTIN_DIR)/, \
 					builtins.c \
+					builtins_utils.c \
 					cd.c \
 					echo.c \
 					env.c \

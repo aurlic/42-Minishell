@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 11:15:25 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/22 15:22:31 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:39:57 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,33 @@ t_lex	*parser_sub(t_shell *shell, t_cmds **cmds, t_lex **tmp_lex, t_lex *curr)
 	return (curr);
 }
 
+void	parse_cmds_tab(t_shell *shell, int i, int j, int open)
+{
+	t_cmds	*tmp;
+
+	tmp = shell->cmds;
+	while (tmp)
+	{
+		i = -1;
+		while (tmp->tab[++i])
+		{
+			j = -1;
+			while (tmp->tab[i][++j])
+			{
+				expand_checker(tmp->tab[i][j], &open);
+				if (tmp->tab[i][j] == '$' && open == 0)
+				{
+					find_dollar(shell, tmp, i, j);
+					break ;
+				}
+			}
+		}
+		if (tmp->next == NULL)
+			tmp->end = 1;
+		tmp = tmp->next;
+	}
+}
+
 void	parser(t_shell *shell, t_lex *lex)
 {
 	t_cmds	*cmds;
@@ -42,7 +69,6 @@ void	parser(t_shell *shell, t_lex *lex)
 	cmds = malloc(sizeof(t_cmds));
 	if (!cmds)
 		exit_shell(shell, "parser_malloc", 1);
-	redesign_words(shell, lex);
 	tmp_lex = lex;
 	curr = lex;
 	cmds_head = cmds;
@@ -51,6 +77,8 @@ void	parser(t_shell *shell, t_lex *lex)
 	cmds->end = 1;
 	cmds = cmds_head;
 	shell->cmds = cmds_head;
-	parse_cmds_tab(shell, i);
+	parse_cmds_tab(shell, i, 0, 0);
+	parse_builtins(shell);
+	redesign_words(shell, shell->cmds);
 	free_lex(&lex);
 }

@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:30:34 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/22 16:11:39 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:13:50 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,22 @@ void	handle_lex_quote(char *str, int *i, int *j, int *opened)
 
 static void	handle_lex_word(char *str, int *i, int *j)
 {
-	while ((str[*i] != ' ')
-		&& (is_token(str, *i) == FALSE) && (quote_is_goat(str[*i]) == 0) && str[*i])
+	int	open;
+
+	open = 0;
+	while ((str[*i] != ' ') && (is_token(str, *i) == FALSE) && str[*i])
 	{
+		open = quote_is_goat(str[*i]);
+		if (open != 0)
+		{
+			(*i)++;
+			(*j)++;
+			while (str[*i] && open != quote_is_goat(str[*i]))
+			{
+				(*i)++;
+				(*j)++;
+			}
+		}
 		(*j)++;
 		(*i)++;
 	}
@@ -79,7 +92,7 @@ t_lex	*lexer(t_shell *shell, char *str)
 	{
 		write(STDERR_FILENO, ERR_QUOTE, ft_strlen(ERR_QUOTE));
 		g_return = 2;
-		return (NULL);
+		return (lex);
 	}
 	lex_str(shell, &lex, str);
 	return (lex);

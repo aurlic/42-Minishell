@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 17:14:58 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 12:33:05 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/25 11:43:46 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,5 @@ void	find_dollar(t_shell *shell, t_cmds *cmds, int i, int j)
 			|| ft_isalnum(cmds->tab[tab_n[0]][tab_n[1]]))
 		tab_n[2]++;
 	if (tab_n[2] != 0)
-	{
 		dollar_sub(tmp, &cmds, tab_n);
-	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:44:58 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/22 10:16:42 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/25 15:15:46 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char **av, char **envp)
 	t_lex	*lex;
 	char	*str;
 
-	if (ac != 1 && !av[0])
+	if (ac != 1 || av[1])
 		exit(EXIT_FAILURE);
 	init_shell(&shell, envp);
 	while (1)
@@ -28,7 +28,7 @@ int	main(int ac, char **av, char **envp)
 		handle_signals(0);
 		str = read_prompt(&shell);
 		lex = lexer(&shell, str);
-		if (g_return == 2)
+		if (!lex)
 			free_lex(&lex);
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:17:12 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:43:27 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,16 @@ int	quote_is_goat(char quote)
 
 static void	open_check(char *str, char type, int *i, int *opened)
 {
+	int	start;
+
+	start = *i;
 	if (str[*i] == type)
 	{
 		if (*opened == 0)
 			*opened = -1;
 		while (str[*i] && str[*i + 1] && str[++(*i)] != type)
 			continue ;
-		if (str[*i] == type && *opened == -1)
+		if (str[*i] == type && *opened == -1 && start != *i)
 			*opened = 0;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:12:40 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 12:30:54 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:40:00 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,33 +46,12 @@ static void	fill_cmd_tab(t_shell *shell, t_cmds **cmds, t_lex *curr, int i)
 	(*cmds)->tab[j] = NULL;
 }
 
-void	parse_cmds_tab(t_shell *shell, int i)
+void	expand_checker(char c, int *open)
 {
-	int		j;
-	t_cmds	*tmp;
-
-	tmp = shell->cmds;
-	while (tmp)
-	{
-		i = -1;
-		if (is_builtin(tmp->tab[0]))
-			tmp->is_builtin = is_builtin(tmp->tab[0]);
-		while (tmp->tab[++i])
-		{
-			j = -1;
-			while (tmp->tab[i][++j])
-			{
-				if (tmp->tab[i][j] == '$')
-				{
-					find_dollar(shell, tmp, i, j);
-					break ;
-				}
-			}
-		}
-		if (tmp->next == NULL)
-			tmp->end = 1;
-		tmp = tmp->next;
-	}
+	if (quote_is_goat(c) == 1 && *open == 1)
+		*open = 0;
+	if (quote_is_goat(c) == 1 && *open == 0)
+		*open = 1;
 }
 
 t_cmds	*create_cmd(t_shell *shell, t_cmds **cmds, t_lex *tmp_lex, t_lex *curr)
