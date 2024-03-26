@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:49:45 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/21 11:04:38 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:33:55 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	unset_env(t_shell *shell, char *var)
+static void	unset_env(t_shell *shell, t_env *tmp)
 {
-	t_env	*tmp;
-
-	tmp = shell->env;
-	while (ft_strictcmp(tmp->key, var) == 0)
-		tmp = tmp->next;
-	if (tmp->prev)
+	if (tmp == shell->env)
+	{
+		shell->env = tmp->next;
+		tmp->next->prev = NULL;
+	}
+	else
+	{
 		tmp->prev->next = tmp->next;
-	if (tmp->next)
-		tmp->next->prev = tmp->prev;
+		if (tmp->next)
+			tmp->next->prev = tmp->prev;
+	}
 	free(tmp->key);
 	free(tmp->value);
-	tmp->prev = NULL;
-	tmp->next = NULL;
 	free(tmp);
 }
 
@@ -34,22 +34,22 @@ static void	unset_sub(t_shell *shell, t_cmds *cmds)
 {
 	int		i;
 	t_env	*tmp;
-	t_env	*next;
+	t_env   *first;
 
 	i = 1;
 	while (cmds->tab[i])
 	{
-		tmp = shell->env;
+        first = shell->env;
+		tmp = first;
 		while (tmp)
 		{
 			if (ft_strictcmp(tmp->key, cmds->tab[i]) == 1)
 			{
-				next = tmp->next;
-				unset_env(shell, cmds->tab[i]);
-				tmp = next;
+				unset_env(shell, tmp);
+				break ;
 			}
 			else
-			tmp = tmp->next;
+				tmp = tmp->next;
 		}
 		i++;
 	}
