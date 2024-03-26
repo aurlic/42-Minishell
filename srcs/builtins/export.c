@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:53:19 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/22 10:15:14 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/26 14:08:46 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,29 +68,30 @@ static t_env	*export_sub(t_shell *shell, char *str, int i, int delim)
 	return (new);
 }
 
-static void	set_export(t_shell *shell, char *str)
+static void	set_export(t_shell *shell, char *str, int delim)
 {
 	int		i;
-	int		delim;
 	t_env	*new;
 
 	i = -1;
-	delim = 0;
 	while (str[++i])
 		if (str[i] == '=' && delim == 0)
 			delim = i;
 	if (delim != 0)
+	{
+		if (!check_exist(shell, str, delim))
+			return ;
 		new = export_sub(shell, str, i, delim);
+	}
 	else
 	{
+		if (!check_exist_no_delim(shell, str))
+			return ;
 		new = malloc(sizeof(t_env));
-		if (!new)
-			exit_shell(shell, "export_new_env", 1);
 		new->key = ft_calloc(i + 1, sizeof(char));
-		if (!new->key)
+		if (!new || !new->key)
 			exit_shell(shell, "export_new_key", 1);
-		ft_strncpy(new->key, str, i);
-		new->value = NULL;
+		(ft_strncpy(new->key, str, i), new->value = NULL);
 	}
 	new->next = shell->env;
 	shell->env->prev = new;
@@ -114,7 +115,7 @@ void	export_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds)
 		i = 1;
 		while (cmds->tab[i] && cmds->tab[i][0])
 		{
-			set_export(shell, cmds->tab[i]);
+			set_export(shell, cmds->tab[i], 0);
 			i++;
 		}
 	}

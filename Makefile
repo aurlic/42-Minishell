@@ -84,6 +84,7 @@ define	SRC	:=
 					unset.c \
 					export.c \
 					export_utils.c \
+					export_utils2.c \
 				)
 				$(addprefix $(ENV_DIR)/, \
 					get_env.c \

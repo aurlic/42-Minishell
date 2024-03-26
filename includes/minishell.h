@@ -6,7 +6,7 @@
 /*   By: traccurt <traccurt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:53 by traccurt          #+#    #+#             */
-/*   Updated: 2024/03/25 15:44:22 by traccurt         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:10:11 by traccurt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,8 @@ void	unset_builtin(t_shell *shell, t_cmds *cmds);
 void	exit_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds, int flag);
 void	export_builtin(t_shell *shell, t_cmds *cmds, t_fd *fds);
 void	no_arg(t_shell *shell, t_fd *fds);
-
+int		check_exist(t_shell *shell, char *str, int delim);
+int		check_exist_no_delim(t_shell *shell, char *str);
 void	parse_builtins(t_shell *shell);
 int		split_count(char **split);
 
