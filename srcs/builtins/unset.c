@@ -6,7 +6,7 @@
 /*   By: aurlic <aurlic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:49:45 by aurlic            #+#    #+#             */
-/*   Updated: 2024/03/26 13:33:55 by aurlic           ###   ########.fr       */
+/*   Updated: 2024/03/28 11:26:38 by aurlic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ static void	unset_sub(t_shell *shell, t_cmds *cmds)
 {
 	int		i;
 	t_env	*tmp;
-	t_env   *first;
+	t_env	*first;
 
 	i = 1;
 	while (cmds->tab[i])
 	{
-        first = shell->env;
+		first = shell->env;
 		tmp = first;
 		while (tmp)
 		{
